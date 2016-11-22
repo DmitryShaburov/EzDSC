@@ -50,7 +50,7 @@ namespace EzDSC
 
         public DscConfigurationItemNode GetConfigurationItemNode(string fullname)
         {
-            string[] path = fullname.Split('.');
+            string[] path = fullname.Split(':');
             DscModule module = Modules.Find(x => x.Name == path[0]);
             DscResource resource = module.Resources.Find(x => x.FriendlyName == path[1]);
             return resource.Nodes.Find(x => x.Name == path[2]);

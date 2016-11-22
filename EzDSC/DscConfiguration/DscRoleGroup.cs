@@ -14,8 +14,8 @@ namespace EzDSC
 
         public DscRoleGroup(string path, DscRoleGroup parent)
         {
-            DirectoryPath = path;
-            Name = Path.GetFileName(Path.GetDirectoryName(path));
+            DirectoryPath = path.EndsWith("\\") ? path : path + "\\";
+            Name = Path.GetFileName(Path.GetDirectoryName(DirectoryPath));
             Parent = parent;
             string[] roles = Directory.GetFiles(path, "*.json");
             string[] groups = Directory.GetDirectories(path);
@@ -34,20 +34,20 @@ namespace EzDSC
             string fullname = Name;
             if (Parent != null)
             {
-                fullname = Parent.BuildName() + "." + fullname;
+                fullname = Parent.BuildName() + ":" + fullname;
             }
             return fullname;
         }
 
         public DscRoleNode GetRoleNode(string fullname)
         {
-            string[] path = fullname.Split('.');
+            string[] path = fullname.Split(':');
             if (path.Length == 2)
             {
                 return Nodes.Find(x => x.Name == path[1]);
             }
             DscRoleGroup nextGroup = Groups.Find(x => x.Name == path[1]);
-            return nextGroup.GetRoleNode(string.Join(".", path.Skip(1).ToArray()));
+            return nextGroup.GetRoleNode(string.Join(":", path.Skip(1).ToArray()));
         }
     }
 }

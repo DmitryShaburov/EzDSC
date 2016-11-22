@@ -22,7 +22,7 @@ namespace EzDSC
             string fullname = Name;
             if (Parent != null)
             {
-                fullname = Parent.BuildName() + "." + fullname;
+                fullname = Parent.BuildName() + ":" + fullname;
             }
             return fullname;
         }

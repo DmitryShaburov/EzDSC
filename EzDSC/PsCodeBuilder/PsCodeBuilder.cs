@@ -39,7 +39,7 @@ namespace EzDSC
         {
             List<string> itemText = new List<string>();
 
-            itemText.Add(node.Parent.FriendlyName + " " + node.Name);
+            itemText.Add(node.Parent.FriendlyName + " \"" + node.Name + "\"");
             itemText.Add("{");
             foreach (DictionaryEntry entry in node.ConfigurationItem.Properties)
             {
@@ -47,7 +47,14 @@ namespace EzDSC
                 switch (node.Parent.GetVariableTypeOf(entry.Key.ToString()))
                 {
                     case DscResource.VariableType.String:
-                        itemText.Add(entry.Key + " = \"" + entry.Value + "\"");
+                        if (entry.Value.ToString().StartsWith("$") || entry.Value.ToString().StartsWith("\""))
+                        {
+                            itemText.Add(entry.Key + " = " + entry.Value);
+                        }
+                        else
+                        {
+                            itemText.Add(entry.Key + " = \"" + entry.Value + "\"");
+                        }
                         break;
 
                     case DscResource.VariableType.Boolean:

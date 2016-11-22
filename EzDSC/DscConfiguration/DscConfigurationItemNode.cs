@@ -17,7 +17,7 @@ namespace EzDSC
 
         public string GetFullName()
         {
-            return Parent.Parent.Name + "." + Parent.FriendlyName + "." + Name;
+            return Parent.Parent.Name + ":" + Parent.FriendlyName + ":" + Name;
         }
     }
 }

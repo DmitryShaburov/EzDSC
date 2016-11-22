@@ -222,7 +222,7 @@ namespace EzDSC
             if (treeDialog.SelectedTag.GetType() != typeof(DscConfigurationItemNode)) return;
             DscConfigurationItemNode configurationItemNode = (treeDialog.SelectedTag as DscConfigurationItemNode);
             DscRoleNode roleNode = (tvLibrary.SelectedNode.Tag as DscRoleNode);
-            roleNode.Role.Resources.Add(configurationItemNode.Parent.Parent.Name + "." + configurationItemNode.Parent.FriendlyName + "." + configurationItemNode.Name);
+            roleNode.Role.Resources.Add(configurationItemNode.GetFullName());
             lbRole.DataSource = null;
             lbRole.DataSource = roleNode.Role.Resources;
             roleNode.Role.Save(roleNode.FilePath);
@@ -301,9 +301,7 @@ namespace EzDSC
             if (treeDialog.SelectedTag.GetType() != typeof(DscConfigurationItemNode)) return;
             DscConfigurationItemNode selectedConfigurationItemNode = (treeDialog.SelectedTag as DscConfigurationItemNode);
             DscConfigurationItemNode currentConfigurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
-            currentConfigurationItemNode.ConfigurationItem.DependsOn.Add(
-                selectedConfigurationItemNode.Parent.Parent.Name + "." +
-                selectedConfigurationItemNode.Parent.FriendlyName + "." + selectedConfigurationItemNode.Name);
+            currentConfigurationItemNode.ConfigurationItem.DependsOn.Add(selectedConfigurationItemNode.GetFullName());
             lbCIDependency.DataSource = null;
             lbCIDependency.DataSource = currentConfigurationItemNode.ConfigurationItem.DependsOn;
             currentConfigurationItemNode.ConfigurationItem.Save(_repository.Dir.Resources +
