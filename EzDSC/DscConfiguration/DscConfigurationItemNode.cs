@@ -14,5 +14,10 @@ namespace EzDSC
             Name = Path.GetFileName(path).Replace(".json", "");
             ConfigurationItem = DscConfigurationItem.Load(path);
         }
+
+        public string GetFullName()
+        {
+            return Parent.Parent.Name + "." + Parent.FriendlyName + "." + Name;
+        }
     }
 }

@@ -34,8 +34,7 @@
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Servers");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.cmRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miRolesAddGroup = new System.Windows.Forms.ToolStripMenuItem();
-            this.tssRoles = new System.Windows.Forms.ToolStripSeparator();
+            this.miRolesNewGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.miRolesNewRole = new System.Windows.Forms.ToolStripMenuItem();
             this.cmServers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miServersNewGroup = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,16 +46,21 @@
             this.miServerItemBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.runConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
+            this.scConfigurationItem = new System.Windows.Forms.SplitContainer();
+            this.pgEditor = new System.Windows.Forms.PropertyGrid();
+            this.lbCIDependency = new System.Windows.Forms.ListBox();
+            this.tsCIDependsOn = new System.Windows.Forms.ToolStrip();
+            this.tsbCIAddDepends = new System.Windows.Forms.ToolStripButton();
+            this.tsbCIRemoveDepends = new System.Windows.Forms.ToolStripButton();
             this.scServer = new System.Windows.Forms.SplitContainer();
             this.lbServerRoles = new System.Windows.Forms.ListBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsServerRoles = new System.Windows.Forms.ToolStrip();
             this.tsbServerRoleAdd = new System.Windows.Forms.ToolStripButton();
             this.tsbServerRoleRemove = new System.Windows.Forms.ToolStripButton();
             this.pgServerVariables = new System.Windows.Forms.PropertyGrid();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsServerVariables = new System.Windows.Forms.ToolStrip();
             this.tsbVariableAdd = new System.Windows.Forms.ToolStripButton();
             this.tsbVariableRemove = new System.Windows.Forms.ToolStripButton();
-            this.pgEditor = new System.Windows.Forms.PropertyGrid();
             this.pRolePanel = new System.Windows.Forms.Panel();
             this.lbRole = new System.Windows.Forms.ListBox();
             this.tsRole = new System.Windows.Forms.ToolStrip();
@@ -70,11 +74,6 @@
             this.miFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmResourceType = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scConfigurationItem = new System.Windows.Forms.SplitContainer();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.tsbCIAddDepends = new System.Windows.Forms.ToolStripButton();
-            this.tsbCIRemoveDepends = new System.Windows.Forms.ToolStripButton();
-            this.lbCIDependency = new System.Windows.Forms.ListBox();
             this.cmRoles.SuspendLayout();
             this.cmServers.SuspendLayout();
             this.cmServerItem.SuspendLayout();
@@ -82,48 +81,42 @@
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
             this.scMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scServer)).BeginInit();
-            this.scServer.Panel1.SuspendLayout();
-            this.scServer.Panel2.SuspendLayout();
-            this.scServer.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
-            this.pRolePanel.SuspendLayout();
-            this.tsRole.SuspendLayout();
-            this.msMainMenu.SuspendLayout();
-            this.cmResourceType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scConfigurationItem)).BeginInit();
             this.scConfigurationItem.Panel1.SuspendLayout();
             this.scConfigurationItem.Panel2.SuspendLayout();
             this.scConfigurationItem.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
+            this.tsCIDependsOn.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scServer)).BeginInit();
+            this.scServer.Panel1.SuspendLayout();
+            this.scServer.Panel2.SuspendLayout();
+            this.scServer.SuspendLayout();
+            this.tsServerRoles.SuspendLayout();
+            this.tsServerVariables.SuspendLayout();
+            this.pRolePanel.SuspendLayout();
+            this.tsRole.SuspendLayout();
+            this.msMainMenu.SuspendLayout();
+            this.cmResourceType.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmRoles
             // 
             this.cmRoles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miRolesAddGroup,
-            this.tssRoles,
+            this.miRolesNewGroup,
             this.miRolesNewRole});
             this.cmRoles.Name = "cmRoles";
-            this.cmRoles.Size = new System.Drawing.Size(141, 54);
+            this.cmRoles.Size = new System.Drawing.Size(153, 70);
             // 
-            // miRolesAddGroup
+            // miRolesNewGroup
             // 
-            this.miRolesAddGroup.Enabled = false;
-            this.miRolesAddGroup.Name = "miRolesAddGroup";
-            this.miRolesAddGroup.Size = new System.Drawing.Size(140, 22);
-            this.miRolesAddGroup.Text = "Add group...";
-            // 
-            // tssRoles
-            // 
-            this.tssRoles.Name = "tssRoles";
-            this.tssRoles.Size = new System.Drawing.Size(137, 6);
+            this.miRolesNewGroup.Name = "miRolesNewGroup";
+            this.miRolesNewGroup.Size = new System.Drawing.Size(152, 22);
+            this.miRolesNewGroup.Text = "New group...";
+            this.miRolesNewGroup.Click += new System.EventHandler(this.miRolesNewGroup_Click);
             // 
             // miRolesNewRole
             // 
             this.miRolesNewRole.Name = "miRolesNewRole";
-            this.miRolesNewRole.Size = new System.Drawing.Size(140, 22);
+            this.miRolesNewRole.Size = new System.Drawing.Size(152, 22);
             this.miRolesNewRole.Text = "New role...";
             this.miRolesNewRole.Click += new System.EventHandler(this.createRoleToolStripMenuItem_Click);
             // 
@@ -226,6 +219,75 @@
             this.scMain.SplitterDistance = 240;
             this.scMain.TabIndex = 7;
             // 
+            // scConfigurationItem
+            // 
+            this.scConfigurationItem.Location = new System.Drawing.Point(127, 201);
+            this.scConfigurationItem.Name = "scConfigurationItem";
+            this.scConfigurationItem.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // scConfigurationItem.Panel1
+            // 
+            this.scConfigurationItem.Panel1.Controls.Add(this.pgEditor);
+            // 
+            // scConfigurationItem.Panel2
+            // 
+            this.scConfigurationItem.Panel2.Controls.Add(this.lbCIDependency);
+            this.scConfigurationItem.Panel2.Controls.Add(this.tsCIDependsOn);
+            this.scConfigurationItem.Size = new System.Drawing.Size(347, 213);
+            this.scConfigurationItem.SplitterDistance = 139;
+            this.scConfigurationItem.TabIndex = 12;
+            // 
+            // pgEditor
+            // 
+            this.pgEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pgEditor.Location = new System.Drawing.Point(0, 0);
+            this.pgEditor.Name = "pgEditor";
+            this.pgEditor.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
+            this.pgEditor.Size = new System.Drawing.Size(347, 139);
+            this.pgEditor.TabIndex = 10;
+            this.pgEditor.ToolbarVisible = false;
+            this.pgEditor.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgEditor_PropertyValueChanged);
+            // 
+            // lbCIDependency
+            // 
+            this.lbCIDependency.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbCIDependency.FormattingEnabled = true;
+            this.lbCIDependency.Location = new System.Drawing.Point(0, 25);
+            this.lbCIDependency.Name = "lbCIDependency";
+            this.lbCIDependency.Size = new System.Drawing.Size(347, 45);
+            this.lbCIDependency.TabIndex = 1;
+            // 
+            // tsCIDependsOn
+            // 
+            this.tsCIDependsOn.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbCIAddDepends,
+            this.tsbCIRemoveDepends});
+            this.tsCIDependsOn.Location = new System.Drawing.Point(0, 0);
+            this.tsCIDependsOn.Name = "tsCIDependsOn";
+            this.tsCIDependsOn.Size = new System.Drawing.Size(347, 25);
+            this.tsCIDependsOn.TabIndex = 0;
+            this.tsCIDependsOn.Text = "toolStrip3";
+            // 
+            // tsbCIAddDepends
+            // 
+            this.tsbCIAddDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbCIAddDepends.Image = ((System.Drawing.Image)(resources.GetObject("tsbCIAddDepends.Image")));
+            this.tsbCIAddDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCIAddDepends.Name = "tsbCIAddDepends";
+            this.tsbCIAddDepends.Size = new System.Drawing.Size(42, 22);
+            this.tsbCIAddDepends.Text = "Add...";
+            this.tsbCIAddDepends.Click += new System.EventHandler(this.tsbCIAddDepends_Click);
+            // 
+            // tsbCIRemoveDepends
+            // 
+            this.tsbCIRemoveDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbCIRemoveDepends.Image = ((System.Drawing.Image)(resources.GetObject("tsbCIRemoveDepends.Image")));
+            this.tsbCIRemoveDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCIRemoveDepends.Name = "tsbCIRemoveDepends";
+            this.tsbCIRemoveDepends.Size = new System.Drawing.Size(63, 22);
+            this.tsbCIRemoveDepends.Text = "Remove...";
+            this.tsbCIRemoveDepends.Click += new System.EventHandler(this.tsbCIRemoveDepends_Click);
+            // 
             // scServer
             // 
             this.scServer.Location = new System.Drawing.Point(572, 61);
@@ -235,12 +297,12 @@
             // scServer.Panel1
             // 
             this.scServer.Panel1.Controls.Add(this.lbServerRoles);
-            this.scServer.Panel1.Controls.Add(this.toolStrip1);
+            this.scServer.Panel1.Controls.Add(this.tsServerRoles);
             // 
             // scServer.Panel2
             // 
             this.scServer.Panel2.Controls.Add(this.pgServerVariables);
-            this.scServer.Panel2.Controls.Add(this.toolStrip2);
+            this.scServer.Panel2.Controls.Add(this.tsServerVariables);
             this.scServer.Size = new System.Drawing.Size(396, 273);
             this.scServer.SplitterDistance = 136;
             this.scServer.TabIndex = 11;
@@ -254,16 +316,16 @@
             this.lbServerRoles.Size = new System.Drawing.Size(396, 111);
             this.lbServerRoles.TabIndex = 1;
             // 
-            // toolStrip1
+            // tsServerRoles
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsServerRoles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbServerRoleAdd,
             this.tsbServerRoleRemove});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(396, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "tsServerRoles";
+            this.tsServerRoles.Location = new System.Drawing.Point(0, 0);
+            this.tsServerRoles.Name = "tsServerRoles";
+            this.tsServerRoles.Size = new System.Drawing.Size(396, 25);
+            this.tsServerRoles.TabIndex = 0;
+            this.tsServerRoles.Text = "tsServerRoles";
             // 
             // tsbServerRoleAdd
             // 
@@ -295,16 +357,16 @@
             this.pgServerVariables.TabIndex = 1;
             this.pgServerVariables.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgServerVariables_PropertyValueChanged);
             // 
-            // toolStrip2
+            // tsServerVariables
             // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsServerVariables.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbVariableAdd,
             this.tsbVariableRemove});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(396, 25);
-            this.toolStrip2.TabIndex = 0;
-            this.toolStrip2.Text = "tsServerVariables";
+            this.tsServerVariables.Location = new System.Drawing.Point(0, 0);
+            this.tsServerVariables.Name = "tsServerVariables";
+            this.tsServerVariables.Size = new System.Drawing.Size(396, 25);
+            this.tsServerVariables.TabIndex = 0;
+            this.tsServerVariables.Text = "tsServerVariables";
             // 
             // tsbVariableAdd
             // 
@@ -324,17 +386,6 @@
             this.tsbVariableRemove.Name = "tsbVariableRemove";
             this.tsbVariableRemove.Size = new System.Drawing.Size(63, 22);
             this.tsbVariableRemove.Text = "Remove...";
-            // 
-            // pgEditor
-            // 
-            this.pgEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgEditor.Location = new System.Drawing.Point(0, 0);
-            this.pgEditor.Name = "pgEditor";
-            this.pgEditor.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
-            this.pgEditor.Size = new System.Drawing.Size(347, 139);
-            this.pgEditor.TabIndex = 10;
-            this.pgEditor.ToolbarVisible = false;
-            this.pgEditor.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgEditor_PropertyValueChanged);
             // 
             // pRolePanel
             // 
@@ -444,64 +495,6 @@
             this.miResourceTypeNewConfigurationItem.Text = "New configuration item...";
             this.miResourceTypeNewConfigurationItem.Click += new System.EventHandler(this.miResourceTypeNewConfigurationItem_Click);
             // 
-            // scConfigurationItem
-            // 
-            this.scConfigurationItem.Location = new System.Drawing.Point(127, 201);
-            this.scConfigurationItem.Name = "scConfigurationItem";
-            this.scConfigurationItem.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // scConfigurationItem.Panel1
-            // 
-            this.scConfigurationItem.Panel1.Controls.Add(this.pgEditor);
-            // 
-            // scConfigurationItem.Panel2
-            // 
-            this.scConfigurationItem.Panel2.Controls.Add(this.lbCIDependency);
-            this.scConfigurationItem.Panel2.Controls.Add(this.toolStrip3);
-            this.scConfigurationItem.Size = new System.Drawing.Size(347, 213);
-            this.scConfigurationItem.SplitterDistance = 139;
-            this.scConfigurationItem.TabIndex = 12;
-            // 
-            // toolStrip3
-            // 
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbCIAddDepends,
-            this.tsbCIRemoveDepends});
-            this.toolStrip3.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(347, 25);
-            this.toolStrip3.TabIndex = 0;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
-            // tsbCIAddDepends
-            // 
-            this.tsbCIAddDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbCIAddDepends.Image = ((System.Drawing.Image)(resources.GetObject("tsbCIAddDepends.Image")));
-            this.tsbCIAddDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCIAddDepends.Name = "tsbCIAddDepends";
-            this.tsbCIAddDepends.Size = new System.Drawing.Size(42, 22);
-            this.tsbCIAddDepends.Text = "Add...";
-            this.tsbCIAddDepends.Click += new System.EventHandler(this.tsbCIAddDepends_Click);
-            // 
-            // tsbCIRemoveDepends
-            // 
-            this.tsbCIRemoveDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbCIRemoveDepends.Image = ((System.Drawing.Image)(resources.GetObject("tsbCIRemoveDepends.Image")));
-            this.tsbCIRemoveDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCIRemoveDepends.Name = "tsbCIRemoveDepends";
-            this.tsbCIRemoveDepends.Size = new System.Drawing.Size(63, 22);
-            this.tsbCIRemoveDepends.Text = "Remove...";
-            this.tsbCIRemoveDepends.Click += new System.EventHandler(this.tsbCIRemoveDepends_Click);
-            // 
-            // lbCIDependency
-            // 
-            this.lbCIDependency.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbCIDependency.FormattingEnabled = true;
-            this.lbCIDependency.Location = new System.Drawing.Point(0, 25);
-            this.lbCIDependency.Name = "lbCIDependency";
-            this.lbCIDependency.Size = new System.Drawing.Size(347, 45);
-            this.lbCIDependency.TabIndex = 1;
-            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,16 +514,23 @@
             this.scMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).EndInit();
             this.scMain.ResumeLayout(false);
+            this.scConfigurationItem.Panel1.ResumeLayout(false);
+            this.scConfigurationItem.Panel2.ResumeLayout(false);
+            this.scConfigurationItem.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scConfigurationItem)).EndInit();
+            this.scConfigurationItem.ResumeLayout(false);
+            this.tsCIDependsOn.ResumeLayout(false);
+            this.tsCIDependsOn.PerformLayout();
             this.scServer.Panel1.ResumeLayout(false);
             this.scServer.Panel1.PerformLayout();
             this.scServer.Panel2.ResumeLayout(false);
             this.scServer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scServer)).EndInit();
             this.scServer.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.tsServerRoles.ResumeLayout(false);
+            this.tsServerRoles.PerformLayout();
+            this.tsServerVariables.ResumeLayout(false);
+            this.tsServerVariables.PerformLayout();
             this.pRolePanel.ResumeLayout(false);
             this.pRolePanel.PerformLayout();
             this.tsRole.ResumeLayout(false);
@@ -538,13 +538,6 @@
             this.msMainMenu.ResumeLayout(false);
             this.msMainMenu.PerformLayout();
             this.cmResourceType.ResumeLayout(false);
-            this.scConfigurationItem.Panel1.ResumeLayout(false);
-            this.scConfigurationItem.Panel2.ResumeLayout(false);
-            this.scConfigurationItem.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.scConfigurationItem)).EndInit();
-            this.scConfigurationItem.ResumeLayout(false);
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -556,8 +549,7 @@
         private System.Windows.Forms.ContextMenuStrip cmRoles;
         private System.Windows.Forms.ToolStripMenuItem miRolesNewRole;
         private System.Windows.Forms.ContextMenuStrip cmServers;
-        private System.Windows.Forms.ToolStripMenuItem miRolesAddGroup;
-        private System.Windows.Forms.ToolStripSeparator tssRoles;
+        private System.Windows.Forms.ToolStripMenuItem miRolesNewGroup;
         private System.Windows.Forms.ToolStripMenuItem miServersNewGroup;
         private System.Windows.Forms.ToolStripSeparator tssServers;
         private System.Windows.Forms.ToolStripMenuItem miServersNewServer;
@@ -581,16 +573,16 @@
         private System.Windows.Forms.PropertyGrid pgEditor;
         private System.Windows.Forms.SplitContainer scServer;
         private System.Windows.Forms.ListBox lbServerRoles;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip tsServerRoles;
         private System.Windows.Forms.ToolStripButton tsbServerRoleAdd;
         private System.Windows.Forms.ToolStripButton tsbServerRoleRemove;
         private System.Windows.Forms.PropertyGrid pgServerVariables;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip tsServerVariables;
         private System.Windows.Forms.ToolStripButton tsbVariableAdd;
         private System.Windows.Forms.ToolStripButton tsbVariableRemove;
         private System.Windows.Forms.ToolStripMenuItem runConfigurationToolStripMenuItem;
         private System.Windows.Forms.SplitContainer scConfigurationItem;
-        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStrip tsCIDependsOn;
         private System.Windows.Forms.ToolStripButton tsbCIAddDepends;
         private System.Windows.Forms.ToolStripButton tsbCIRemoveDepends;
         private System.Windows.Forms.ListBox lbCIDependency;

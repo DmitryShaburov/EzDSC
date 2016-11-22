@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
@@ -27,11 +21,13 @@ namespace EzDSC
             if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
             DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
             DscRole role = new DscRole();
-            string fileName = _repository.Dir.Roles + nameDialog.inputResult + ".json";
+            string fileName = roleGroup.DirectoryPath + "\\" + nameDialog.inputResult + ".json";
             role.Save(fileName);
-            roleGroup.Nodes.Add(new DscRoleNode(fileName, roleGroup));
-            tvLibrary.Nodes["tviRoles"].Nodes.Clear();
-            FillRoleTree(_repository.Roles, tvLibrary.Nodes["tviRoles"]);
+            DscRoleNode newRoleNode = new DscRoleNode(fileName, roleGroup);
+            roleGroup.Nodes.Add(newRoleNode);
+            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(newRoleNode.BuildName(), newRoleNode.Name);
+            newTreeNode.Tag = newRoleNode;
+            tvLibrary.SelectedNode = newTreeNode;
         }
 
         private void FillResourceTree()
@@ -67,6 +63,7 @@ namespace EzDSC
             {
                 TreeNode groupNode = treeNode.Nodes.Add(childGroup.Name);
                 groupNode.Tag = childGroup;
+                groupNode.ContextMenuStrip = cmRoles;
                 FillRoleTree(childGroup, groupNode);
             }
         }
@@ -162,8 +159,10 @@ namespace EzDSC
             DscServerNode serverNode =
                 new DscServerNode(DscServerNode.ServerType.Server, fileName, parentNode);
             parentNode.Nodes.Add(serverNode);
-            tvLibrary.Nodes["tviServers"].Nodes.Clear();
-            FillServerTree(_repository.Servers, tvLibrary.Nodes["tviServers"]);
+            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(serverNode.FilePath, serverNode.Name);
+            newTreeNode.Tag = serverNode;
+            newTreeNode.ContextMenuStrip = cmServers;
+            tvLibrary.SelectedNode = newTreeNode;
         }
 
         private void miServersNewGroup_Click(object sender, EventArgs e)
@@ -178,8 +177,10 @@ namespace EzDSC
             DscServerNode serverNode =
                 new DscServerNode(DscServerNode.ServerType.Group, fileName, parentNode);
             parentNode.Nodes.Add(serverNode);
-            tvLibrary.Nodes["tviServers"].Nodes.Clear();
-            FillServerTree(_repository.Servers, tvLibrary.Nodes["tviServers"]);
+            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(serverNode.FilePath, serverNode.Name);
+            newTreeNode.Tag = serverNode;
+            newTreeNode.ContextMenuStrip = cmServers;
+            tvLibrary.SelectedNode = newTreeNode;
         }
 
         private void miFileExit_Click(object sender, EventArgs e)
@@ -207,9 +208,11 @@ namespace EzDSC
             string fileName = _repository.Dir.Resources + resource.Parent.Name + "\\" + resource.FriendlyName + "\\" +
                               nameDialog.inputResult + ".json";
             configurationItem.Save(fileName);
-            resource.Nodes.Add(new DscConfigurationItemNode(fileName, resource));
-            tvLibrary.Nodes["tviResources"].Nodes.Clear();
-            FillResourceTree();
+            DscConfigurationItemNode configurationItemNode = new DscConfigurationItemNode(fileName, resource);
+            resource.Nodes.Add(configurationItemNode);
+            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(configurationItemNode.GetFullName(), configurationItemNode.Name);
+            newTreeNode.Tag = configurationItemNode;
+            tvLibrary.SelectedNode = newTreeNode;
         }
 
         private void tsbRoleAdd_Click(object sender, EventArgs e)
@@ -325,6 +328,21 @@ namespace EzDSC
         private void tvLibrary_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             tvLibrary.SelectedNode = e.Node;
+        }
+
+        private void miRolesNewGroup_Click(object sender, EventArgs e)
+        {
+            fModalName nameDialog = new fModalName();
+            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
+            DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
+            string path = roleGroup.DirectoryPath + nameDialog.inputResult + "\\";
+            _repository.Dir.DirectoryCreateIfNotExists(path);
+            DscRoleGroup newRoleGroup = new DscRoleGroup(path, roleGroup);
+            roleGroup.Groups.Add(newRoleGroup);
+            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(newRoleGroup.BuildName(), newRoleGroup.Name);
+            newTreeNode.Tag = newRoleGroup;
+            newTreeNode.ContextMenuStrip = cmRoles;
+            tvLibrary.SelectedNode = newTreeNode;
         }
     }
 }
