@@ -8,6 +8,7 @@ namespace EzDSC
     public class DscConfigurationItem
     {
         public IDictionary Properties = new Hashtable();
+        public List<string> DependsOn = new List<string>();
 
         private string SearchArray(string[] arr, string s)
         {

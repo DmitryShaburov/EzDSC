@@ -94,10 +94,10 @@ namespace EzDSC
 
             pRolePanel.Dock = DockStyle.Fill;
             scServer.Dock = DockStyle.Fill;
-            pgEditor.Dock = DockStyle.Fill;;
+            scConfigurationItem.Dock = DockStyle.Fill;;
             pRolePanel.Hide();
             scServer.Hide();
-            pgEditor.Hide();
+            scConfigurationItem.Hide();
         }
 
         private void tvLibrary_AfterSelect(object sender, TreeViewEventArgs e)
@@ -107,14 +107,14 @@ namespace EzDSC
 
             pRolePanel.Hide();
             scServer.Hide();
-            pgEditor.Hide();
+            scConfigurationItem.Hide();
 
             if (selectedType == typeof(DscConfigurationItemNode))
             {
                 DscConfigurationItemNode configurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
-                pgEditor.Show();
+                scConfigurationItem.Show();
                 pgEditor.SelectedObject = new DictionaryPropertyGridAdapter(configurationItemNode.ConfigurationItem.Properties, configurationItemNode.Parent);
-                pgEditor.Tag = configurationItemNode.ConfigurationItem;
+                lbCIDependency.DataSource = configurationItemNode.ConfigurationItem.DependsOn;
             }
 
             if (selectedType == typeof(DscRoleNode))
@@ -289,6 +289,42 @@ namespace EzDSC
             string fileName = _repository.Dir.Output + Guid.NewGuid() + ".ps1";
             File.WriteAllLines(fileName, PsCodeBuilder.BuildScript(configurations, _repository));
             MessageBox.Show(this, "Result file: " + fileName, "Done!");
+        }
+
+        private void tsbCIAddDepends_Click(object sender, EventArgs e)
+        {
+            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviResources"]);
+            if ((treeDialog.ShowDialog() != DialogResult.OK) || (treeDialog.SelectedTag == null)) return;
+            if (treeDialog.SelectedTag.GetType() != typeof(DscConfigurationItemNode)) return;
+            DscConfigurationItemNode selectedConfigurationItemNode = (treeDialog.SelectedTag as DscConfigurationItemNode);
+            DscConfigurationItemNode currentConfigurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
+            currentConfigurationItemNode.ConfigurationItem.DependsOn.Add(
+                selectedConfigurationItemNode.Parent.Parent.Name + "." +
+                selectedConfigurationItemNode.Parent.FriendlyName + "." + selectedConfigurationItemNode.Name);
+            lbCIDependency.DataSource = null;
+            lbCIDependency.DataSource = currentConfigurationItemNode.ConfigurationItem.DependsOn;
+            currentConfigurationItemNode.ConfigurationItem.Save(_repository.Dir.Resources +
+                                                         currentConfigurationItemNode.Parent.Parent.Name + "\\" +
+                                                         currentConfigurationItemNode.Parent.FriendlyName + "\\" +
+                                                         currentConfigurationItemNode.Name + ".json");
+        }
+
+        private void tsbCIRemoveDepends_Click(object sender, EventArgs e)
+        {
+            if (lbCIDependency.SelectedItem == null) return;
+            DscConfigurationItemNode configurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
+            configurationItemNode.ConfigurationItem.DependsOn.Remove(lbCIDependency.SelectedItem.ToString());
+            lbCIDependency.DataSource = null;
+            lbCIDependency.DataSource = configurationItemNode.ConfigurationItem.DependsOn;
+            configurationItemNode.ConfigurationItem.Save(_repository.Dir.Resources +
+                                                         configurationItemNode.Parent.Parent.Name + "\\" +
+                                                         configurationItemNode.Parent.FriendlyName + "\\" +
+                                                         configurationItemNode.Name + ".json");
+        }
+
+        private void tvLibrary_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            tvLibrary.SelectedNode = e.Node;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace EzDSC
             return configData;
         }
 
-        private static List<string> GetConfigurationItemText(DscConfigurationItemNode node)
+        private static List<string> GetConfigurationItemText(DscConfigurationItemNode node, DscRepository repository)
         {
             List<string> itemText = new List<string>();
 
@@ -65,6 +65,16 @@ namespace EzDSC
                         itemText.Add(entry.Key + " = \"" + entry.Value + "\"");
                         break;
                 }
+            }
+            if (node.ConfigurationItem.DependsOn.Count > 0)
+            {
+                List<string> dependsOn = new List<string>();
+                foreach (string dependency in node.ConfigurationItem.DependsOn)
+                {
+                    DscConfigurationItemNode dependencyNode = repository.GetConfigurationItemNode(dependency);
+                    dependsOn.Add("'[" + dependencyNode.Parent.FriendlyName + "]" + dependencyNode.Name + "'");
+                }
+                itemText.Add("DependsOn = " + string.Join(",", dependsOn));
             }
             itemText.Add("}");
 
@@ -96,7 +106,7 @@ namespace EzDSC
             foreach (string resourceString in resourceStrings)
             {
                 DscConfigurationItemNode configurationItemNode = repository.GetConfigurationItemNode(resourceString);
-                configText.AddRange(GetConfigurationItemText(configurationItemNode));
+                configText.AddRange(GetConfigurationItemText(configurationItemNode, repository));
             }
             configText.AddRange(new List<string> { "}", "}" });
             return configText;
