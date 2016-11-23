@@ -50,22 +50,14 @@
             this.pgEditor = new System.Windows.Forms.PropertyGrid();
             this.lbCIDependency = new System.Windows.Forms.ListBox();
             this.tsCIDependsOn = new System.Windows.Forms.ToolStrip();
-            this.tsbCIAddDepends = new System.Windows.Forms.ToolStripButton();
-            this.tsbCIRemoveDepends = new System.Windows.Forms.ToolStripButton();
             this.scServer = new System.Windows.Forms.SplitContainer();
             this.lbServerRoles = new System.Windows.Forms.ListBox();
             this.tsServerRoles = new System.Windows.Forms.ToolStrip();
-            this.tsbServerRoleAdd = new System.Windows.Forms.ToolStripButton();
-            this.tsbServerRoleRemove = new System.Windows.Forms.ToolStripButton();
             this.pgServerVariables = new System.Windows.Forms.PropertyGrid();
             this.tsServerVariables = new System.Windows.Forms.ToolStrip();
-            this.tsbVariableAdd = new System.Windows.Forms.ToolStripButton();
-            this.tsbVariableRemove = new System.Windows.Forms.ToolStripButton();
             this.pRolePanel = new System.Windows.Forms.Panel();
             this.lbRole = new System.Windows.Forms.ListBox();
             this.tsRole = new System.Windows.Forms.ToolStrip();
-            this.tsbRoleAdd = new System.Windows.Forms.ToolStripButton();
-            this.tsbRoleRemove = new System.Windows.Forms.ToolStripButton();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.miFileNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,6 +66,20 @@
             this.miFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmResourceType = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ilMain = new System.Windows.Forms.ImageList(this.components);
+            this.tslRoleCI = new System.Windows.Forms.ToolStripLabel();
+            this.tslServerRoles = new System.Windows.Forms.ToolStripLabel();
+            this.tslServerVariables = new System.Windows.Forms.ToolStripLabel();
+            this.tslCIDepends = new System.Windows.Forms.ToolStripLabel();
+            this.tsbCIAddDepends = new System.Windows.Forms.ToolStripButton();
+            this.tsbCIRemoveDepends = new System.Windows.Forms.ToolStripButton();
+            this.tsbServerRoleAdd = new System.Windows.Forms.ToolStripButton();
+            this.tsbServerRoleRemove = new System.Windows.Forms.ToolStripButton();
+            this.tsbVariableAdd = new System.Windows.Forms.ToolStripButton();
+            this.tsbVariableRemove = new System.Windows.Forms.ToolStripButton();
+            this.tsbRoleAdd = new System.Windows.Forms.ToolStripButton();
+            this.tsbRoleRemove = new System.Windows.Forms.ToolStripButton();
+            this.miRunConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.cmRoles.SuspendLayout();
             this.cmServers.SuspendLayout();
             this.cmServerItem.SuspendLayout();
@@ -104,19 +110,21 @@
             this.miRolesNewGroup,
             this.miRolesNewRole});
             this.cmRoles.Name = "cmRoles";
-            this.cmRoles.Size = new System.Drawing.Size(153, 70);
+            this.cmRoles.Size = new System.Drawing.Size(143, 48);
             // 
             // miRolesNewGroup
             // 
+            this.miRolesNewGroup.Image = global::EzDSC.Images.folder_new;
             this.miRolesNewGroup.Name = "miRolesNewGroup";
-            this.miRolesNewGroup.Size = new System.Drawing.Size(152, 22);
+            this.miRolesNewGroup.Size = new System.Drawing.Size(142, 22);
             this.miRolesNewGroup.Text = "New group...";
             this.miRolesNewGroup.Click += new System.EventHandler(this.miRolesNewGroup_Click);
             // 
             // miRolesNewRole
             // 
+            this.miRolesNewRole.Image = global::EzDSC.Images.document_new;
             this.miRolesNewRole.Name = "miRolesNewRole";
-            this.miRolesNewRole.Size = new System.Drawing.Size(152, 22);
+            this.miRolesNewRole.Size = new System.Drawing.Size(142, 22);
             this.miRolesNewRole.Text = "New role...";
             this.miRolesNewRole.Click += new System.EventHandler(this.createRoleToolStripMenuItem_Click);
             // 
@@ -126,39 +134,45 @@
             this.miServersNewGroup,
             this.miServersNewServer,
             this.tssServers,
-            this.miBuildConfiguration});
+            this.miBuildConfiguration,
+            this.miRunConfiguration});
             this.cmServers.Name = "cmServers";
-            this.cmServers.Size = new System.Drawing.Size(177, 76);
+            this.cmServers.Size = new System.Drawing.Size(192, 98);
             // 
             // miServersNewGroup
             // 
+            this.miServersNewGroup.Image = global::EzDSC.Images.folder_new;
             this.miServersNewGroup.Name = "miServersNewGroup";
-            this.miServersNewGroup.Size = new System.Drawing.Size(176, 22);
+            this.miServersNewGroup.Size = new System.Drawing.Size(191, 22);
             this.miServersNewGroup.Text = "New group...";
             this.miServersNewGroup.Click += new System.EventHandler(this.miServersNewGroup_Click);
             // 
             // miServersNewServer
             // 
+            this.miServersNewServer.Image = global::EzDSC.Images.document_new;
             this.miServersNewServer.Name = "miServersNewServer";
-            this.miServersNewServer.Size = new System.Drawing.Size(176, 22);
+            this.miServersNewServer.Size = new System.Drawing.Size(191, 22);
             this.miServersNewServer.Text = "New server...";
             this.miServersNewServer.Click += new System.EventHandler(this.miServersNewServer_Click);
             // 
             // tssServers
             // 
             this.tssServers.Name = "tssServers";
-            this.tssServers.Size = new System.Drawing.Size(173, 6);
+            this.tssServers.Size = new System.Drawing.Size(188, 6);
             // 
             // miBuildConfiguration
             // 
+            this.miBuildConfiguration.Image = global::EzDSC.Images.document_save;
             this.miBuildConfiguration.Name = "miBuildConfiguration";
-            this.miBuildConfiguration.Size = new System.Drawing.Size(176, 22);
-            this.miBuildConfiguration.Text = "Build configuration";
+            this.miBuildConfiguration.Size = new System.Drawing.Size(191, 22);
+            this.miBuildConfiguration.Text = "Export configuration...";
             this.miBuildConfiguration.Click += new System.EventHandler(this.miBuildConfiguration_Click);
             // 
             // tvLibrary
             // 
             this.tvLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvLibrary.ImageIndex = 0;
+            this.tvLibrary.ImageList = this.ilMain;
             this.tvLibrary.Location = new System.Drawing.Point(0, 0);
             this.tvLibrary.Name = "tvLibrary";
             treeNode1.Name = "tviResources";
@@ -167,12 +181,14 @@
             treeNode2.Name = "tviRoles";
             treeNode2.Text = "Roles";
             treeNode3.ContextMenuStrip = this.cmServers;
+            treeNode3.ImageIndex = 0;
             treeNode3.Name = "tviServers";
             treeNode3.Text = "Servers";
             this.tvLibrary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2,
             treeNode3});
+            this.tvLibrary.SelectedImageIndex = 0;
             this.tvLibrary.Size = new System.Drawing.Size(240, 514);
             this.tvLibrary.TabIndex = 0;
             this.tvLibrary.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvLibrary_AfterSelect);
@@ -188,6 +204,7 @@
             // 
             // miServerItemBuildConfiguration
             // 
+            this.miServerItemBuildConfiguration.Image = global::EzDSC.Images.document_save;
             this.miServerItemBuildConfiguration.Name = "miServerItemBuildConfiguration";
             this.miServerItemBuildConfiguration.Size = new System.Drawing.Size(176, 22);
             this.miServerItemBuildConfiguration.Text = "Build configuration";
@@ -195,6 +212,7 @@
             // 
             // runConfigurationToolStripMenuItem
             // 
+            this.runConfigurationToolStripMenuItem.Image = global::EzDSC.Images.utilities_terminal;
             this.runConfigurationToolStripMenuItem.Name = "runConfigurationToolStripMenuItem";
             this.runConfigurationToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.runConfigurationToolStripMenuItem.Text = "Run configuration";
@@ -260,6 +278,7 @@
             // tsCIDependsOn
             // 
             this.tsCIDependsOn.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslCIDepends,
             this.tsbCIAddDepends,
             this.tsbCIRemoveDepends});
             this.tsCIDependsOn.Location = new System.Drawing.Point(0, 0);
@@ -267,26 +286,6 @@
             this.tsCIDependsOn.Size = new System.Drawing.Size(347, 25);
             this.tsCIDependsOn.TabIndex = 0;
             this.tsCIDependsOn.Text = "toolStrip3";
-            // 
-            // tsbCIAddDepends
-            // 
-            this.tsbCIAddDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbCIAddDepends.Image = ((System.Drawing.Image)(resources.GetObject("tsbCIAddDepends.Image")));
-            this.tsbCIAddDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCIAddDepends.Name = "tsbCIAddDepends";
-            this.tsbCIAddDepends.Size = new System.Drawing.Size(42, 22);
-            this.tsbCIAddDepends.Text = "Add...";
-            this.tsbCIAddDepends.Click += new System.EventHandler(this.tsbCIAddDepends_Click);
-            // 
-            // tsbCIRemoveDepends
-            // 
-            this.tsbCIRemoveDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbCIRemoveDepends.Image = ((System.Drawing.Image)(resources.GetObject("tsbCIRemoveDepends.Image")));
-            this.tsbCIRemoveDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCIRemoveDepends.Name = "tsbCIRemoveDepends";
-            this.tsbCIRemoveDepends.Size = new System.Drawing.Size(63, 22);
-            this.tsbCIRemoveDepends.Text = "Remove...";
-            this.tsbCIRemoveDepends.Click += new System.EventHandler(this.tsbCIRemoveDepends_Click);
             // 
             // scServer
             // 
@@ -319,6 +318,7 @@
             // tsServerRoles
             // 
             this.tsServerRoles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslServerRoles,
             this.tsbServerRoleAdd,
             this.tsbServerRoleRemove});
             this.tsServerRoles.Location = new System.Drawing.Point(0, 0);
@@ -326,26 +326,6 @@
             this.tsServerRoles.Size = new System.Drawing.Size(396, 25);
             this.tsServerRoles.TabIndex = 0;
             this.tsServerRoles.Text = "tsServerRoles";
-            // 
-            // tsbServerRoleAdd
-            // 
-            this.tsbServerRoleAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbServerRoleAdd.Image = ((System.Drawing.Image)(resources.GetObject("tsbServerRoleAdd.Image")));
-            this.tsbServerRoleAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbServerRoleAdd.Name = "tsbServerRoleAdd";
-            this.tsbServerRoleAdd.Size = new System.Drawing.Size(42, 22);
-            this.tsbServerRoleAdd.Text = "Add...";
-            this.tsbServerRoleAdd.Click += new System.EventHandler(this.tsbServerRoleAdd_Click);
-            // 
-            // tsbServerRoleRemove
-            // 
-            this.tsbServerRoleRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbServerRoleRemove.Image = ((System.Drawing.Image)(resources.GetObject("tsbServerRoleRemove.Image")));
-            this.tsbServerRoleRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbServerRoleRemove.Name = "tsbServerRoleRemove";
-            this.tsbServerRoleRemove.Size = new System.Drawing.Size(63, 22);
-            this.tsbServerRoleRemove.Text = "Remove...";
-            this.tsbServerRoleRemove.Click += new System.EventHandler(this.tsbServerRoleRemove_Click);
             // 
             // pgServerVariables
             // 
@@ -360,6 +340,7 @@
             // tsServerVariables
             // 
             this.tsServerVariables.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslServerVariables,
             this.tsbVariableAdd,
             this.tsbVariableRemove});
             this.tsServerVariables.Location = new System.Drawing.Point(0, 0);
@@ -367,25 +348,6 @@
             this.tsServerVariables.Size = new System.Drawing.Size(396, 25);
             this.tsServerVariables.TabIndex = 0;
             this.tsServerVariables.Text = "tsServerVariables";
-            // 
-            // tsbVariableAdd
-            // 
-            this.tsbVariableAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbVariableAdd.Image = ((System.Drawing.Image)(resources.GetObject("tsbVariableAdd.Image")));
-            this.tsbVariableAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbVariableAdd.Name = "tsbVariableAdd";
-            this.tsbVariableAdd.Size = new System.Drawing.Size(39, 22);
-            this.tsbVariableAdd.Text = "Add..";
-            this.tsbVariableAdd.Click += new System.EventHandler(this.tsbVariableAdd_Click);
-            // 
-            // tsbVariableRemove
-            // 
-            this.tsbVariableRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbVariableRemove.Image = ((System.Drawing.Image)(resources.GetObject("tsbVariableRemove.Image")));
-            this.tsbVariableRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbVariableRemove.Name = "tsbVariableRemove";
-            this.tsbVariableRemove.Size = new System.Drawing.Size(63, 22);
-            this.tsbVariableRemove.Text = "Remove...";
             // 
             // pRolePanel
             // 
@@ -408,6 +370,7 @@
             // tsRole
             // 
             this.tsRole.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslRoleCI,
             this.tsbRoleAdd,
             this.tsbRoleRemove});
             this.tsRole.Location = new System.Drawing.Point(0, 0);
@@ -415,26 +378,6 @@
             this.tsRole.Size = new System.Drawing.Size(200, 25);
             this.tsRole.TabIndex = 6;
             this.tsRole.Text = "toolStrip1";
-            // 
-            // tsbRoleAdd
-            // 
-            this.tsbRoleAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbRoleAdd.Image = ((System.Drawing.Image)(resources.GetObject("tsbRoleAdd.Image")));
-            this.tsbRoleAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRoleAdd.Name = "tsbRoleAdd";
-            this.tsbRoleAdd.Size = new System.Drawing.Size(42, 22);
-            this.tsbRoleAdd.Text = "Add...";
-            this.tsbRoleAdd.Click += new System.EventHandler(this.tsbRoleAdd_Click);
-            // 
-            // tsbRoleRemove
-            // 
-            this.tsbRoleRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbRoleRemove.Image = ((System.Drawing.Image)(resources.GetObject("tsbRoleRemove.Image")));
-            this.tsbRoleRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRoleRemove.Name = "tsbRoleRemove";
-            this.tsbRoleRemove.Size = new System.Drawing.Size(63, 22);
-            this.tsbRoleRemove.Text = "Remove...";
-            this.tsbRoleRemove.Click += new System.EventHandler(this.tsbRoleRemove_Click);
             // 
             // msMainMenu
             // 
@@ -486,14 +429,133 @@
             this.cmResourceType.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miResourceTypeNewConfigurationItem});
             this.cmResourceType.Name = "cmResourceType";
-            this.cmResourceType.Size = new System.Drawing.Size(210, 26);
+            this.cmResourceType.Size = new System.Drawing.Size(210, 48);
             // 
             // miResourceTypeNewConfigurationItem
             // 
+            this.miResourceTypeNewConfigurationItem.Image = global::EzDSC.Images.document_new;
             this.miResourceTypeNewConfigurationItem.Name = "miResourceTypeNewConfigurationItem";
             this.miResourceTypeNewConfigurationItem.Size = new System.Drawing.Size(209, 22);
             this.miResourceTypeNewConfigurationItem.Text = "New configuration item...";
             this.miResourceTypeNewConfigurationItem.Click += new System.EventHandler(this.miResourceTypeNewConfigurationItem_Click);
+            // 
+            // ilMain
+            // 
+            this.ilMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilMain.ImageStream")));
+            this.ilMain.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilMain.Images.SetKeyName(0, "folder");
+            this.ilMain.Images.SetKeyName(1, "text-x-generic");
+            this.ilMain.Images.SetKeyName(2, "network-server");
+            // 
+            // tslRoleCI
+            // 
+            this.tslRoleCI.Name = "tslRoleCI";
+            this.tslRoleCI.Size = new System.Drawing.Size(116, 22);
+            this.tslRoleCI.Text = "Configuration items:";
+            // 
+            // tslServerRoles
+            // 
+            this.tslServerRoles.Name = "tslServerRoles";
+            this.tslServerRoles.Size = new System.Drawing.Size(38, 22);
+            this.tslServerRoles.Text = "Roles:";
+            // 
+            // tslServerVariables
+            // 
+            this.tslServerVariables.Name = "tslServerVariables";
+            this.tslServerVariables.Size = new System.Drawing.Size(56, 22);
+            this.tslServerVariables.Text = "Variables:";
+            // 
+            // tslCIDepends
+            // 
+            this.tslCIDepends.Name = "tslCIDepends";
+            this.tslCIDepends.Size = new System.Drawing.Size(75, 22);
+            this.tslCIDepends.Text = "Depends On:";
+            // 
+            // tsbCIAddDepends
+            // 
+            this.tsbCIAddDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbCIAddDepends.Image = global::EzDSC.Images.list_add;
+            this.tsbCIAddDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCIAddDepends.Name = "tsbCIAddDepends";
+            this.tsbCIAddDepends.Size = new System.Drawing.Size(23, 22);
+            this.tsbCIAddDepends.Text = "Add...";
+            this.tsbCIAddDepends.Click += new System.EventHandler(this.tsbCIAddDepends_Click);
+            // 
+            // tsbCIRemoveDepends
+            // 
+            this.tsbCIRemoveDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbCIRemoveDepends.Image = global::EzDSC.Images.list_remove;
+            this.tsbCIRemoveDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCIRemoveDepends.Name = "tsbCIRemoveDepends";
+            this.tsbCIRemoveDepends.Size = new System.Drawing.Size(23, 22);
+            this.tsbCIRemoveDepends.Text = "Remove...";
+            this.tsbCIRemoveDepends.Click += new System.EventHandler(this.tsbCIRemoveDepends_Click);
+            // 
+            // tsbServerRoleAdd
+            // 
+            this.tsbServerRoleAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbServerRoleAdd.Image = global::EzDSC.Images.list_add;
+            this.tsbServerRoleAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbServerRoleAdd.Name = "tsbServerRoleAdd";
+            this.tsbServerRoleAdd.Size = new System.Drawing.Size(23, 22);
+            this.tsbServerRoleAdd.Text = "Add...";
+            this.tsbServerRoleAdd.Click += new System.EventHandler(this.tsbServerRoleAdd_Click);
+            // 
+            // tsbServerRoleRemove
+            // 
+            this.tsbServerRoleRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbServerRoleRemove.Image = global::EzDSC.Images.list_remove;
+            this.tsbServerRoleRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbServerRoleRemove.Name = "tsbServerRoleRemove";
+            this.tsbServerRoleRemove.Size = new System.Drawing.Size(23, 22);
+            this.tsbServerRoleRemove.Text = "Remove...";
+            this.tsbServerRoleRemove.Click += new System.EventHandler(this.tsbServerRoleRemove_Click);
+            // 
+            // tsbVariableAdd
+            // 
+            this.tsbVariableAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbVariableAdd.Image = global::EzDSC.Images.list_add;
+            this.tsbVariableAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbVariableAdd.Name = "tsbVariableAdd";
+            this.tsbVariableAdd.Size = new System.Drawing.Size(23, 22);
+            this.tsbVariableAdd.Text = "Add..";
+            this.tsbVariableAdd.Click += new System.EventHandler(this.tsbVariableAdd_Click);
+            // 
+            // tsbVariableRemove
+            // 
+            this.tsbVariableRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbVariableRemove.Image = global::EzDSC.Images.list_remove;
+            this.tsbVariableRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbVariableRemove.Name = "tsbVariableRemove";
+            this.tsbVariableRemove.Size = new System.Drawing.Size(23, 22);
+            this.tsbVariableRemove.Text = "Remove...";
+            // 
+            // tsbRoleAdd
+            // 
+            this.tsbRoleAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRoleAdd.Image = global::EzDSC.Images.list_add;
+            this.tsbRoleAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRoleAdd.Name = "tsbRoleAdd";
+            this.tsbRoleAdd.Size = new System.Drawing.Size(23, 22);
+            this.tsbRoleAdd.Text = "Add...";
+            this.tsbRoleAdd.Click += new System.EventHandler(this.tsbRoleAdd_Click);
+            // 
+            // tsbRoleRemove
+            // 
+            this.tsbRoleRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRoleRemove.Image = global::EzDSC.Images.list_remove;
+            this.tsbRoleRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRoleRemove.Name = "tsbRoleRemove";
+            this.tsbRoleRemove.Size = new System.Drawing.Size(23, 22);
+            this.tsbRoleRemove.Text = "Remove...";
+            this.tsbRoleRemove.Click += new System.EventHandler(this.tsbRoleRemove_Click);
+            // 
+            // miRunConfiguration
+            // 
+            this.miRunConfiguration.Image = global::EzDSC.Images.utilities_terminal;
+            this.miRunConfiguration.Name = "miRunConfiguration";
+            this.miRunConfiguration.Size = new System.Drawing.Size(191, 22);
+            this.miRunConfiguration.Text = "Run configuration";
             // 
             // fMain
             // 
@@ -586,6 +648,12 @@
         private System.Windows.Forms.ToolStripButton tsbCIAddDepends;
         private System.Windows.Forms.ToolStripButton tsbCIRemoveDepends;
         private System.Windows.Forms.ListBox lbCIDependency;
+        private System.Windows.Forms.ImageList ilMain;
+        private System.Windows.Forms.ToolStripLabel tslCIDepends;
+        private System.Windows.Forms.ToolStripLabel tslServerRoles;
+        private System.Windows.Forms.ToolStripLabel tslServerVariables;
+        private System.Windows.Forms.ToolStripLabel tslRoleCI;
+        private System.Windows.Forms.ToolStripMenuItem miRunConfiguration;
     }
 }
 

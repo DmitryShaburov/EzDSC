@@ -26,6 +26,8 @@ namespace EzDSC
             DscRoleNode newRoleNode = new DscRoleNode(fileName, roleGroup);
             roleGroup.Nodes.Add(newRoleNode);
             TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(newRoleNode.BuildName(), newRoleNode.Name);
+            newTreeNode.ImageIndex = 1;
+            newTreeNode.SelectedImageIndex = 1;
             newTreeNode.Tag = newRoleNode;
             tvLibrary.SelectedNode = newTreeNode;
         }
@@ -35,16 +37,22 @@ namespace EzDSC
             foreach (DscModule module in _repository.Modules)
             {
                 TreeNode moduleNode = tvLibrary.Nodes["tviResources"].Nodes.Add(module.Name);
+                moduleNode.ImageIndex = 0;
+                moduleNode.SelectedImageIndex = 0;
                 moduleNode.Tag = module;
                 foreach (DscResource resource in module.Resources)
                 {
                     TreeNode resourceNode = moduleNode.Nodes.Add(resource.FriendlyName);
                     resourceNode.Tag = resource;
+                    resourceNode.ImageIndex = 0;
+                    resourceNode.SelectedImageIndex = 0;
                     resourceNode.ContextMenuStrip = cmResourceType;
                     foreach (DscConfigurationItemNode configurationItem in resource.Nodes)
                     {
                         TreeNode configurationItemNode = resourceNode.Nodes.Add(configurationItem.Name);
                         configurationItemNode.Tag = configurationItem;
+                        configurationItemNode.ImageIndex = 1;
+                        configurationItemNode.SelectedImageIndex = 1;
                     }
                 }
                
@@ -58,11 +66,15 @@ namespace EzDSC
             {
                 TreeNode roleNode = treeNode.Nodes.Add(childRole.Name);
                 roleNode.Tag = childRole;
+                roleNode.ImageIndex = 1;
+                roleNode.SelectedImageIndex = 1;
             }
             foreach (DscRoleGroup childGroup in group.Groups)
             {
                 TreeNode groupNode = treeNode.Nodes.Add(childGroup.Name);
                 groupNode.Tag = childGroup;
+                groupNode.ImageIndex = 0;
+                groupNode.SelectedImageIndex = 0;
                 groupNode.ContextMenuStrip = cmRoles;
                 FillRoleTree(childGroup, groupNode);
             }
@@ -75,8 +87,12 @@ namespace EzDSC
             {
                 TreeNode childNode = treeNode.Nodes.Add(child.Name);
                 childNode.Tag = child;
+                childNode.ImageIndex = 2;
+                childNode.SelectedImageIndex = 2;
                 childNode.ContextMenuStrip = cmServerItem;
                 if (child.Type != DscServerNode.ServerType.Group) continue;
+                childNode.ImageIndex = 0;
+                childNode.SelectedImageIndex = 0;
                 childNode.ContextMenuStrip = cmServers;
                 FillServerTree(child, childNode);
             }
@@ -160,6 +176,8 @@ namespace EzDSC
                 new DscServerNode(DscServerNode.ServerType.Server, fileName, parentNode);
             parentNode.Nodes.Add(serverNode);
             TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(serverNode.FilePath, serverNode.Name);
+            newTreeNode.ImageIndex = 2;
+            newTreeNode.SelectedImageIndex = 2;
             newTreeNode.Tag = serverNode;
             newTreeNode.ContextMenuStrip = cmServers;
             tvLibrary.SelectedNode = newTreeNode;
@@ -178,6 +196,8 @@ namespace EzDSC
                 new DscServerNode(DscServerNode.ServerType.Group, fileName, parentNode);
             parentNode.Nodes.Add(serverNode);
             TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(serverNode.FilePath, serverNode.Name);
+            newTreeNode.ImageIndex = 0;
+            newTreeNode.SelectedImageIndex = 0;
             newTreeNode.Tag = serverNode;
             newTreeNode.ContextMenuStrip = cmServers;
             tvLibrary.SelectedNode = newTreeNode;
@@ -211,13 +231,15 @@ namespace EzDSC
             DscConfigurationItemNode configurationItemNode = new DscConfigurationItemNode(fileName, resource);
             resource.Nodes.Add(configurationItemNode);
             TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(configurationItemNode.GetFullName(), configurationItemNode.Name);
+            newTreeNode.ImageIndex = 1;
+            newTreeNode.SelectedImageIndex = 1;
             newTreeNode.Tag = configurationItemNode;
             tvLibrary.SelectedNode = newTreeNode;
         }
 
         private void tsbRoleAdd_Click(object sender, EventArgs e)
         {
-            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviResources"]);
+            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviResources"], ilMain);
             if ((treeDialog.ShowDialog() != DialogResult.OK) || (treeDialog.SelectedTag == null)) return;
             if (treeDialog.SelectedTag.GetType() != typeof(DscConfigurationItemNode)) return;
             DscConfigurationItemNode configurationItemNode = (treeDialog.SelectedTag as DscConfigurationItemNode);
@@ -240,7 +262,7 @@ namespace EzDSC
 
         private void tsbServerRoleAdd_Click(object sender, EventArgs e)
         {
-            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviRoles"]);
+            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviRoles"], ilMain);
             if ((treeDialog.ShowDialog() != DialogResult.OK) || (treeDialog.SelectedTag == null)) return;
             if (treeDialog.SelectedTag.GetType() != typeof(DscRoleNode)) return;
             DscRoleNode roleNode = (treeDialog.SelectedTag as DscRoleNode);
@@ -296,7 +318,7 @@ namespace EzDSC
 
         private void tsbCIAddDepends_Click(object sender, EventArgs e)
         {
-            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviResources"]);
+            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviResources"], ilMain);
             if ((treeDialog.ShowDialog() != DialogResult.OK) || (treeDialog.SelectedTag == null)) return;
             if (treeDialog.SelectedTag.GetType() != typeof(DscConfigurationItemNode)) return;
             DscConfigurationItemNode selectedConfigurationItemNode = (treeDialog.SelectedTag as DscConfigurationItemNode);
@@ -339,6 +361,8 @@ namespace EzDSC
             roleGroup.Groups.Add(newRoleGroup);
             TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(newRoleGroup.BuildName(), newRoleGroup.Name);
             newTreeNode.Tag = newRoleGroup;
+            newTreeNode.ImageIndex = 0;
+            newTreeNode.SelectedImageIndex = 0;
             newTreeNode.ContextMenuStrip = cmRoles;
             tvLibrary.SelectedNode = newTreeNode;
         }

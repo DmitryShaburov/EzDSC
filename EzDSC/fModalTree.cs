@@ -16,9 +16,10 @@ namespace EzDSC
         public enum TreeType { TtResources, TtRoles }
         public object SelectedTag;
 
-        public fModalTree(TreeNode node)
+        public fModalTree(TreeNode node, ImageList list)
         {
             InitializeComponent();
+            tvSelect.ImageList = list;
             tvSelect.Nodes.Add((TreeNode)node.Clone());
         }
 
