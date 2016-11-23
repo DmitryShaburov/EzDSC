@@ -148,11 +148,10 @@ namespace EzDSC
 
         private void miServerItemBuildConfiguration_Click(object sender, EventArgs e)
         {
+            if ((sfdExportScript.ShowDialog() != DialogResult.OK) || (sfdExportScript.FileName == "")) return;
             DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
             List<PsConfiguration> configurations = serverNode.GetConfigurations();
-            string fileName = _repository.Dir.Output + Guid.NewGuid() + ".ps1";
-            File.WriteAllLines(fileName, PsCodeBuilder.BuildScript(configurations, _repository));
-            MessageBox.Show(this, "Result file: " + fileName, "Done!");
+            File.WriteAllLines(sfdExportScript.FileName, PsCodeBuilder.BuildScript(configurations, _repository));
         }
 
         private void pgEditor_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -309,11 +308,10 @@ namespace EzDSC
 
         private void miBuildConfiguration_Click(object sender, EventArgs e)
         {
+            if ((sfdExportScript.ShowDialog() != DialogResult.OK) || (sfdExportScript.FileName == "")) return;
             DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
             List<PsConfiguration> configurations = serverNode.GetConfigurations();
-            string fileName = _repository.Dir.Output + Guid.NewGuid() + ".ps1";
-            File.WriteAllLines(fileName, PsCodeBuilder.BuildScript(configurations, _repository));
-            MessageBox.Show(this, "Result file: " + fileName, "Done!");
+            File.WriteAllLines(sfdExportScript.FileName, PsCodeBuilder.BuildScript(configurations, _repository));
         }
 
         private void tsbCIAddDepends_Click(object sender, EventArgs e)

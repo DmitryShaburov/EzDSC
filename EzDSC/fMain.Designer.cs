@@ -29,22 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Resources");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Roles");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Servers");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Resources");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Roles");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Servers");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.cmRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miRolesNewGroup = new System.Windows.Forms.ToolStripMenuItem();
-            this.miRolesNewRole = new System.Windows.Forms.ToolStripMenuItem();
             this.cmServers = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miServersNewGroup = new System.Windows.Forms.ToolStripMenuItem();
-            this.miServersNewServer = new System.Windows.Forms.ToolStripMenuItem();
             this.tssServers = new System.Windows.Forms.ToolStripSeparator();
-            this.miBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.tvLibrary = new System.Windows.Forms.TreeView();
             this.cmServerItem = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miServerItemBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.runConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.scConfigurationItem = new System.Windows.Forms.SplitContainer();
             this.pgEditor = new System.Windows.Forms.PropertyGrid();
@@ -65,7 +58,6 @@
             this.tsFileStrip = new System.Windows.Forms.ToolStripSeparator();
             this.miFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmResourceType = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ilMain = new System.Windows.Forms.ImageList(this.components);
             this.tslRoleCI = new System.Windows.Forms.ToolStripLabel();
             this.tslServerRoles = new System.Windows.Forms.ToolStripLabel();
@@ -79,7 +71,16 @@
             this.tsbVariableRemove = new System.Windows.Forms.ToolStripButton();
             this.tsbRoleAdd = new System.Windows.Forms.ToolStripButton();
             this.tsbRoleRemove = new System.Windows.Forms.ToolStripButton();
+            this.miRolesNewGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.miRolesNewRole = new System.Windows.Forms.ToolStripMenuItem();
+            this.miServersNewGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.miServersNewServer = new System.Windows.Forms.ToolStripMenuItem();
+            this.miBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.miRunConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.miServerItemBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.runConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sfdExportScript = new System.Windows.Forms.SaveFileDialog();
             this.cmRoles.SuspendLayout();
             this.cmServers.SuspendLayout();
             this.cmServerItem.SuspendLayout();
@@ -112,22 +113,6 @@
             this.cmRoles.Name = "cmRoles";
             this.cmRoles.Size = new System.Drawing.Size(143, 48);
             // 
-            // miRolesNewGroup
-            // 
-            this.miRolesNewGroup.Image = global::EzDSC.Images.folder_new;
-            this.miRolesNewGroup.Name = "miRolesNewGroup";
-            this.miRolesNewGroup.Size = new System.Drawing.Size(142, 22);
-            this.miRolesNewGroup.Text = "New group...";
-            this.miRolesNewGroup.Click += new System.EventHandler(this.miRolesNewGroup_Click);
-            // 
-            // miRolesNewRole
-            // 
-            this.miRolesNewRole.Image = global::EzDSC.Images.document_new;
-            this.miRolesNewRole.Name = "miRolesNewRole";
-            this.miRolesNewRole.Size = new System.Drawing.Size(142, 22);
-            this.miRolesNewRole.Text = "New role...";
-            this.miRolesNewRole.Click += new System.EventHandler(this.createRoleToolStripMenuItem_Click);
-            // 
             // cmServers
             // 
             this.cmServers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -139,34 +124,10 @@
             this.cmServers.Name = "cmServers";
             this.cmServers.Size = new System.Drawing.Size(192, 98);
             // 
-            // miServersNewGroup
-            // 
-            this.miServersNewGroup.Image = global::EzDSC.Images.folder_new;
-            this.miServersNewGroup.Name = "miServersNewGroup";
-            this.miServersNewGroup.Size = new System.Drawing.Size(191, 22);
-            this.miServersNewGroup.Text = "New group...";
-            this.miServersNewGroup.Click += new System.EventHandler(this.miServersNewGroup_Click);
-            // 
-            // miServersNewServer
-            // 
-            this.miServersNewServer.Image = global::EzDSC.Images.document_new;
-            this.miServersNewServer.Name = "miServersNewServer";
-            this.miServersNewServer.Size = new System.Drawing.Size(191, 22);
-            this.miServersNewServer.Text = "New server...";
-            this.miServersNewServer.Click += new System.EventHandler(this.miServersNewServer_Click);
-            // 
             // tssServers
             // 
             this.tssServers.Name = "tssServers";
             this.tssServers.Size = new System.Drawing.Size(188, 6);
-            // 
-            // miBuildConfiguration
-            // 
-            this.miBuildConfiguration.Image = global::EzDSC.Images.document_save;
-            this.miBuildConfiguration.Name = "miBuildConfiguration";
-            this.miBuildConfiguration.Size = new System.Drawing.Size(191, 22);
-            this.miBuildConfiguration.Text = "Export configuration...";
-            this.miBuildConfiguration.Click += new System.EventHandler(this.miBuildConfiguration_Click);
             // 
             // tvLibrary
             // 
@@ -175,19 +136,19 @@
             this.tvLibrary.ImageList = this.ilMain;
             this.tvLibrary.Location = new System.Drawing.Point(0, 0);
             this.tvLibrary.Name = "tvLibrary";
-            treeNode1.Name = "tviResources";
-            treeNode1.Text = "Resources";
-            treeNode2.ContextMenuStrip = this.cmRoles;
-            treeNode2.Name = "tviRoles";
-            treeNode2.Text = "Roles";
-            treeNode3.ContextMenuStrip = this.cmServers;
-            treeNode3.ImageIndex = 0;
-            treeNode3.Name = "tviServers";
-            treeNode3.Text = "Servers";
+            treeNode4.Name = "tviResources";
+            treeNode4.Text = "Resources";
+            treeNode5.ContextMenuStrip = this.cmRoles;
+            treeNode5.Name = "tviRoles";
+            treeNode5.Text = "Roles";
+            treeNode6.ContextMenuStrip = this.cmServers;
+            treeNode6.ImageIndex = 0;
+            treeNode6.Name = "tviServers";
+            treeNode6.Text = "Servers";
             this.tvLibrary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.tvLibrary.SelectedImageIndex = 0;
             this.tvLibrary.Size = new System.Drawing.Size(240, 514);
             this.tvLibrary.TabIndex = 0;
@@ -200,23 +161,7 @@
             this.miServerItemBuildConfiguration,
             this.runConfigurationToolStripMenuItem});
             this.cmServerItem.Name = "cmServerItem";
-            this.cmServerItem.Size = new System.Drawing.Size(177, 48);
-            // 
-            // miServerItemBuildConfiguration
-            // 
-            this.miServerItemBuildConfiguration.Image = global::EzDSC.Images.document_save;
-            this.miServerItemBuildConfiguration.Name = "miServerItemBuildConfiguration";
-            this.miServerItemBuildConfiguration.Size = new System.Drawing.Size(176, 22);
-            this.miServerItemBuildConfiguration.Text = "Build configuration";
-            this.miServerItemBuildConfiguration.Click += new System.EventHandler(this.miServerItemBuildConfiguration_Click);
-            // 
-            // runConfigurationToolStripMenuItem
-            // 
-            this.runConfigurationToolStripMenuItem.Image = global::EzDSC.Images.utilities_terminal;
-            this.runConfigurationToolStripMenuItem.Name = "runConfigurationToolStripMenuItem";
-            this.runConfigurationToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.runConfigurationToolStripMenuItem.Text = "Run configuration";
-            this.runConfigurationToolStripMenuItem.Click += new System.EventHandler(this.runConfigurationToolStripMenuItem_Click);
+            this.cmServerItem.Size = new System.Drawing.Size(183, 70);
             // 
             // scMain
             // 
@@ -429,15 +374,7 @@
             this.cmResourceType.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miResourceTypeNewConfigurationItem});
             this.cmResourceType.Name = "cmResourceType";
-            this.cmResourceType.Size = new System.Drawing.Size(210, 48);
-            // 
-            // miResourceTypeNewConfigurationItem
-            // 
-            this.miResourceTypeNewConfigurationItem.Image = global::EzDSC.Images.document_new;
-            this.miResourceTypeNewConfigurationItem.Name = "miResourceTypeNewConfigurationItem";
-            this.miResourceTypeNewConfigurationItem.Size = new System.Drawing.Size(209, 22);
-            this.miResourceTypeNewConfigurationItem.Text = "New configuration item...";
-            this.miResourceTypeNewConfigurationItem.Click += new System.EventHandler(this.miResourceTypeNewConfigurationItem_Click);
+            this.cmResourceType.Size = new System.Drawing.Size(210, 26);
             // 
             // ilMain
             // 
@@ -550,12 +487,81 @@
             this.tsbRoleRemove.Text = "Remove...";
             this.tsbRoleRemove.Click += new System.EventHandler(this.tsbRoleRemove_Click);
             // 
+            // miRolesNewGroup
+            // 
+            this.miRolesNewGroup.Image = global::EzDSC.Images.folder_new;
+            this.miRolesNewGroup.Name = "miRolesNewGroup";
+            this.miRolesNewGroup.Size = new System.Drawing.Size(142, 22);
+            this.miRolesNewGroup.Text = "New group...";
+            this.miRolesNewGroup.Click += new System.EventHandler(this.miRolesNewGroup_Click);
+            // 
+            // miRolesNewRole
+            // 
+            this.miRolesNewRole.Image = global::EzDSC.Images.document_new;
+            this.miRolesNewRole.Name = "miRolesNewRole";
+            this.miRolesNewRole.Size = new System.Drawing.Size(142, 22);
+            this.miRolesNewRole.Text = "New role...";
+            this.miRolesNewRole.Click += new System.EventHandler(this.createRoleToolStripMenuItem_Click);
+            // 
+            // miServersNewGroup
+            // 
+            this.miServersNewGroup.Image = global::EzDSC.Images.folder_new;
+            this.miServersNewGroup.Name = "miServersNewGroup";
+            this.miServersNewGroup.Size = new System.Drawing.Size(191, 22);
+            this.miServersNewGroup.Text = "New group...";
+            this.miServersNewGroup.Click += new System.EventHandler(this.miServersNewGroup_Click);
+            // 
+            // miServersNewServer
+            // 
+            this.miServersNewServer.Image = global::EzDSC.Images.document_new;
+            this.miServersNewServer.Name = "miServersNewServer";
+            this.miServersNewServer.Size = new System.Drawing.Size(191, 22);
+            this.miServersNewServer.Text = "New server...";
+            this.miServersNewServer.Click += new System.EventHandler(this.miServersNewServer_Click);
+            // 
+            // miBuildConfiguration
+            // 
+            this.miBuildConfiguration.Image = global::EzDSC.Images.document_save;
+            this.miBuildConfiguration.Name = "miBuildConfiguration";
+            this.miBuildConfiguration.Size = new System.Drawing.Size(191, 22);
+            this.miBuildConfiguration.Text = "Export configuration...";
+            this.miBuildConfiguration.Click += new System.EventHandler(this.miBuildConfiguration_Click);
+            // 
             // miRunConfiguration
             // 
             this.miRunConfiguration.Image = global::EzDSC.Images.utilities_terminal;
             this.miRunConfiguration.Name = "miRunConfiguration";
             this.miRunConfiguration.Size = new System.Drawing.Size(191, 22);
             this.miRunConfiguration.Text = "Run configuration";
+            // 
+            // miServerItemBuildConfiguration
+            // 
+            this.miServerItemBuildConfiguration.Image = global::EzDSC.Images.document_save;
+            this.miServerItemBuildConfiguration.Name = "miServerItemBuildConfiguration";
+            this.miServerItemBuildConfiguration.Size = new System.Drawing.Size(182, 22);
+            this.miServerItemBuildConfiguration.Text = "Export configuration";
+            this.miServerItemBuildConfiguration.Click += new System.EventHandler(this.miServerItemBuildConfiguration_Click);
+            // 
+            // runConfigurationToolStripMenuItem
+            // 
+            this.runConfigurationToolStripMenuItem.Image = global::EzDSC.Images.utilities_terminal;
+            this.runConfigurationToolStripMenuItem.Name = "runConfigurationToolStripMenuItem";
+            this.runConfigurationToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.runConfigurationToolStripMenuItem.Text = "Run configuration";
+            this.runConfigurationToolStripMenuItem.Click += new System.EventHandler(this.runConfigurationToolStripMenuItem_Click);
+            // 
+            // miResourceTypeNewConfigurationItem
+            // 
+            this.miResourceTypeNewConfigurationItem.Image = global::EzDSC.Images.document_new;
+            this.miResourceTypeNewConfigurationItem.Name = "miResourceTypeNewConfigurationItem";
+            this.miResourceTypeNewConfigurationItem.Size = new System.Drawing.Size(209, 22);
+            this.miResourceTypeNewConfigurationItem.Text = "New configuration item...";
+            this.miResourceTypeNewConfigurationItem.Click += new System.EventHandler(this.miResourceTypeNewConfigurationItem_Click);
+            // 
+            // sfdExportScript
+            // 
+            this.sfdExportScript.DefaultExt = "ps1";
+            this.sfdExportScript.Filter = "PowerShell Script|*.ps1";
             // 
             // fMain
             // 
@@ -654,6 +660,7 @@
         private System.Windows.Forms.ToolStripLabel tslServerVariables;
         private System.Windows.Forms.ToolStripLabel tslRoleCI;
         private System.Windows.Forms.ToolStripMenuItem miRunConfiguration;
+        private System.Windows.Forms.SaveFileDialog sfdExportScript;
     }
 }
 

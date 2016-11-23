@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace EzDSC
 {
@@ -15,12 +15,12 @@ namespace EzDSC
 
         public static DscRole Load(string path)
         {
-            return new JavaScriptSerializer().Deserialize<DscRole>(File.ReadAllText(path));
+            return JsonConvert.DeserializeObject<DscRole>(File.ReadAllText(path));
         }
 
         public void Save(string path)
         {
-            File.WriteAllText(path, new JavaScriptSerializer().Serialize(this));
+            File.WriteAllText(path, JsonConvert.SerializeObject(this, Formatting.Indented));
         }
     }
 }
