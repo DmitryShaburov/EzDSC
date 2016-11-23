@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -33,7 +34,34 @@ namespace EzDSC
             return s.Substring(start, end - start);
         }
 
-        private static string[] SplitQualifiers(string s)
+        private static string GetStringInsideOfNested(string s, char open, char close)
+        {
+            int start = s.IndexOf(open) + 1;
+            int end = s.Length - 1;
+            byte level = 0;
+            for (int i = start; i < s.Length; i++)
+            {
+                if (s[i] == open)
+                {
+                    level++;
+                }
+                if (s[i] == close)
+                {
+                    if (level == 0)
+                    {
+                        end = i;
+                        break;
+                    }
+                    else
+                    {
+                        level--;
+                    }
+                }
+            }
+            return s.Substring(start, end - start);
+        }
+
+        private static string[] SplitQualifiers(string s, char delimiter)
         {
             List<int> delimiterPositions = new List<int>();
             int bracesDepth = 0;
@@ -49,7 +77,7 @@ namespace EzDSC
                         bracesDepth--;
                         break;
                     default:
-                        if (bracesDepth == 0 && s[i] == ',')
+                        if (bracesDepth == 0 && s[i] == delimiter)
                         {
                             delimiterPositions.Add(i);
                         }
@@ -97,11 +125,15 @@ namespace EzDSC
                 {
                     ClassName = tempLine.Split(':')[0].Replace("class ", "").Trim();
                 }
-
-                // Parsing parameters lines
-                if (!Regex.IsMatch(tempLine, WildCardToRegular("[*] * *;"))) continue;
+            }
+            string mofText = string.Join("", mofFile);
+            string body = GetStringInsideOfNested(mofText, '{', '}');
+            string[] parameterList = body.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+            foreach (string parameterString in parameterList)
+            {
+                if (!Regex.IsMatch(parameterString, WildCardToRegular("[*] * *"))) continue;
                 MofParameter parameter = new MofParameter();
-                string[] qualifierArray = SplitQualifiers(GetStringInsideOf(tempLine, '[', ']'));
+                string[] qualifierArray = SplitQualifiers(GetStringInsideOf(parameterString, '[', ']'), ',');
                 parameter.Qualifier = qualifierArray[0];
                 foreach (string q in qualifierArray)
                 {
@@ -110,8 +142,8 @@ namespace EzDSC
                         parameter.Values = GetStringInsideOf(q, '{', '}').Split(',').Select(p => p.Trim().Replace("\"", "")).ToArray();
                     }
                 }
-                int varStart = tempLine.IndexOf(']') + 1;
-                string[] s = tempLine.Substring(varStart).Trim().Replace(";", "").Split(' ');
+                int varStart = parameterString.IndexOf(']') + 1;
+                string[] s = parameterString.Substring(varStart).Trim().Replace(";", "").Split(' ');
                 parameter.Type = s[0];
                 parameter.Name = s[1].Replace("[]", "");
                 Parameters.Add(parameter);

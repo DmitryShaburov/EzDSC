@@ -19,5 +19,18 @@ namespace EzDSC
         {
             return Parent.Parent.Name + ":" + Parent.FriendlyName + ":" + Name;
         }
+
+        public void Validate()
+        {
+            foreach (DscResource.Parameter parameter in Parent.Parameters)
+            {
+                if (parameter.Qualifier != DscResource.QualifierType.Required) continue;
+                if (ConfigurationItem.Properties[parameter.Name] == null ||
+                    ConfigurationItem.Properties[parameter.Name].ToString() == "")
+                {
+                    ConfigurationItem.Properties[parameter.Name] = parameter.GetDefaultValue();
+                }
+            }
+        }
     }
 }

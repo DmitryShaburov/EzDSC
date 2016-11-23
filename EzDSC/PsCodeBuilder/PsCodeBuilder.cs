@@ -60,7 +60,8 @@ namespace EzDSC
                     case DscResource.VariableType.Boolean:
                         itemText.Add(entry.Key + " = $" + entry.Value);
                         break;
-
+                    case DscResource.VariableType.Uint16:
+                    case DscResource.VariableType.Sint16:
                     case DscResource.VariableType.Uint32:
                     case DscResource.VariableType.Sint32:
                     case DscResource.VariableType.Uint64:

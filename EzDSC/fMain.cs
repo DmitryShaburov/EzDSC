@@ -157,6 +157,7 @@ namespace EzDSC
         private void pgEditor_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             DscConfigurationItemNode configurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
+            configurationItemNode.Validate();
             configurationItemNode.ConfigurationItem.Save(_repository.Dir.Resources +
                                                          configurationItemNode.Parent.Parent.Name + "\\" +
                                                          configurationItemNode.Parent.FriendlyName + "\\" +
@@ -228,6 +229,7 @@ namespace EzDSC
                               nameDialog.inputResult + ".json";
             configurationItem.Save(fileName);
             DscConfigurationItemNode configurationItemNode = new DscConfigurationItemNode(fileName, resource);
+            configurationItemNode.Validate();
             resource.Nodes.Add(configurationItemNode);
             TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(configurationItemNode.GetFullName(), configurationItemNode.Name);
             newTreeNode.ImageIndex = 1;
