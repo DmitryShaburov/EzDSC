@@ -75,6 +75,7 @@
             this.Name = "fModalName";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Name";
+            this.Load += new System.EventHandler(this.fModalName_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

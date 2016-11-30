@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 
 namespace EzDSC
 {
@@ -18,10 +19,10 @@ namespace EzDSC
         private void createRoleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
+            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.InputResult == "")) return;
             DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
             DscRole role = new DscRole();
-            string fileName = roleGroup.DirectoryPath + "\\" + nameDialog.inputResult + ".json";
+            string fileName = roleGroup.DirectoryPath + "\\" + nameDialog.InputResult + ".json";
             role.Save(fileName);
             DscRoleNode newRoleNode = new DscRoleNode(fileName, roleGroup);
             roleGroup.Nodes.Add(newRoleNode);
@@ -167,9 +168,15 @@ namespace EzDSC
         private void miServersNewServer_Click(object sender, EventArgs e)
         {
             fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
+            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.InputResult == "")) return;
             DscServerNode parentNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
-            string fileName = Path.GetDirectoryName(parentNode.FilePath) + "\\" + nameDialog.inputResult + ".json";
+            if (parentNode.Nodes.Any(x => x.Name == nameDialog.InputResult))
+            {
+                MessageBox.Show(this, "Server or group with same name already exists!", "Error!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            string fileName = Path.GetDirectoryName(parentNode.FilePath) + "\\" + nameDialog.InputResult + ".json";
             DscServer server = new DscServer();
             server.Save(fileName);
             DscServerNode serverNode =
@@ -186,9 +193,9 @@ namespace EzDSC
         private void miServersNewGroup_Click(object sender, EventArgs e)
         {
             fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
+            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.InputResult == "")) return;
             DscServerNode parentNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
-            string fileName = Path.GetDirectoryName(parentNode.FilePath) + "\\" + nameDialog.inputResult + "\\.group";
+            string fileName = Path.GetDirectoryName(parentNode.FilePath) + "\\" + nameDialog.InputResult + "\\.group";
             _repository.Dir.DirectoryCreateIfNotExists(Path.GetDirectoryName(fileName));
             DscServer server = new DscServer();
             server.Save(fileName);
@@ -222,11 +229,11 @@ namespace EzDSC
         private void miResourceTypeNewConfigurationItem_Click(object sender, EventArgs e)
         {
             fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
+            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.InputResult == "")) return;
             DscResource resource = (tvLibrary.SelectedNode.Tag as DscResource);
             DscConfigurationItem configurationItem = new DscConfigurationItem(resource);
             string fileName = _repository.Dir.Resources + resource.Parent.Name + "\\" + resource.FriendlyName + "\\" +
-                              nameDialog.inputResult + ".json";
+                              nameDialog.InputResult + ".json";
             configurationItem.Save(fileName);
             DscConfigurationItemNode configurationItemNode = new DscConfigurationItemNode(fileName, resource);
             configurationItemNode.Validate();
@@ -296,9 +303,9 @@ namespace EzDSC
         private void tsbVariableAdd_Click(object sender, EventArgs e)
         {
             fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
+            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.InputResult == "")) return;
             DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
-            string variableName = nameDialog.inputResult.Replace("$", "");
+            string variableName = nameDialog.InputResult.Replace("$", "");
             serverNode.Node.Variables.Add(variableName, "");
             serverNode.Node.Save(serverNode.FilePath);
             pgServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
@@ -355,9 +362,9 @@ namespace EzDSC
         private void miRolesNewGroup_Click(object sender, EventArgs e)
         {
             fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
+            if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.InputResult == "")) return;
             DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
-            string path = roleGroup.DirectoryPath + nameDialog.inputResult + "\\";
+            string path = roleGroup.DirectoryPath + nameDialog.InputResult + "\\";
             _repository.Dir.DirectoryCreateIfNotExists(path);
             DscRoleGroup newRoleGroup = new DscRoleGroup(path, roleGroup);
             roleGroup.Groups.Add(newRoleGroup);

@@ -12,7 +12,7 @@ namespace EzDSC
 {
     public partial class fModalName : Form
     {
-        public string inputResult;
+        public string InputResult;
 
         public fModalName()
         {
@@ -21,7 +21,12 @@ namespace EzDSC
 
         private void bOK_Click(object sender, EventArgs e)
         {
-            this.inputResult = tbInput.Text;
+            InputResult = tbInput.Text;
+        }
+
+        private void fModalName_Load(object sender, EventArgs e)
+        {
+            ActiveControl = tbInput;
         }
     }
 }
