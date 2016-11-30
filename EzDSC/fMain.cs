@@ -298,8 +298,10 @@ namespace EzDSC
             fModalName nameDialog = new fModalName();
             if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.inputResult == "")) return;
             DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
-            serverNode.Node.Variables.Add(nameDialog.inputResult, "");
+            string variableName = nameDialog.inputResult.Replace("$", "");
+            serverNode.Node.Variables.Add(variableName, "");
             serverNode.Node.Save(serverNode.FilePath);
+            pgServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
         }
 
         private void pgServerVariables_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -365,6 +367,14 @@ namespace EzDSC
             newTreeNode.SelectedImageIndex = 0;
             newTreeNode.ContextMenuStrip = cmRoles;
             tvLibrary.SelectedNode = newTreeNode;
+        }
+
+        private void tsbVariableRemove_Click(object sender, EventArgs e)
+        {
+            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            serverNode.Node.Variables.Remove(pgServerVariables.SelectedGridItem.Label);
+            serverNode.Node.Save(serverNode.FilePath);
+            pgServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
         }
     }
 }
