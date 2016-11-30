@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace EzDSC
 {
@@ -25,6 +26,21 @@ namespace EzDSC
                 fullname = Parent.BuildName() + ":" + fullname;
             }
             return fullname;
+        }
+
+        public HashSet<string> FindUsages(DscServerNode serverNode)
+        {
+            HashSet<string> usages = new HashSet<string>();
+            string fullname = BuildName();
+            if (serverNode.Node.Roles.Contains(fullname))
+            {
+                usages.Add(serverNode.Name);
+            }
+            foreach (DscServerNode childNode in serverNode.Nodes)
+            {
+                usages.UnionWith(FindUsages(childNode));
+            }
+            return usages;
         }
     }
 }

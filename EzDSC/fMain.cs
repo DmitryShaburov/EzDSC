@@ -72,6 +72,7 @@ namespace EzDSC
                 roleNode.Tag = childRole;
                 roleNode.ImageIndex = 1;
                 roleNode.SelectedImageIndex = 1;
+                roleNode.ContextMenuStrip = cmRoleItem;
             }
             foreach (DscRoleGroup childGroup in group.Groups)
             {
@@ -465,6 +466,52 @@ namespace EzDSC
             if (dialogResult != DialogResult.Yes) return;
             serverNode.Parent.Nodes.Remove(serverNode);
             Directory.Delete(Path.GetDirectoryName(serverNode.FilePath), true);
+            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+        }
+
+        private void deleteToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
+            if (roleGroup.Parent == null) return;
+            HashSet<string> roleUsages = roleGroup.FindUsages(_repository.Servers);
+            if (roleUsages.Count > 0)
+            {
+                string usages = string.Join(Environment.NewLine, roleUsages);
+                MessageBox.Show(this,
+                    "You cannot delete selected group because following servers/groups using it:" + Environment.NewLine +
+                    usages, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected group?",
+                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult != DialogResult.Yes) return;
+            roleGroup.Parent.Groups.Remove(roleGroup);
+            Directory.Delete(roleGroup.DirectoryPath, true);
+            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+        }
+
+        private void cmRoleItem_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            DscRoleNode roleNode = (tvLibrary.SelectedNode.Tag as DscRoleNode);
+            HashSet<string> roleUsages = roleNode.FindUsages(_repository.Servers);
+            if (roleUsages.Count > 0)
+            {
+                string usages = string.Join(Environment.NewLine, roleUsages);
+                MessageBox.Show(this,
+                    "You cannot delete selected role because following servers/groups using it:" + Environment.NewLine +
+                    usages, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected role?",
+                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult != DialogResult.Yes) return;
+            roleNode.Parent.Nodes.Remove(roleNode);
+            File.Delete(roleNode.FilePath);
             tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
         }
     }

@@ -49,5 +49,19 @@ namespace EzDSC
             DscRoleGroup nextGroup = Groups.Find(x => x.Name == path[1]);
             return nextGroup.GetRoleNode(string.Join(":", path.Skip(1).ToArray()));
         }
+
+        public HashSet<string> FindUsages(DscServerNode serverNode)
+        {
+            HashSet<string> usages = new HashSet<string>();
+            foreach (DscRoleNode node in Nodes)
+            {
+                usages.UnionWith(node.FindUsages(serverNode));
+            }
+            foreach (DscRoleGroup group in Groups)
+            {
+                usages.UnionWith(group.FindUsages(serverNode));
+            }
+            return usages;
+        }
     }
 }

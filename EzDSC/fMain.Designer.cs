@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Resources");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Roles");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Servers");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Resources");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Roles");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Servers");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.cmRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miRolesNewGroup = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,6 +89,10 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmRoleItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmRoles.SuspendLayout();
             this.cmServers.SuspendLayout();
             this.cmServerItem.SuspendLayout();
@@ -111,15 +115,18 @@
             this.tsRole.SuspendLayout();
             this.msMainMenu.SuspendLayout();
             this.cmResourceType.SuspendLayout();
+            this.cmRoleItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmRoles
             // 
             this.cmRoles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miRolesNewGroup,
-            this.miRolesNewRole});
+            this.miRolesNewRole,
+            this.toolStripMenuItem5,
+            this.deleteToolStripMenuItem2});
             this.cmRoles.Name = "cmRoles";
-            this.cmRoles.Size = new System.Drawing.Size(143, 48);
+            this.cmRoles.Size = new System.Drawing.Size(143, 76);
             // 
             // miRolesNewGroup
             // 
@@ -150,7 +157,7 @@
             this.toolStripMenuItem4,
             this.deleteToolStripMenuItem1});
             this.cmServers.Name = "cmServers";
-            this.cmServers.Size = new System.Drawing.Size(192, 176);
+            this.cmServers.Size = new System.Drawing.Size(192, 154);
             // 
             // miServersNewGroup
             // 
@@ -208,19 +215,19 @@
             this.tvLibrary.ImageList = this.ilMain;
             this.tvLibrary.Location = new System.Drawing.Point(0, 0);
             this.tvLibrary.Name = "tvLibrary";
-            treeNode1.Name = "tviResources";
-            treeNode1.Text = "Resources";
-            treeNode2.ContextMenuStrip = this.cmRoles;
-            treeNode2.Name = "tviRoles";
-            treeNode2.Text = "Roles";
-            treeNode3.ContextMenuStrip = this.cmServers;
-            treeNode3.ImageIndex = 0;
-            treeNode3.Name = "tviServers";
-            treeNode3.Text = "Servers";
+            treeNode4.Name = "tviResources";
+            treeNode4.Text = "Resources";
+            treeNode5.ContextMenuStrip = this.cmRoles;
+            treeNode5.Name = "tviRoles";
+            treeNode5.Text = "Roles";
+            treeNode6.ContextMenuStrip = this.cmServers;
+            treeNode6.ImageIndex = 0;
+            treeNode6.Name = "tviServers";
+            treeNode6.Text = "Servers";
             this.tvLibrary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.tvLibrary.SelectedImageIndex = 0;
             this.tvLibrary.Size = new System.Drawing.Size(240, 514);
             this.tvLibrary.TabIndex = 0;
@@ -631,6 +638,33 @@
             this.deleteToolStripMenuItem1.Text = "Delete";
             this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(139, 6);
+            // 
+            // deleteToolStripMenuItem2
+            // 
+            this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
+            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(142, 22);
+            this.deleteToolStripMenuItem2.Text = "Delete";
+            this.deleteToolStripMenuItem2.Click += new System.EventHandler(this.deleteToolStripMenuItem2_Click);
+            // 
+            // cmRoleItem
+            // 
+            this.cmRoleItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem6});
+            this.cmRoleItem.Name = "cmRoleItem";
+            this.cmRoleItem.Size = new System.Drawing.Size(153, 48);
+            this.cmRoleItem.Opening += new System.ComponentModel.CancelEventHandler(this.cmRoleItem_Opening);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Text = "Delete";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -674,6 +708,7 @@
             this.msMainMenu.ResumeLayout(false);
             this.msMainMenu.PerformLayout();
             this.cmResourceType.ResumeLayout(false);
+            this.cmRoleItem.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -737,6 +772,10 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem2;
+        private System.Windows.Forms.ContextMenuStrip cmRoleItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
     }
 }
 
