@@ -214,7 +214,7 @@ namespace EzDSC
             newTreeNode.ImageIndex = 2;
             newTreeNode.SelectedImageIndex = 2;
             newTreeNode.Tag = serverNode;
-            newTreeNode.ContextMenuStrip = cmServers;
+            newTreeNode.ContextMenuStrip = cmServerItem;
             tvLibrary.SelectedNode = newTreeNode;
         }
 
@@ -443,6 +443,29 @@ namespace EzDSC
             }
             MessageBox.Show(this, "Module installation completed!", "Done!", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected server?",
+                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult != DialogResult.Yes) return;
+            serverNode.Parent.Nodes.Remove(serverNode);
+            File.Delete(serverNode.FilePath);
+            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+        }
+
+        private void deleteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            if (serverNode.Type == DscServerNode.ServerType.Root) return;
+            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected group?",
+                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult != DialogResult.Yes) return;
+            serverNode.Parent.Nodes.Remove(serverNode);
+            Directory.Delete(Path.GetDirectoryName(serverNode.FilePath), true);
+            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
         }
     }
 }

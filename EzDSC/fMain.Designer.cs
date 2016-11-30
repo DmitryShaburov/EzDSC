@@ -42,11 +42,15 @@
             this.tssServers = new System.Windows.Forms.ToolStripSeparator();
             this.miBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.miRunConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.installModulesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tvLibrary = new System.Windows.Forms.TreeView();
             this.ilMain = new System.Windows.Forms.ImageList(this.components);
             this.cmServerItem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miServerItemBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.runConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.installModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.scConfigurationItem = new System.Windows.Forms.SplitContainer();
             this.pgEditor = new System.Windows.Forms.PropertyGrid();
@@ -81,10 +85,10 @@
             this.cmResourceType = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdExportScript = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.installModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.installModulesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmRoles.SuspendLayout();
             this.cmServers.SuspendLayout();
             this.cmServerItem.SuspendLayout();
@@ -142,9 +146,11 @@
             this.miBuildConfiguration,
             this.miRunConfiguration,
             this.toolStripMenuItem2,
-            this.installModulesToolStripMenuItem1});
+            this.installModulesToolStripMenuItem1,
+            this.toolStripMenuItem4,
+            this.deleteToolStripMenuItem1});
             this.cmServers.Name = "cmServers";
-            this.cmServers.Size = new System.Drawing.Size(192, 148);
+            this.cmServers.Size = new System.Drawing.Size(192, 176);
             // 
             // miServersNewGroup
             // 
@@ -182,6 +188,18 @@
             this.miRunConfiguration.Size = new System.Drawing.Size(191, 22);
             this.miRunConfiguration.Text = "Run configuration";
             this.miRunConfiguration.Click += new System.EventHandler(this.miRunConfiguration_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(188, 6);
+            // 
+            // installModulesToolStripMenuItem1
+            // 
+            this.installModulesToolStripMenuItem1.Name = "installModulesToolStripMenuItem1";
+            this.installModulesToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
+            this.installModulesToolStripMenuItem1.Text = "Install modules";
+            this.installModulesToolStripMenuItem1.Click += new System.EventHandler(this.installModulesToolStripMenuItem1_Click);
             // 
             // tvLibrary
             // 
@@ -223,9 +241,11 @@
             this.miServerItemBuildConfiguration,
             this.runConfigurationToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.installModulesToolStripMenuItem});
+            this.installModulesToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.deleteToolStripMenuItem});
             this.cmServerItem.Name = "cmServerItem";
-            this.cmServerItem.Size = new System.Drawing.Size(183, 76);
+            this.cmServerItem.Size = new System.Drawing.Size(183, 104);
             // 
             // miServerItemBuildConfiguration
             // 
@@ -242,6 +262,18 @@
             this.runConfigurationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.runConfigurationToolStripMenuItem.Text = "Run configuration";
             this.runConfigurationToolStripMenuItem.Click += new System.EventHandler(this.runConfigurationToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // installModulesToolStripMenuItem
+            // 
+            this.installModulesToolStripMenuItem.Name = "installModulesToolStripMenuItem";
+            this.installModulesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.installModulesToolStripMenuItem.Text = "Install modules";
+            this.installModulesToolStripMenuItem.Click += new System.EventHandler(this.installModulesToolStripMenuItem_Click);
             // 
             // scMain
             // 
@@ -575,29 +607,29 @@
             this.sfdExportScript.DefaultExt = "ps1";
             this.sfdExportScript.Filter = "PowerShell Script|*.ps1";
             // 
-            // toolStripMenuItem1
+            // toolStripMenuItem3
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 6);
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(179, 6);
             // 
-            // installModulesToolStripMenuItem
+            // deleteToolStripMenuItem
             // 
-            this.installModulesToolStripMenuItem.Name = "installModulesToolStripMenuItem";
-            this.installModulesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.installModulesToolStripMenuItem.Text = "Install modules";
-            this.installModulesToolStripMenuItem.Click += new System.EventHandler(this.installModulesToolStripMenuItem_Click);
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem2
+            // toolStripMenuItem4
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(188, 6);
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(188, 6);
             // 
-            // installModulesToolStripMenuItem1
+            // deleteToolStripMenuItem1
             // 
-            this.installModulesToolStripMenuItem1.Name = "installModulesToolStripMenuItem1";
-            this.installModulesToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
-            this.installModulesToolStripMenuItem1.Text = "Install modules";
-            this.installModulesToolStripMenuItem1.Click += new System.EventHandler(this.installModulesToolStripMenuItem1_Click);
+            this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
+            this.deleteToolStripMenuItem1.Text = "Delete";
+            this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
             // fMain
             // 
@@ -701,6 +733,10 @@
         private System.Windows.Forms.ToolStripMenuItem installModulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem installModulesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem1;
     }
 }
 
