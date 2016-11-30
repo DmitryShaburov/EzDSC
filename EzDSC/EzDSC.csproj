@@ -107,6 +107,7 @@
       <DependentUpon>fModalTree.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EzSettings.cs" />
+    <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Images.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,6 +117,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsCodeBuilder\PsCodeBuilder.cs" />
     <Compile Include="PsCodeBuilder\PsConfiguration.cs" />
+    <Compile Include="Workers\ModuleWorker.cs" />
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>

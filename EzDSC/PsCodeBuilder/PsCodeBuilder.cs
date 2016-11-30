@@ -105,7 +105,9 @@ namespace EzDSC
                     configText.Add("$" + configuration.Variables.Keys.ElementAt(i) + ",");
                 }
             }
-            configText.AddRange(new List<string> { ")", "Node $AllNodes.Nodename", "{" });
+            configText.Add(")");
+            configText.AddRange(configuration.GetUsedModules(repository).Select(module => "Import-DscResource -Module " + module));
+            configText.AddRange(new List<string> {"Node $AllNodes.Nodename", "{" });
             HashSet<string> resourceStrings = new HashSet<string>();
             foreach (string roleString in configuration.Roles)
             {
@@ -179,6 +181,12 @@ namespace EzDSC
             }
             script.Add("Write-Host 'Press any key to continue ...'");
             script.Add("$x = $host.UI.RawUI.ReadKey(\"NoEcho, IncludeKeyDown\")");
+            return Tabulate(script);
+        }
+
+        public static List<string> BuildUnblockFile(List<string> files)
+        {
+            List<string> script = files.Select(file => "Unblock-File -Path \"" + file + "\"").ToList();
             return Tabulate(script);
         }
     }

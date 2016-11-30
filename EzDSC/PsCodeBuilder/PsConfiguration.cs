@@ -16,6 +16,26 @@ namespace EzDSC
             return Id.ToString("N").ToUpper();
         }
 
+        public HashSet<string> GetUsedModules(DscRepository repository)
+        {
+            HashSet<string> modules = new HashSet<string>();
+            HashSet<string> resourceStrings = new HashSet<string>();
+            foreach (string roleString in Roles)
+            {
+                DscRoleNode roleNode = repository.Roles.GetRoleNode(roleString);
+                resourceStrings.UnionWith(roleNode.Role.Resources);
+            }
+            foreach (string resourceString in resourceStrings)
+            {
+                DscConfigurationItemNode configurationItemNode = repository.GetConfigurationItemNode(resourceString);
+                if (configurationItemNode.Parent.Parent.Name != "PSDesiredStateConfiguration")
+                {
+                    modules.Add(configurationItemNode.Parent.Parent.Name);
+                }
+            }
+            return modules;
+        }
+
         public PsConfiguration(string server, HashSet<string> roles, Dictionary<string, string> variables)
         {
             Id = Guid.NewGuid();

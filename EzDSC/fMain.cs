@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
 using System.Linq;
+using System.Security;
+using System.Security.Policy;
+using Workers;
 
 namespace EzDSC
 {
@@ -99,12 +102,37 @@ namespace EzDSC
             }
         }
 
+        private void UnblockModules()
+        {
+            string[] allFiles = Directory.GetFiles(_repository.Dir.Modules, "*", SearchOption.AllDirectories);
+            List<string> blockedFiles = new List<string>();
+            foreach (string file in allFiles)
+            {
+                Uri uri = new Uri(file);
+                Zone zone = Zone.CreateFromUrl(uri.AbsoluteUri);
+                if (zone.SecurityZone != SecurityZone.MyComputer)
+                {
+                    blockedFiles.Add(file);
+                }
+            }
+            if (blockedFiles.Count == 0) return;
+            string filename = Path.GetTempPath() + Guid.NewGuid() + ".ps1";
+            File.WriteAllLines(filename, PsCodeBuilder.BuildUnblockFile(blockedFiles));
+            Process.Start("powershell.exe", "-ExecutionPolicy Unrestricted -File " + filename);
+            //ProcessStartInfo startInfo = new ProcessStartInfo("powershell.exe",
+            //    "-ExecutionPolicy Unrestricted -File " + filename);
+            //startInfo.Verb = "runas";
+            //Process.Start(startInfo);
+        }
+
         private void fMain_Load(object sender, EventArgs e)
         {
             _repository = new DscRepository("C:\\Work\\EZDSC Repository");
             FillResourceTree();
             FillRoleTree(_repository.Roles, tvLibrary.Nodes["tviRoles"]);
             FillServerTree(_repository.Servers, tvLibrary.Nodes["tviServers"]);
+            UnblockModules();
+            ModuleWorker.InstallLocalModules(_repository);
 
             pRolePanel.Dock = DockStyle.Fill;
             scServer.Dock = DockStyle.Fill;
@@ -283,11 +311,11 @@ namespace EzDSC
 
         private void runConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string filename = Path.GetTempPath() + Guid.NewGuid() + ".ps1";
             DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
             List<PsConfiguration> configurations = serverNode.GetConfigurations();
-            string fileName = _repository.Dir.Output + Guid.NewGuid() + ".ps1";
-            File.WriteAllLines(fileName, PsCodeBuilder.BuildScript(configurations, _repository));
-            Process.Start("powershell.exe", "-ExecutionPolicy UnRestricted -File " + fileName);
+            File.WriteAllLines(filename, PsCodeBuilder.BuildScript(configurations, _repository));
+            Process.Start("powershell.exe", "-ExecutionPolicy Unrestricted -File " + filename);
         }
 
         private void tsbServerRoleRemove_Click(object sender, EventArgs e)
@@ -382,6 +410,39 @@ namespace EzDSC
             serverNode.Node.Variables.Remove(pgServerVariables.SelectedGridItem.Label);
             serverNode.Node.Save(serverNode.FilePath);
             pgServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
+        }
+
+        private void miRunConfiguration_Click(object sender, EventArgs e)
+        {
+            string filename = Path.GetTempPath() + Guid.NewGuid() + ".ps1";
+            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            List<PsConfiguration> configurations = serverNode.GetConfigurations();
+            File.WriteAllLines(filename, PsCodeBuilder.BuildScript(configurations, _repository));
+            Process.Start("powershell.exe", "-ExecutionPolicy Unrestricted -File " + filename);
+        }
+
+        private void installModulesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            List<PsConfiguration> configurations = serverNode.GetConfigurations();
+            foreach (PsConfiguration configuration in configurations)
+            {
+                ModuleWorker.InstallModules(_repository, configuration.Servers, configuration.GetUsedModules(_repository));
+            }
+            MessageBox.Show(this, "Module installation completed!", "Done!", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void installModulesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            List<PsConfiguration> configurations = serverNode.GetConfigurations();
+            foreach (PsConfiguration configuration in configurations)
+            {
+                ModuleWorker.InstallModules(_repository, configuration.Servers, configuration.GetUsedModules(_repository));
+            }
+            MessageBox.Show(this, "Module installation completed!", "Done!", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }

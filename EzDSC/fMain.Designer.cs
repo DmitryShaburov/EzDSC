@@ -81,6 +81,10 @@
             this.cmResourceType = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdExportScript = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.installModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.installModulesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmRoles.SuspendLayout();
             this.cmServers.SuspendLayout();
             this.cmServerItem.SuspendLayout();
@@ -136,9 +140,11 @@
             this.miServersNewServer,
             this.tssServers,
             this.miBuildConfiguration,
-            this.miRunConfiguration});
+            this.miRunConfiguration,
+            this.toolStripMenuItem2,
+            this.installModulesToolStripMenuItem1});
             this.cmServers.Name = "cmServers";
-            this.cmServers.Size = new System.Drawing.Size(192, 98);
+            this.cmServers.Size = new System.Drawing.Size(192, 148);
             // 
             // miServersNewGroup
             // 
@@ -175,6 +181,7 @@
             this.miRunConfiguration.Name = "miRunConfiguration";
             this.miRunConfiguration.Size = new System.Drawing.Size(191, 22);
             this.miRunConfiguration.Text = "Run configuration";
+            this.miRunConfiguration.Click += new System.EventHandler(this.miRunConfiguration_Click);
             // 
             // tvLibrary
             // 
@@ -214,9 +221,11 @@
             // 
             this.cmServerItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miServerItemBuildConfiguration,
-            this.runConfigurationToolStripMenuItem});
+            this.runConfigurationToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.installModulesToolStripMenuItem});
             this.cmServerItem.Name = "cmServerItem";
-            this.cmServerItem.Size = new System.Drawing.Size(183, 48);
+            this.cmServerItem.Size = new System.Drawing.Size(183, 76);
             // 
             // miServerItemBuildConfiguration
             // 
@@ -401,8 +410,10 @@
             this.pgServerVariables.HelpVisible = false;
             this.pgServerVariables.Location = new System.Drawing.Point(0, 25);
             this.pgServerVariables.Name = "pgServerVariables";
+            this.pgServerVariables.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
             this.pgServerVariables.Size = new System.Drawing.Size(396, 108);
             this.pgServerVariables.TabIndex = 1;
+            this.pgServerVariables.ToolbarVisible = false;
             this.pgServerVariables.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pgServerVariables_PropertyValueChanged);
             // 
             // tsServerVariables
@@ -564,6 +575,30 @@
             this.sfdExportScript.DefaultExt = "ps1";
             this.sfdExportScript.Filter = "PowerShell Script|*.ps1";
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // installModulesToolStripMenuItem
+            // 
+            this.installModulesToolStripMenuItem.Name = "installModulesToolStripMenuItem";
+            this.installModulesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.installModulesToolStripMenuItem.Text = "Install modules";
+            this.installModulesToolStripMenuItem.Click += new System.EventHandler(this.installModulesToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(188, 6);
+            // 
+            // installModulesToolStripMenuItem1
+            // 
+            this.installModulesToolStripMenuItem1.Name = "installModulesToolStripMenuItem1";
+            this.installModulesToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
+            this.installModulesToolStripMenuItem1.Text = "Install modules";
+            this.installModulesToolStripMenuItem1.Click += new System.EventHandler(this.installModulesToolStripMenuItem1_Click);
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -662,6 +697,10 @@
         private System.Windows.Forms.ToolStripLabel tslRoleCI;
         private System.Windows.Forms.ToolStripMenuItem miRunConfiguration;
         private System.Windows.Forms.SaveFileDialog sfdExportScript;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem installModulesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem installModulesToolStripMenuItem1;
     }
 }
 
