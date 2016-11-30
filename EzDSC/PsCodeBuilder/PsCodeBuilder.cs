@@ -15,6 +15,7 @@ namespace EzDSC
                 "@{",
                 "NodeName = '*'",
                 "PSDscAllowDomainUser = $true",
+                "PSDscAllowPlainTextPassword = $true",
                 "}"
             };
             foreach (string server in configuration.Servers)

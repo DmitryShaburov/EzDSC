@@ -100,7 +100,7 @@ namespace EzDSC
 
         private void fMain_Load(object sender, EventArgs e)
         {
-            _repository = new DscRepository("E:\\EZDSC");
+            _repository = new DscRepository("C:\\Work\\EZDSC Repository");
             FillResourceTree();
             FillRoleTree(_repository.Roles, tvLibrary.Nodes["tviRoles"]);
             FillServerTree(_repository.Servers, tvLibrary.Nodes["tviServers"]);
