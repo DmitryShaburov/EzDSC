@@ -126,6 +126,9 @@ namespace EzDSC
         private void LoadRepository(string path)
         {
             _repository = new DscRepository(path);
+            tvLibrary.Nodes["tviResources"].Nodes.Clear();
+            tvLibrary.Nodes["tviRoles"].Nodes.Clear();
+            tvLibrary.Nodes["tviServers"].Nodes.Clear();
             FillResourceTree();
             FillRoleTree(_repository.Roles, tvLibrary.Nodes["tviRoles"]);
             FillServerTree(_repository.Servers, tvLibrary.Nodes["tviServers"]);
