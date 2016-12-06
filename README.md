@@ -41,9 +41,7 @@ Path = "$Share\distr.exe"
 Add variable without "$" sign at beginning.
 
 If variable uses powershell script: write code without double quotes
-
 Example:
-
 Credential = Get-Credential -UserName CONTOSO\user -Message "Active Directory Credential"
 
 
