@@ -4,11 +4,11 @@ EzDSC is a simple GUI for designing and running your DSC configurations.
 
 ## How it works?
 EzDSC have 3 main concepts:
-* Resources are basic buiding blocks of configurations. It's just a table of properties.
-Each resource have a type (for example: archive, package), and each type have a DSC Module that provides it.
-Default module shipped with Windows is PSDesiredStateConfiguration.
+* Resources are basic buiding blocks of configurations. It's just a table of properties.  
+Each resource have a type (for example: archive, package), and each type have a DSC Module that provides it.  
+Default module shipped with Windows is PSDesiredStateConfiguration.  
 Example: "Package Git", "Registry DisableUAC", "Group AddToAdmin" etc.
-* Roles are more high level blocks of configuration - it just combines bunch of resouces.
+* Roles are more high level blocks of configuration - it just combines bunch of resouces.  
 For example "Generic Server" role would have set of some basic resouces that shoud be applied to all servers, "Web Server" would have more specific resouces that installs IIS, configures it, etc.
 * Servers (and group of servers) is a tree structure. Each node of that tree can have multiple roles and variables attached to it.
 
@@ -30,12 +30,12 @@ For example "Generic Server" role would have set of some basic resouces that sho
 6. If you use variables in your resourses - add them to servers/groups
 
 ## How to use variables in resouces?
-If you using only value of your variable: write it with $ at beginning
-Example:
+If you using only value of your variable: write it with $ at beginning  
+Example:  
 Credential = $ADCredential
 
-If you using variable in string: write it inside of double quotes
-Example:
+If you using variable in string: write it inside of double quotes  
+Example:  
 Path = "$Share\distr.exe"
 
 ## How to use variables in servers and groups?
