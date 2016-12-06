@@ -19,6 +19,7 @@ For example "Generic Server" role would have set of some basic resouces that sho
 * Directly run DSC configuration from app;
 * Use community modules (unpack them and place into Modules folder of your repository);
 * Install necessary community modules to target servers;
+* Store your configuration in well-formatted readable JSON format separated by folders and files, so you can store configuration in your favorite VCS
 
 ## How to use it?
 1. Select folder to store your DSC repository
