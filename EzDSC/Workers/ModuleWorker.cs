@@ -21,7 +21,7 @@ namespace Workers
                     string destination = "\\\\" + server + "\\C$\\Program Files\\WindowsPowerShell\\Modules\\" + module;
                     if (!Directory.Exists(destination))
                     {
-                        FileSystem.DirectoryCopy(source, destination, true);
+                        FileSystem.DirectoryCopy(source, destination);
                     }
                 }
             }
@@ -30,15 +30,15 @@ namespace Workers
         public static void InstallLocalModules(DscRepository repository)
         {
             string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            repository.Dir.DirectoryCreateIfNotExists(documents + "\\WindowsPowerShell");
-            repository.Dir.DirectoryCreateIfNotExists(documents + "\\WindowsPowerShell\\Modules");
+            FileSystem.DirectoryCreateIfNotExists(documents + "\\WindowsPowerShell");
+            FileSystem.DirectoryCreateIfNotExists(documents + "\\WindowsPowerShell\\Modules");
             foreach (DscModule module in repository.Modules)
             {
                 if (module.Name == "PSDesiredStateConfiguration") continue;
                 string destination = documents + "\\WindowsPowerShell\\Modules\\" + module.Name;
                 if (!Directory.Exists(destination))
                 {
-                     FileSystem.DirectoryCopy(module.DirectoryPath, destination, true);
+                     FileSystem.DirectoryCopy(module.DirectoryPath, destination);
                 }
             }
         }

@@ -1,0 +1,8 @@
+{
+  "Resources": [
+    "PSDesiredStateConfiguration:Environment:Example_Variable",
+    "PSDesiredStateConfiguration:Environment:Example_Path",
+    "PSDesiredStateConfiguration:Registry:Example_Registry",
+    "PSDesiredStateConfiguration:Group:Example_Add_To_Administrators"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "Roles": [],
+  "Variables": {
+    "Share": "\"\\\\server.domain.local\\Share\"",
+    "ADCredential": "Get-Credential -UserName DOMAIN\\SomeUser -Message \"Active Directory Credential\"",
+    "AdminMembers": "@(\"DOMAIN\\AnotherUser\",\"DOMAIN\\SomeGroup\")"
+  }
+}

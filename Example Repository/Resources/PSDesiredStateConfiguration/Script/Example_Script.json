@@ -1,0 +1,9 @@
+{
+  "Properties": {
+    "GetScript": "Get-ExecutionPolicy",
+    "Credential": "",
+    "SetScript": "Set-ExecutionPolicy Unrestricted -Force -Scope LocalMachine",
+    "TestScript": "(Get-ExecutionPolicy) -eq \"\"Unrestricted\"\""
+  },
+  "DependsOn": []
+}

@@ -13,7 +13,7 @@ namespace EzDSC
 
         public DscRepository(string path)
         {
-            Dir = new DscRepositoryFolders(path);
+            Dir = new DscRepositoryFolders(path.TrimEnd('\\'));
             LoadModules(Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\WindowsPowerShell\\v1.0\\Modules\\");
             LoadModules(Dir.Modules);
             LoadConfigurationItems();
@@ -38,7 +38,7 @@ namespace EzDSC
                 foreach (DscResource resource in module.Resources)
                 {
                     string path = Dir.Resources + module.Name + "\\" + resource.FriendlyName;
-                    Dir.DirectoryCreateIfNotExists(path);
+                    FileSystem.DirectoryCreateIfNotExists(path);
                     string[] configurationItems = Directory.GetFiles(path, "*.json");
                     foreach (string configurationItem in configurationItems)
                     {

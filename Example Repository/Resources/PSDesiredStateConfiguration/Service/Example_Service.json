@@ -1,0 +1,10 @@
+{
+  "Properties": {
+    "StartupType": "Automatic",
+    "BuiltInAccount": "",
+    "State": "Running",
+    "Credential": "",
+    "Name": "Schedule"
+  },
+  "DependsOn": []
+}

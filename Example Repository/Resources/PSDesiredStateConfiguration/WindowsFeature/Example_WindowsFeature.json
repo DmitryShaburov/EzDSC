@@ -1,0 +1,11 @@
+{
+  "Properties": {
+    "Ensure": "Present",
+    "Source": "",
+    "IncludeAllSubFeature": null,
+    "Credential": "",
+    "LogPath": "",
+    "Name": "NET-Framework-Core"
+  },
+  "DependsOn": []
+}

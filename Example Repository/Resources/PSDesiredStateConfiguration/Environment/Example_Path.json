@@ -1,0 +1,9 @@
+{
+  "Properties": {
+    "Value": "C:\\Program Files\\MyApp",
+    "Path": true,
+    "Name": "PATH",
+    "Ensure": "Present"
+  },
+  "DependsOn": []
+}

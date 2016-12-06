@@ -1,0 +1,13 @@
+{
+  "Properties": {
+    "ProductId": "{672B5547-D20B-4D19-9BFD-B93C32BC77DA}",
+    "Ensure": "Present",
+    "Arguments": "/qn ADDLOCAL=ALL REMOVE=DocumentationShortcuts",
+    "Path": "\"$Share\\node-v6.9.1-x64.msi\"",
+    "ReturnCode": null,
+    "Credential": "",
+    "LogPath": "",
+    "Name": "Node.js"
+  },
+  "DependsOn": []
+}

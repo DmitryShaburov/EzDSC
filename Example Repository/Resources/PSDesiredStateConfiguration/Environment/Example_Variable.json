@@ -1,0 +1,9 @@
+{
+  "Properties": {
+    "Value": "MYVALUE",
+    "Path": false,
+    "Name": "MYVARIABLE",
+    "Ensure": "Present"
+  },
+  "DependsOn": []
+}

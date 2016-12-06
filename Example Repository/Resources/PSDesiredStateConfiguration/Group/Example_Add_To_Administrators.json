@@ -1,0 +1,12 @@
+{
+  "Properties": {
+    "MembersToInclude": "$AdminMembers",
+    "Ensure": "Present",
+    "MembersToExclude": "",
+    "Description": "",
+    "Credential": "$ADCredential",
+    "GroupName": "Administrators",
+    "Members": ""
+  },
+  "DependsOn": []
+}

@@ -13,6 +13,7 @@ namespace EzDSC
     public partial class fMain : Form
     {
         private DscRepository _repository;
+        private EzSettings _settings;
 
         public fMain()
         {
@@ -120,27 +121,39 @@ namespace EzDSC
             string filename = Path.GetTempPath() + Guid.NewGuid() + ".ps1";
             File.WriteAllLines(filename, PsCodeBuilder.BuildUnblockFile(blockedFiles));
             Process.Start("powershell.exe", "-ExecutionPolicy Unrestricted -File " + filename);
-            //ProcessStartInfo startInfo = new ProcessStartInfo("powershell.exe",
-            //    "-ExecutionPolicy Unrestricted -File " + filename);
-            //startInfo.Verb = "runas";
-            //Process.Start(startInfo);
         }
 
-        private void fMain_Load(object sender, EventArgs e)
+        private void LoadRepository(string path)
         {
-            _repository = new DscRepository("C:\\Work\\EZDSC Repository");
+            _repository = new DscRepository(path);
             FillResourceTree();
             FillRoleTree(_repository.Roles, tvLibrary.Nodes["tviRoles"]);
             FillServerTree(_repository.Servers, tvLibrary.Nodes["tviServers"]);
             UnblockModules();
             ModuleWorker.InstallLocalModules(_repository);
+        }
 
+        private void fMain_Load(object sender, EventArgs e)
+        {
+            // Setting default controls state
             pRolePanel.Dock = DockStyle.Fill;
             scServer.Dock = DockStyle.Fill;
-            scConfigurationItem.Dock = DockStyle.Fill;;
+            scConfigurationItem.Dock = DockStyle.Fill;
             pRolePanel.Hide();
             scServer.Hide();
             scConfigurationItem.Hide();
+
+            // Loading application settings
+            _settings = EzSettings.Load();
+            Size = _settings.WindowSize;
+            WindowState = _settings.WindowState;
+
+            // Loading last opened repository
+            if (_settings.LastRepositoryPath == null) return;
+            if (Directory.Exists(_settings.LastRepositoryPath))
+            {
+                LoadRepository(_settings.LastRepositoryPath);
+            }
         }
 
         private void tvLibrary_AfterSelect(object sender, TreeViewEventArgs e)
@@ -225,7 +238,7 @@ namespace EzDSC
             if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.InputResult == "")) return;
             DscServerNode parentNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
             string fileName = Path.GetDirectoryName(parentNode.FilePath) + "\\" + nameDialog.InputResult + "\\.group";
-            _repository.Dir.DirectoryCreateIfNotExists(Path.GetDirectoryName(fileName));
+            FileSystem.DirectoryCreateIfNotExists(Path.GetDirectoryName(fileName));
             DscServer server = new DscServer();
             server.Save(fileName);
             DscServerNode serverNode =
@@ -250,8 +263,7 @@ namespace EzDSC
             DialogResult result = fbd.ShowDialog();
             if (!string.IsNullOrWhiteSpace(fbd.SelectedPath))
             {
-                string[] files = Directory.GetFiles(fbd.SelectedPath);
-                System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
+                LoadRepository(fbd.SelectedPath);
             }
         }
 
@@ -394,7 +406,7 @@ namespace EzDSC
             if ((nameDialog.ShowDialog() != DialogResult.OK) || (nameDialog.InputResult == "")) return;
             DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
             string path = roleGroup.DirectoryPath + nameDialog.InputResult + "\\";
-            _repository.Dir.DirectoryCreateIfNotExists(path);
+            FileSystem.DirectoryCreateIfNotExists(path);
             DscRoleGroup newRoleGroup = new DscRoleGroup(path, roleGroup);
             roleGroup.Groups.Add(newRoleGroup);
             TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(newRoleGroup.BuildName(), newRoleGroup.Name);
@@ -513,6 +525,19 @@ namespace EzDSC
             roleNode.Parent.Nodes.Remove(roleNode);
             File.Delete(roleNode.FilePath);
             tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+        }
+
+        private void fMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _settings.WindowSize = Size;
+            _settings.WindowState = WindowState;
+            _settings.LastRepositoryPath = _repository?.Dir.Root;
+            _settings.Save();
+        }
+
+        private void miFileOpen_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

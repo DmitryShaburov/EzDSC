@@ -1,0 +1,7 @@
+{
+  "Resources": [
+    "PSDesiredStateConfiguration:Service:Example_Service",
+    "PSDesiredStateConfiguration:Script:Example_Script",
+    "PSDesiredStateConfiguration:WindowsFeature:Example_WindowsFeature"
+  ]
+}

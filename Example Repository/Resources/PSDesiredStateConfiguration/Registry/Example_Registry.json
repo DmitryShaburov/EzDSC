@@ -1,0 +1,12 @@
+{
+  "Properties": {
+    "Force": true,
+    "Ensure": "Present",
+    "Key": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+    "ValueData": "NtfsDisable8dot3NameCreation",
+    "Hex": null,
+    "ValueName": "1",
+    "ValueType": "Dword"
+  },
+  "DependsOn": []
+}

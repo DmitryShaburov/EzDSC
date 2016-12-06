@@ -1,0 +1,8 @@
+{
+  "Roles": [],
+  "Variables": {
+    "Share": "\"\\\\server.contoso.com\\Share\"",
+    "ADCredential": "Get-Credential -UserName CONTOSO\\SomeUser -Message \"Active Directory Credential\"",
+    "AdminMembers": "@(\"CONTOSO\\AnotherUser\",\"CONTOSO\\SomeGroup\")"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "Properties": {
+    "Message": "Sample Message will appear in log"
+  },
+  "DependsOn": []
+}

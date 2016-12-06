@@ -1,0 +1,7 @@
+{
+  "Resources": [
+    "PSDesiredStateConfiguration:Package:Example_Git",
+    "PSDesiredStateConfiguration:Log:Example_Log",
+    "PSDesiredStateConfiguration:Archive:Example_Archive"
+  ]
+}

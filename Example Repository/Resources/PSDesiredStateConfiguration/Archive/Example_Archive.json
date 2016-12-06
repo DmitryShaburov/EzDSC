@@ -1,0 +1,12 @@
+{
+  "Properties": {
+    "Validate": true,
+    "Destination": "C:\\etc\\unpacked",
+    "Ensure": "Present",
+    "Force": true,
+    "Path": "\"$Share\\archive.zip\"",
+    "Checksum": "",
+    "Credential": ""
+  },
+  "DependsOn": []
+}

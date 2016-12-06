@@ -16,14 +16,6 @@ namespace EzDSC
         public string AppRoot;
         public string AppModules;
 
-        public void DirectoryCreateIfNotExists(string path)
-        {
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-        }
-
         public void InitRootServer()
         {
             string filename = Servers + ".group";
@@ -43,12 +35,12 @@ namespace EzDSC
             Resources = Root + "Resources\\";
             Output = Root + "Output\\";
 
-            DirectoryCreateIfNotExists(Root);
-            DirectoryCreateIfNotExists(Roles);
-            DirectoryCreateIfNotExists(Modules);
-            DirectoryCreateIfNotExists(Servers);
-            DirectoryCreateIfNotExists(Resources);
-            DirectoryCreateIfNotExists(Output);
+            FileSystem.DirectoryCreateIfNotExists(Root);
+            FileSystem.DirectoryCreateIfNotExists(Roles);
+            FileSystem.DirectoryCreateIfNotExists(Modules);
+            FileSystem.DirectoryCreateIfNotExists(Servers);
+            FileSystem.DirectoryCreateIfNotExists(Resources);
+            FileSystem.DirectoryCreateIfNotExists(Output);
 
             AppRoot = AppDomain.CurrentDomain.BaseDirectory;
             AppModules = AppRoot + "Modules\\";

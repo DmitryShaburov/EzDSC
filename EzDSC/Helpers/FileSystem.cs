@@ -9,50 +9,42 @@ namespace EzDSC
 {
     class FileSystem
     {
-        public static void DirectoryCopy(
-            string sourceDirName, string destDirName, bool copySubDirs)
+        public static void DirectoryCopy(string source, string destination)
         {
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-            DirectoryInfo[] dirs = dir.GetDirectories();
+            DirectoryInfo dir = new DirectoryInfo(source);
 
-            // If the source directory does not exist, throw an exception.
             if (!dir.Exists)
             {
                 throw new DirectoryNotFoundException(
                     "Source directory does not exist or could not be found: "
-                    + sourceDirName);
+                    + source);
             }
 
-            // If the destination directory does not exist, create it.
-            if (!Directory.Exists(destDirName))
+            if (!Directory.Exists(destination))
             {
-                Directory.CreateDirectory(destDirName);
+                Directory.CreateDirectory(destination);
             }
 
-
-            // Get the file contents of the directory to copy.
             FileInfo[] files = dir.GetFiles();
-
             foreach (FileInfo file in files)
             {
-                // Create the path to the new copy of the file.
-                string temppath = Path.Combine(destDirName, file.Name);
-
-                // Copy the file.
+                string temppath = Path.Combine(destination, file.Name);
                 file.CopyTo(temppath, false);
             }
 
-            // If copySubDirs is true, copy the subdirectories.
-            if (copySubDirs)
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            foreach (DirectoryInfo subdir in dirs)
             {
-                foreach (DirectoryInfo subdir in dirs)
-                {
-                    // Create the subdirectory.
-                    string temppath = Path.Combine(destDirName, subdir.Name);
+                string temppath = Path.Combine(destination, subdir.Name);
+                DirectoryCopy(subdir.FullName, temppath);
+            }
+        }
 
-                    // Copy the subdirectories.
-                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
-                }
+        public static void DirectoryCreateIfNotExists(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
             }
         }
     }
