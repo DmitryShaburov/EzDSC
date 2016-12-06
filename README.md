@@ -39,13 +39,20 @@ Path = "$Share\distr.exe"
 
 ## How to use variables in servers and groups?
 Add variable without "$" sign at beginning.
+
 If variable uses powershell script: write code without double quotes
+
 Example:
+
 Credential = Get-Credential -UserName CONTOSO\user -Message "Active Directory Credential"
 
+
 If variable is a array of string: write them inside of @(), in double quotes, comma separated
+
 Example:
+
 AdminMembers = @("CONTOSO\user", "CONTOSO\group")
+
 
 If variable is a string: write it in double quotes:
 Example:
