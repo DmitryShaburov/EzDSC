@@ -38,10 +38,8 @@ namespace EzDSC
 
         private static List<string> GetConfigurationItemText(DscConfigurationItemNode node, DscRepository repository)
         {
-            List<string> itemText = new List<string>();
+            List<string> itemText = new List<string> {node.Parent.FriendlyName + " \"" + node.Name + "\"", "{"};
 
-            itemText.Add(node.Parent.FriendlyName + " \"" + node.Name + "\"");
-            itemText.Add("{");
             foreach (DictionaryEntry entry in node.ConfigurationItem.Properties)
             {
                 if ((entry.Value == null) || (entry.Value.ToString() == "")) continue;

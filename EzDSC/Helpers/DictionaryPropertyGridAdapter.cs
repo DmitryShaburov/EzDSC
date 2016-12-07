@@ -4,10 +4,10 @@ using System.ComponentModel;
 
 namespace EzDSC
 {
-    class DictionaryPropertyGridAdapter : ICustomTypeDescriptor
+    internal class DictionaryPropertyGridAdapter : ICustomTypeDescriptor
     {
-        IDictionary _dictionary;
-        DscResource _schema;
+        readonly IDictionary _dictionary;
+        readonly DscResource _schema;
 
         public DictionaryPropertyGridAdapter(IDictionary d, DscResource s)
         {
@@ -82,14 +82,9 @@ namespace EzDSC
             ArrayList properties = new ArrayList();
             foreach (DictionaryEntry e in _dictionary)
             {
-                if (_schema != null)
-                {
-                    properties.Add(new DictionaryPropertyDescriptor(_dictionary, e.Key, _schema));
-                }
-                else
-                {
-                    properties.Add(new DictionaryPropertyDescriptor(_dictionary, e.Key));
-                }
+                properties.Add(_schema != null
+                    ? new DictionaryPropertyDescriptor(_dictionary, e.Key, _schema)
+                    : new DictionaryPropertyDescriptor(_dictionary, e.Key));
             }
 
             PropertyDescriptor[] props =
@@ -101,9 +96,9 @@ namespace EzDSC
 
     class DictionaryPropertyDescriptor : PropertyDescriptor
     {
-        IDictionary _dictionary;
-        object _key;
-        DscResource _schema;
+        readonly IDictionary _dictionary;
+        readonly object _key;
+        readonly DscResource _schema;
 
         internal DictionaryPropertyDescriptor(IDictionary d, object key, DscResource s)
             : base(key.ToString(), null)
@@ -146,15 +141,9 @@ namespace EzDSC
             return _dictionary[_key];
         }
 
-        public override bool IsReadOnly
-        {
-            get { return false; }
-        }
+        public override bool IsReadOnly => false;
 
-        public override Type ComponentType
-        {
-            get { return null; }
-        }
+        public override Type ComponentType => null;
 
         public override bool CanResetValue(object component)
         {
