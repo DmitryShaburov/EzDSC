@@ -34,63 +34,63 @@
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Servers");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.cmRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miRolesNewGroup = new System.Windows.Forms.ToolStripMenuItem();
-            this.miRolesNewRole = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.deleteToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmServers = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miServersNewGroup = new System.Windows.Forms.ToolStripMenuItem();
-            this.miServersNewServer = new System.Windows.Forms.ToolStripMenuItem();
             this.tssServers = new System.Windows.Forms.ToolStripSeparator();
-            this.miBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.miRunConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.installModulesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tvLibrary = new System.Windows.Forms.TreeView();
             this.ilMain = new System.Windows.Forms.ImageList(this.components);
             this.cmServerItem = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miServerItemBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
-            this.runConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.installModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.scConfigurationItem = new System.Windows.Forms.SplitContainer();
             this.pgEditor = new System.Windows.Forms.PropertyGrid();
             this.lbCIDependency = new System.Windows.Forms.ListBox();
             this.tsCIDependsOn = new System.Windows.Forms.ToolStrip();
             this.tslCIDepends = new System.Windows.Forms.ToolStripLabel();
-            this.tsbCIAddDepends = new System.Windows.Forms.ToolStripButton();
-            this.tsbCIRemoveDepends = new System.Windows.Forms.ToolStripButton();
             this.scServer = new System.Windows.Forms.SplitContainer();
             this.lbServerRoles = new System.Windows.Forms.ListBox();
             this.tsServerRoles = new System.Windows.Forms.ToolStrip();
             this.tslServerRoles = new System.Windows.Forms.ToolStripLabel();
-            this.tsbServerRoleAdd = new System.Windows.Forms.ToolStripButton();
-            this.tsbServerRoleRemove = new System.Windows.Forms.ToolStripButton();
             this.pgServerVariables = new System.Windows.Forms.PropertyGrid();
             this.tsServerVariables = new System.Windows.Forms.ToolStrip();
             this.tslServerVariables = new System.Windows.Forms.ToolStripLabel();
-            this.tsbVariableAdd = new System.Windows.Forms.ToolStripButton();
-            this.tsbVariableRemove = new System.Windows.Forms.ToolStripButton();
             this.pRolePanel = new System.Windows.Forms.Panel();
             this.lbRole = new System.Windows.Forms.ListBox();
             this.tsRole = new System.Windows.Forms.ToolStrip();
             this.tslRoleCI = new System.Windows.Forms.ToolStripLabel();
-            this.tsbRoleAdd = new System.Windows.Forms.ToolStripButton();
-            this.tsbRoleRemove = new System.Windows.Forms.ToolStripButton();
             this.msMainMenu = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.miFileNew = new System.Windows.Forms.ToolStripMenuItem();
             this.tsFileStrip = new System.Windows.Forms.ToolStripSeparator();
-            this.miFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cmResourceType = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdExportScript = new System.Windows.Forms.SaveFileDialog();
             this.cmRoleItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsbCIAddDepends = new System.Windows.Forms.ToolStripButton();
+            this.tsbCIRemoveDepends = new System.Windows.Forms.ToolStripButton();
+            this.tsbServerRoleAdd = new System.Windows.Forms.ToolStripButton();
+            this.tsbServerRoleRemove = new System.Windows.Forms.ToolStripButton();
+            this.tsbVariableAdd = new System.Windows.Forms.ToolStripButton();
+            this.tsbVariableRemove = new System.Windows.Forms.ToolStripButton();
+            this.tsbRoleAdd = new System.Windows.Forms.ToolStripButton();
+            this.tsbRoleRemove = new System.Windows.Forms.ToolStripButton();
+            this.miFileNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.miRolesNewGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.miRolesNewRole = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.miServersNewGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.miServersNewServer = new System.Windows.Forms.ToolStripMenuItem();
+            this.miBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.miRunConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.miServerItemBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.runConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmRoles.SuspendLayout();
             this.cmServers.SuspendLayout();
@@ -127,33 +127,10 @@
             this.cmRoles.Name = "cmRoles";
             this.cmRoles.Size = new System.Drawing.Size(143, 76);
             // 
-            // miRolesNewGroup
-            // 
-            this.miRolesNewGroup.Image = global::EzDSC.Images.folder_new;
-            this.miRolesNewGroup.Name = "miRolesNewGroup";
-            this.miRolesNewGroup.Size = new System.Drawing.Size(142, 22);
-            this.miRolesNewGroup.Text = "New group...";
-            this.miRolesNewGroup.Click += new System.EventHandler(this.miRolesNewGroup_Click);
-            // 
-            // miRolesNewRole
-            // 
-            this.miRolesNewRole.Image = global::EzDSC.Images.document_new;
-            this.miRolesNewRole.Name = "miRolesNewRole";
-            this.miRolesNewRole.Size = new System.Drawing.Size(142, 22);
-            this.miRolesNewRole.Text = "New role...";
-            this.miRolesNewRole.Click += new System.EventHandler(this.createRoleToolStripMenuItem_Click);
-            // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(139, 6);
-            // 
-            // deleteToolStripMenuItem2
-            // 
-            this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
-            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(142, 22);
-            this.deleteToolStripMenuItem2.Text = "Delete";
-            this.deleteToolStripMenuItem2.Click += new System.EventHandler(this.deleteToolStripMenuItem2_Click);
             // 
             // cmServers
             // 
@@ -170,42 +147,10 @@
             this.cmServers.Name = "cmServers";
             this.cmServers.Size = new System.Drawing.Size(192, 154);
             // 
-            // miServersNewGroup
-            // 
-            this.miServersNewGroup.Image = global::EzDSC.Images.folder_new;
-            this.miServersNewGroup.Name = "miServersNewGroup";
-            this.miServersNewGroup.Size = new System.Drawing.Size(191, 22);
-            this.miServersNewGroup.Text = "New group...";
-            this.miServersNewGroup.Click += new System.EventHandler(this.miServersNewGroup_Click);
-            // 
-            // miServersNewServer
-            // 
-            this.miServersNewServer.Image = global::EzDSC.Images.document_new;
-            this.miServersNewServer.Name = "miServersNewServer";
-            this.miServersNewServer.Size = new System.Drawing.Size(191, 22);
-            this.miServersNewServer.Text = "New server...";
-            this.miServersNewServer.Click += new System.EventHandler(this.miServersNewServer_Click);
-            // 
             // tssServers
             // 
             this.tssServers.Name = "tssServers";
             this.tssServers.Size = new System.Drawing.Size(188, 6);
-            // 
-            // miBuildConfiguration
-            // 
-            this.miBuildConfiguration.Image = global::EzDSC.Images.document_save;
-            this.miBuildConfiguration.Name = "miBuildConfiguration";
-            this.miBuildConfiguration.Size = new System.Drawing.Size(191, 22);
-            this.miBuildConfiguration.Text = "Export configuration...";
-            this.miBuildConfiguration.Click += new System.EventHandler(this.miBuildConfiguration_Click);
-            // 
-            // miRunConfiguration
-            // 
-            this.miRunConfiguration.Image = global::EzDSC.Images.utilities_terminal;
-            this.miRunConfiguration.Name = "miRunConfiguration";
-            this.miRunConfiguration.Size = new System.Drawing.Size(191, 22);
-            this.miRunConfiguration.Text = "Run configuration";
-            this.miRunConfiguration.Click += new System.EventHandler(this.miRunConfiguration_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -214,6 +159,7 @@
             // 
             // installModulesToolStripMenuItem1
             // 
+            this.installModulesToolStripMenuItem1.Image = global::EzDSC.Images.mail_send_receive;
             this.installModulesToolStripMenuItem1.Name = "installModulesToolStripMenuItem1";
             this.installModulesToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
             this.installModulesToolStripMenuItem1.Text = "Install modules";
@@ -223,13 +169,6 @@
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(188, 6);
-            // 
-            // deleteToolStripMenuItem1
-            // 
-            this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
-            this.deleteToolStripMenuItem1.Text = "Delete";
-            this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
             // 
             // tvLibrary
             // 
@@ -275,23 +214,7 @@
             this.toolStripMenuItem3,
             this.deleteToolStripMenuItem});
             this.cmServerItem.Name = "cmServerItem";
-            this.cmServerItem.Size = new System.Drawing.Size(183, 104);
-            // 
-            // miServerItemBuildConfiguration
-            // 
-            this.miServerItemBuildConfiguration.Image = global::EzDSC.Images.document_save;
-            this.miServerItemBuildConfiguration.Name = "miServerItemBuildConfiguration";
-            this.miServerItemBuildConfiguration.Size = new System.Drawing.Size(182, 22);
-            this.miServerItemBuildConfiguration.Text = "Export configuration";
-            this.miServerItemBuildConfiguration.Click += new System.EventHandler(this.miServerItemBuildConfiguration_Click);
-            // 
-            // runConfigurationToolStripMenuItem
-            // 
-            this.runConfigurationToolStripMenuItem.Image = global::EzDSC.Images.utilities_terminal;
-            this.runConfigurationToolStripMenuItem.Name = "runConfigurationToolStripMenuItem";
-            this.runConfigurationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.runConfigurationToolStripMenuItem.Text = "Run configuration";
-            this.runConfigurationToolStripMenuItem.Click += new System.EventHandler(this.runConfigurationToolStripMenuItem_Click);
+            this.cmServerItem.Size = new System.Drawing.Size(183, 126);
             // 
             // toolStripMenuItem1
             // 
@@ -300,6 +223,7 @@
             // 
             // installModulesToolStripMenuItem
             // 
+            this.installModulesToolStripMenuItem.Image = global::EzDSC.Images.mail_send_receive;
             this.installModulesToolStripMenuItem.Name = "installModulesToolStripMenuItem";
             this.installModulesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.installModulesToolStripMenuItem.Text = "Install modules";
@@ -309,13 +233,6 @@
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(179, 6);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // scMain
             // 
@@ -392,26 +309,6 @@
             this.tslCIDepends.Size = new System.Drawing.Size(75, 22);
             this.tslCIDepends.Text = "Depends On:";
             // 
-            // tsbCIAddDepends
-            // 
-            this.tsbCIAddDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbCIAddDepends.Image = global::EzDSC.Images.list_add;
-            this.tsbCIAddDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCIAddDepends.Name = "tsbCIAddDepends";
-            this.tsbCIAddDepends.Size = new System.Drawing.Size(23, 22);
-            this.tsbCIAddDepends.Text = "Add...";
-            this.tsbCIAddDepends.Click += new System.EventHandler(this.tsbCIAddDepends_Click);
-            // 
-            // tsbCIRemoveDepends
-            // 
-            this.tsbCIRemoveDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbCIRemoveDepends.Image = global::EzDSC.Images.list_remove;
-            this.tsbCIRemoveDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCIRemoveDepends.Name = "tsbCIRemoveDepends";
-            this.tsbCIRemoveDepends.Size = new System.Drawing.Size(23, 22);
-            this.tsbCIRemoveDepends.Text = "Remove...";
-            this.tsbCIRemoveDepends.Click += new System.EventHandler(this.tsbCIRemoveDepends_Click);
-            // 
             // scServer
             // 
             this.scServer.Location = new System.Drawing.Point(572, 61);
@@ -458,26 +355,6 @@
             this.tslServerRoles.Size = new System.Drawing.Size(38, 22);
             this.tslServerRoles.Text = "Roles:";
             // 
-            // tsbServerRoleAdd
-            // 
-            this.tsbServerRoleAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbServerRoleAdd.Image = global::EzDSC.Images.list_add;
-            this.tsbServerRoleAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbServerRoleAdd.Name = "tsbServerRoleAdd";
-            this.tsbServerRoleAdd.Size = new System.Drawing.Size(23, 22);
-            this.tsbServerRoleAdd.Text = "Add...";
-            this.tsbServerRoleAdd.Click += new System.EventHandler(this.tsbServerRoleAdd_Click);
-            // 
-            // tsbServerRoleRemove
-            // 
-            this.tsbServerRoleRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbServerRoleRemove.Image = global::EzDSC.Images.list_remove;
-            this.tsbServerRoleRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbServerRoleRemove.Name = "tsbServerRoleRemove";
-            this.tsbServerRoleRemove.Size = new System.Drawing.Size(23, 22);
-            this.tsbServerRoleRemove.Text = "Remove...";
-            this.tsbServerRoleRemove.Click += new System.EventHandler(this.tsbServerRoleRemove_Click);
-            // 
             // pgServerVariables
             // 
             this.pgServerVariables.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -507,26 +384,6 @@
             this.tslServerVariables.Name = "tslServerVariables";
             this.tslServerVariables.Size = new System.Drawing.Size(57, 22);
             this.tslServerVariables.Text = "Variables:";
-            // 
-            // tsbVariableAdd
-            // 
-            this.tsbVariableAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbVariableAdd.Image = global::EzDSC.Images.list_add;
-            this.tsbVariableAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbVariableAdd.Name = "tsbVariableAdd";
-            this.tsbVariableAdd.Size = new System.Drawing.Size(23, 22);
-            this.tsbVariableAdd.Text = "Add..";
-            this.tsbVariableAdd.Click += new System.EventHandler(this.tsbVariableAdd_Click);
-            // 
-            // tsbVariableRemove
-            // 
-            this.tsbVariableRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbVariableRemove.Image = global::EzDSC.Images.list_remove;
-            this.tsbVariableRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbVariableRemove.Name = "tsbVariableRemove";
-            this.tsbVariableRemove.Size = new System.Drawing.Size(23, 22);
-            this.tsbVariableRemove.Text = "Remove...";
-            this.tsbVariableRemove.Click += new System.EventHandler(this.tsbVariableRemove_Click);
             // 
             // pRolePanel
             // 
@@ -564,6 +421,110 @@
             this.tslRoleCI.Size = new System.Drawing.Size(116, 22);
             this.tslRoleCI.Text = "Configuration items:";
             // 
+            // msMainMenu
+            // 
+            this.msMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miFile});
+            this.msMainMenu.Location = new System.Drawing.Point(0, 0);
+            this.msMainMenu.Name = "msMainMenu";
+            this.msMainMenu.Size = new System.Drawing.Size(1250, 24);
+            this.msMainMenu.TabIndex = 8;
+            // 
+            // miFile
+            // 
+            this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miFileNew,
+            this.tsFileStrip,
+            this.miFileExit});
+            this.miFile.Name = "miFile";
+            this.miFile.Size = new System.Drawing.Size(37, 20);
+            this.miFile.Text = "File";
+            // 
+            // tsFileStrip
+            // 
+            this.tsFileStrip.Name = "tsFileStrip";
+            this.tsFileStrip.Size = new System.Drawing.Size(152, 6);
+            // 
+            // cmResourceType
+            // 
+            this.cmResourceType.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miResourceTypeNewConfigurationItem});
+            this.cmResourceType.Name = "cmResourceType";
+            this.cmResourceType.Size = new System.Drawing.Size(210, 26);
+            // 
+            // sfdExportScript
+            // 
+            this.sfdExportScript.DefaultExt = "ps1";
+            this.sfdExportScript.Filter = "PowerShell Script|*.ps1";
+            // 
+            // cmRoleItem
+            // 
+            this.cmRoleItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem6});
+            this.cmRoleItem.Name = "cmRoleItem";
+            this.cmRoleItem.Size = new System.Drawing.Size(108, 26);
+            this.cmRoleItem.Opening += new System.ComponentModel.CancelEventHandler(this.cmRoleItem_Opening);
+            // 
+            // tsbCIAddDepends
+            // 
+            this.tsbCIAddDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbCIAddDepends.Image = global::EzDSC.Images.list_add;
+            this.tsbCIAddDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCIAddDepends.Name = "tsbCIAddDepends";
+            this.tsbCIAddDepends.Size = new System.Drawing.Size(23, 22);
+            this.tsbCIAddDepends.Text = "Add...";
+            this.tsbCIAddDepends.Click += new System.EventHandler(this.tsbCIAddDepends_Click);
+            // 
+            // tsbCIRemoveDepends
+            // 
+            this.tsbCIRemoveDepends.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbCIRemoveDepends.Image = global::EzDSC.Images.list_remove;
+            this.tsbCIRemoveDepends.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCIRemoveDepends.Name = "tsbCIRemoveDepends";
+            this.tsbCIRemoveDepends.Size = new System.Drawing.Size(23, 22);
+            this.tsbCIRemoveDepends.Text = "Remove...";
+            this.tsbCIRemoveDepends.Click += new System.EventHandler(this.tsbCIRemoveDepends_Click);
+            // 
+            // tsbServerRoleAdd
+            // 
+            this.tsbServerRoleAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbServerRoleAdd.Image = global::EzDSC.Images.list_add;
+            this.tsbServerRoleAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbServerRoleAdd.Name = "tsbServerRoleAdd";
+            this.tsbServerRoleAdd.Size = new System.Drawing.Size(23, 22);
+            this.tsbServerRoleAdd.Text = "Add...";
+            this.tsbServerRoleAdd.Click += new System.EventHandler(this.tsbServerRoleAdd_Click);
+            // 
+            // tsbServerRoleRemove
+            // 
+            this.tsbServerRoleRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbServerRoleRemove.Image = global::EzDSC.Images.list_remove;
+            this.tsbServerRoleRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbServerRoleRemove.Name = "tsbServerRoleRemove";
+            this.tsbServerRoleRemove.Size = new System.Drawing.Size(23, 22);
+            this.tsbServerRoleRemove.Text = "Remove...";
+            this.tsbServerRoleRemove.Click += new System.EventHandler(this.tsbServerRoleRemove_Click);
+            // 
+            // tsbVariableAdd
+            // 
+            this.tsbVariableAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbVariableAdd.Image = global::EzDSC.Images.list_add;
+            this.tsbVariableAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbVariableAdd.Name = "tsbVariableAdd";
+            this.tsbVariableAdd.Size = new System.Drawing.Size(23, 22);
+            this.tsbVariableAdd.Text = "Add..";
+            this.tsbVariableAdd.Click += new System.EventHandler(this.tsbVariableAdd_Click);
+            // 
+            // tsbVariableRemove
+            // 
+            this.tsbVariableRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbVariableRemove.Image = global::EzDSC.Images.list_remove;
+            this.tsbVariableRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbVariableRemove.Name = "tsbVariableRemove";
+            this.tsbVariableRemove.Size = new System.Drawing.Size(23, 22);
+            this.tsbVariableRemove.Text = "Remove...";
+            this.tsbVariableRemove.Click += new System.EventHandler(this.tsbVariableRemove_Click);
+            // 
             // tsbRoleAdd
             // 
             this.tsbRoleAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -584,50 +545,109 @@
             this.tsbRoleRemove.Text = "Remove...";
             this.tsbRoleRemove.Click += new System.EventHandler(this.tsbRoleRemove_Click);
             // 
-            // msMainMenu
-            // 
-            this.msMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miFile});
-            this.msMainMenu.Location = new System.Drawing.Point(0, 0);
-            this.msMainMenu.Name = "msMainMenu";
-            this.msMainMenu.Size = new System.Drawing.Size(1250, 24);
-            this.msMainMenu.TabIndex = 8;
-            // 
-            // miFile
-            // 
-            this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miFileNew,
-            this.tsFileStrip,
-            this.miFileExit});
-            this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(37, 20);
-            this.miFile.Text = "File";
-            // 
             // miFileNew
             // 
+            this.miFileNew.Image = global::EzDSC.Images.user_home;
             this.miFileNew.Name = "miFileNew";
             this.miFileNew.Size = new System.Drawing.Size(155, 22);
             this.miFileNew.Text = "Open / create...";
             this.miFileNew.Click += new System.EventHandler(this.miFileNew_Click);
             // 
-            // tsFileStrip
-            // 
-            this.tsFileStrip.Name = "tsFileStrip";
-            this.tsFileStrip.Size = new System.Drawing.Size(109, 6);
-            // 
             // miFileExit
             // 
+            this.miFileExit.Image = global::EzDSC.Images.system_log_out;
             this.miFileExit.Name = "miFileExit";
-            this.miFileExit.Size = new System.Drawing.Size(112, 22);
+            this.miFileExit.Size = new System.Drawing.Size(155, 22);
             this.miFileExit.Text = "Exit";
             this.miFileExit.Click += new System.EventHandler(this.miFileExit_Click);
             // 
-            // cmResourceType
+            // miRolesNewGroup
             // 
-            this.cmResourceType.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miResourceTypeNewConfigurationItem});
-            this.cmResourceType.Name = "cmResourceType";
-            this.cmResourceType.Size = new System.Drawing.Size(210, 26);
+            this.miRolesNewGroup.Image = global::EzDSC.Images.folder_new;
+            this.miRolesNewGroup.Name = "miRolesNewGroup";
+            this.miRolesNewGroup.Size = new System.Drawing.Size(142, 22);
+            this.miRolesNewGroup.Text = "New group...";
+            this.miRolesNewGroup.Click += new System.EventHandler(this.miRolesNewGroup_Click);
+            // 
+            // miRolesNewRole
+            // 
+            this.miRolesNewRole.Image = global::EzDSC.Images.document_new;
+            this.miRolesNewRole.Name = "miRolesNewRole";
+            this.miRolesNewRole.Size = new System.Drawing.Size(142, 22);
+            this.miRolesNewRole.Text = "New role...";
+            this.miRolesNewRole.Click += new System.EventHandler(this.createRoleToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem2
+            // 
+            this.deleteToolStripMenuItem2.Image = global::EzDSC.Images.edit_delete;
+            this.deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
+            this.deleteToolStripMenuItem2.Size = new System.Drawing.Size(142, 22);
+            this.deleteToolStripMenuItem2.Text = "Delete";
+            this.deleteToolStripMenuItem2.Click += new System.EventHandler(this.deleteToolStripMenuItem2_Click);
+            // 
+            // miServersNewGroup
+            // 
+            this.miServersNewGroup.Image = global::EzDSC.Images.folder_new;
+            this.miServersNewGroup.Name = "miServersNewGroup";
+            this.miServersNewGroup.Size = new System.Drawing.Size(191, 22);
+            this.miServersNewGroup.Text = "New group...";
+            this.miServersNewGroup.Click += new System.EventHandler(this.miServersNewGroup_Click);
+            // 
+            // miServersNewServer
+            // 
+            this.miServersNewServer.Image = global::EzDSC.Images.document_new;
+            this.miServersNewServer.Name = "miServersNewServer";
+            this.miServersNewServer.Size = new System.Drawing.Size(191, 22);
+            this.miServersNewServer.Text = "New server...";
+            this.miServersNewServer.Click += new System.EventHandler(this.miServersNewServer_Click);
+            // 
+            // miBuildConfiguration
+            // 
+            this.miBuildConfiguration.Image = global::EzDSC.Images.document_save;
+            this.miBuildConfiguration.Name = "miBuildConfiguration";
+            this.miBuildConfiguration.Size = new System.Drawing.Size(191, 22);
+            this.miBuildConfiguration.Text = "Export configuration...";
+            this.miBuildConfiguration.Click += new System.EventHandler(this.miBuildConfiguration_Click);
+            // 
+            // miRunConfiguration
+            // 
+            this.miRunConfiguration.Image = global::EzDSC.Images.utilities_terminal;
+            this.miRunConfiguration.Name = "miRunConfiguration";
+            this.miRunConfiguration.Size = new System.Drawing.Size(191, 22);
+            this.miRunConfiguration.Text = "Run configuration";
+            this.miRunConfiguration.Click += new System.EventHandler(this.miRunConfiguration_Click);
+            // 
+            // deleteToolStripMenuItem1
+            // 
+            this.deleteToolStripMenuItem1.Image = global::EzDSC.Images.edit_delete;
+            this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
+            this.deleteToolStripMenuItem1.Text = "Delete";
+            this.deleteToolStripMenuItem1.Click += new System.EventHandler(this.deleteToolStripMenuItem1_Click);
+            // 
+            // miServerItemBuildConfiguration
+            // 
+            this.miServerItemBuildConfiguration.Image = global::EzDSC.Images.document_save;
+            this.miServerItemBuildConfiguration.Name = "miServerItemBuildConfiguration";
+            this.miServerItemBuildConfiguration.Size = new System.Drawing.Size(182, 22);
+            this.miServerItemBuildConfiguration.Text = "Export configuration";
+            this.miServerItemBuildConfiguration.Click += new System.EventHandler(this.miServerItemBuildConfiguration_Click);
+            // 
+            // runConfigurationToolStripMenuItem
+            // 
+            this.runConfigurationToolStripMenuItem.Image = global::EzDSC.Images.utilities_terminal;
+            this.runConfigurationToolStripMenuItem.Name = "runConfigurationToolStripMenuItem";
+            this.runConfigurationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.runConfigurationToolStripMenuItem.Text = "Run configuration";
+            this.runConfigurationToolStripMenuItem.Click += new System.EventHandler(this.runConfigurationToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Image = global::EzDSC.Images.edit_delete;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // miResourceTypeNewConfigurationItem
             // 
@@ -637,21 +657,9 @@
             this.miResourceTypeNewConfigurationItem.Text = "New configuration item...";
             this.miResourceTypeNewConfigurationItem.Click += new System.EventHandler(this.miResourceTypeNewConfigurationItem_Click);
             // 
-            // sfdExportScript
-            // 
-            this.sfdExportScript.DefaultExt = "ps1";
-            this.sfdExportScript.Filter = "PowerShell Script|*.ps1";
-            // 
-            // cmRoleItem
-            // 
-            this.cmRoleItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem6});
-            this.cmRoleItem.Name = "cmRoleItem";
-            this.cmRoleItem.Size = new System.Drawing.Size(108, 26);
-            this.cmRoleItem.Opening += new System.ComponentModel.CancelEventHandler(this.cmRoleItem_Opening);
-            // 
             // toolStripMenuItem6
             // 
+            this.toolStripMenuItem6.Image = global::EzDSC.Images.edit_delete;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem6.Text = "Delete";

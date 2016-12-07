@@ -178,6 +178,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="%24this.Icon.ico" />
+    <None Include="Resources\mail-send-receive.png" />
+    <None Include="Resources\edit-delete.png" />
+    <None Include="Resources\user-home.png" />
+    <None Include="Resources\system-log-out.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -83,6 +83,16 @@ namespace EzDSC {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap edit_delete {
+            get {
+                object obj = ResourceManager.GetObject("edit_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap folder_new {
             get {
                 object obj = ResourceManager.GetObject("folder_new", resourceCulture);
@@ -106,6 +116,36 @@ namespace EzDSC {
         internal static System.Drawing.Bitmap list_remove {
             get {
                 object obj = ResourceManager.GetObject("list_remove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mail_send_receive {
+            get {
+                object obj = ResourceManager.GetObject("mail_send_receive", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap system_log_out {
+            get {
+                object obj = ResourceManager.GetObject("system_log_out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_home {
+            get {
+                object obj = ResourceManager.GetObject("user_home", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
