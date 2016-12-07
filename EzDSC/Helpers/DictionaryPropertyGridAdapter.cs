@@ -41,7 +41,7 @@ namespace EzDSC
             return TypeDescriptor.GetEvents(this, attributes, true);
         }
 
-        EventDescriptorCollection System.ComponentModel.ICustomTypeDescriptor.GetEvents()
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
         {
             return TypeDescriptor.GetEvents(this, true);
         }
@@ -72,7 +72,7 @@ namespace EzDSC
         }
 
         PropertyDescriptorCollection
-            System.ComponentModel.ICustomTypeDescriptor.GetProperties()
+            ICustomTypeDescriptor.GetProperties()
         {
             return ((ICustomTypeDescriptor)this).GetProperties(new Attribute[0]);
         }

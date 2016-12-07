@@ -10,18 +10,6 @@ namespace EzDSC
         public IDictionary Properties = new Hashtable();
         public List<string> DependsOn = new List<string>();
 
-        private string SearchArray(string[] arr, string s)
-        {
-            foreach (string str in arr)
-            {
-                if (str.TrimStart().ToLower().StartsWith(s.ToLower()))
-                {
-                    return str;
-                }
-            }
-            return null;
-        }
-
         public DscConfigurationItem()
         {
 

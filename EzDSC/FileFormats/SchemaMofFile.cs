@@ -18,7 +18,7 @@ namespace EzDSC
             public string Qualifier;
             public string Name;
             public string Type;
-            public string[] Values = null;
+            public string[] Values;
         }
 
 
@@ -128,7 +128,7 @@ namespace EzDSC
             }
             string mofText = string.Join("", mofFile);
             string body = GetStringInsideOfNested(mofText, '{', '}');
-            string[] parameterList = body.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+            string[] parameterList = body.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
             foreach (string parameterString in parameterList)
             {
                 if (!Regex.IsMatch(parameterString, WildCardToRegular("[*] * *"))) continue;

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EzDSC
 {
@@ -46,6 +42,11 @@ namespace EzDSC
             {
                 Directory.CreateDirectory(path);
             }
+        }
+
+        public static string GetTempFile()
+        {
+            return Path.GetTempPath() + Guid.NewGuid() + ".ps1";
         }
     }
 }

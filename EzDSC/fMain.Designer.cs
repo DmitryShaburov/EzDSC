@@ -29,22 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Resources");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Roles");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Servers");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Resources");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Roles");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Servers");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.cmRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.cmServers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tssServers = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.installModulesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.tvLibrary = new System.Windows.Forms.TreeView();
             this.ilMain = new System.Windows.Forms.ImageList(this.components);
             this.cmServerItem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.installModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.scConfigurationItem = new System.Windows.Forms.SplitContainer();
@@ -86,12 +84,16 @@
             this.miServersNewServer = new System.Windows.Forms.ToolStripMenuItem();
             this.miBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.miRunConfiguration = new System.Windows.Forms.ToolStripMenuItem();
+            this.installModulesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.miServerItemBuildConfiguration = new System.Windows.Forms.ToolStripMenuItem();
             this.runConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.installModulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miResourceTypeNewConfigurationItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmConfigurationItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmRoles.SuspendLayout();
             this.cmServers.SuspendLayout();
             this.cmServerItem.SuspendLayout();
@@ -115,6 +117,7 @@
             this.msMainMenu.SuspendLayout();
             this.cmResourceType.SuspendLayout();
             this.cmRoleItem.SuspendLayout();
+            this.cmConfigurationItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmRoles
@@ -157,14 +160,6 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(188, 6);
             // 
-            // installModulesToolStripMenuItem1
-            // 
-            this.installModulesToolStripMenuItem1.Image = global::EzDSC.Images.mail_send_receive;
-            this.installModulesToolStripMenuItem1.Name = "installModulesToolStripMenuItem1";
-            this.installModulesToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
-            this.installModulesToolStripMenuItem1.Text = "Install modules";
-            this.installModulesToolStripMenuItem1.Click += new System.EventHandler(this.installModulesToolStripMenuItem1_Click);
-            // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
@@ -177,19 +172,19 @@
             this.tvLibrary.ImageList = this.ilMain;
             this.tvLibrary.Location = new System.Drawing.Point(0, 0);
             this.tvLibrary.Name = "tvLibrary";
-            treeNode1.Name = "tviResources";
-            treeNode1.Text = "Resources";
-            treeNode2.ContextMenuStrip = this.cmRoles;
-            treeNode2.Name = "tviRoles";
-            treeNode2.Text = "Roles";
-            treeNode3.ContextMenuStrip = this.cmServers;
-            treeNode3.ImageIndex = 0;
-            treeNode3.Name = "tviServers";
-            treeNode3.Text = "Servers";
+            treeNode4.Name = "tviResources";
+            treeNode4.Text = "Resources";
+            treeNode5.ContextMenuStrip = this.cmRoles;
+            treeNode5.Name = "tviRoles";
+            treeNode5.Text = "Roles";
+            treeNode6.ContextMenuStrip = this.cmServers;
+            treeNode6.ImageIndex = 0;
+            treeNode6.Name = "tviServers";
+            treeNode6.Text = "Servers";
             this.tvLibrary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.tvLibrary.SelectedImageIndex = 0;
             this.tvLibrary.Size = new System.Drawing.Size(240, 514);
             this.tvLibrary.TabIndex = 0;
@@ -214,20 +209,12 @@
             this.toolStripMenuItem3,
             this.deleteToolStripMenuItem});
             this.cmServerItem.Name = "cmServerItem";
-            this.cmServerItem.Size = new System.Drawing.Size(183, 126);
+            this.cmServerItem.Size = new System.Drawing.Size(183, 104);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 6);
-            // 
-            // installModulesToolStripMenuItem
-            // 
-            this.installModulesToolStripMenuItem.Image = global::EzDSC.Images.mail_send_receive;
-            this.installModulesToolStripMenuItem.Name = "installModulesToolStripMenuItem";
-            this.installModulesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.installModulesToolStripMenuItem.Text = "Install modules";
-            this.installModulesToolStripMenuItem.Click += new System.EventHandler(this.installModulesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -462,8 +449,7 @@
             this.cmRoleItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem6});
             this.cmRoleItem.Name = "cmRoleItem";
-            this.cmRoleItem.Size = new System.Drawing.Size(108, 26);
-            this.cmRoleItem.Opening += new System.ComponentModel.CancelEventHandler(this.cmRoleItem_Opening);
+            this.cmRoleItem.Size = new System.Drawing.Size(153, 48);
             // 
             // tsbCIAddDepends
             // 
@@ -617,6 +603,14 @@
             this.miRunConfiguration.Text = "Run configuration";
             this.miRunConfiguration.Click += new System.EventHandler(this.miRunConfiguration_Click);
             // 
+            // installModulesToolStripMenuItem1
+            // 
+            this.installModulesToolStripMenuItem1.Image = global::EzDSC.Images.mail_send_receive;
+            this.installModulesToolStripMenuItem1.Name = "installModulesToolStripMenuItem1";
+            this.installModulesToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
+            this.installModulesToolStripMenuItem1.Text = "Install modules";
+            this.installModulesToolStripMenuItem1.Click += new System.EventHandler(this.installModulesToolStripMenuItem1_Click);
+            // 
             // deleteToolStripMenuItem1
             // 
             this.deleteToolStripMenuItem1.Image = global::EzDSC.Images.edit_delete;
@@ -641,6 +635,14 @@
             this.runConfigurationToolStripMenuItem.Text = "Run configuration";
             this.runConfigurationToolStripMenuItem.Click += new System.EventHandler(this.runConfigurationToolStripMenuItem_Click);
             // 
+            // installModulesToolStripMenuItem
+            // 
+            this.installModulesToolStripMenuItem.Image = global::EzDSC.Images.mail_send_receive;
+            this.installModulesToolStripMenuItem.Name = "installModulesToolStripMenuItem";
+            this.installModulesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.installModulesToolStripMenuItem.Text = "Install modules";
+            this.installModulesToolStripMenuItem.Click += new System.EventHandler(this.installModulesToolStripMenuItem_Click);
+            // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Image = global::EzDSC.Images.edit_delete;
@@ -664,6 +666,21 @@
             this.toolStripMenuItem6.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem6.Text = "Delete";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // cmConfigurationItem
+            // 
+            this.cmConfigurationItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem7});
+            this.cmConfigurationItem.Name = "cmConfigurationItem";
+            this.cmConfigurationItem.Size = new System.Drawing.Size(108, 26);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Image = global::EzDSC.Images.edit_delete;
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Text = "Delete";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // fMain
             // 
@@ -710,6 +727,7 @@
             this.msMainMenu.PerformLayout();
             this.cmResourceType.ResumeLayout(false);
             this.cmRoleItem.ResumeLayout(false);
+            this.cmConfigurationItem.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -776,6 +794,8 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem2;
         private System.Windows.Forms.ContextMenuStrip cmRoleItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ContextMenuStrip cmConfigurationItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
     }
 }
 

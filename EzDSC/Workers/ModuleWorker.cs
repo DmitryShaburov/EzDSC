@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EzDSC;
 using System.IO;
 
-namespace Workers
+namespace EzDSC
 {
-    class ModuleWorker
+    internal class ModuleWorker
     {
         public static void InstallModules(DscRepository repository, HashSet<string> servers, HashSet<string> modules)
         {

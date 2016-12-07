@@ -7,14 +7,14 @@ namespace EzDSC
     {
         public enum QualifierType { Key, Required, Write, Read }
         public enum VariableType { String, Boolean, Uint32, Sint32, Uint64, Sint64, Uint16, Sint16 }
-        private static readonly Dictionary<string, QualifierType> _qualifiers = new Dictionary<string, QualifierType>
+        private static readonly Dictionary<string, QualifierType> QualifiersDictionary = new Dictionary<string, QualifierType>
         {
             {"key", QualifierType.Key},
             {"required", QualifierType.Required},
             {"write", QualifierType.Write},
             {"read", QualifierType.Read}
         };
-        private static readonly Dictionary<string, VariableType> _variables = new Dictionary<string, VariableType>
+        private static readonly Dictionary<string, VariableType> VariablesDictionary = new Dictionary<string, VariableType>
         {
             {"string", VariableType.String},
             {"boolean", VariableType.Boolean},
@@ -119,12 +119,12 @@ namespace EzDSC
 
         public static QualifierType GetQualifierType(string qualifierType)
         {
-            return _qualifiers[qualifierType.ToLower()];
+            return QualifiersDictionary[qualifierType.ToLower()];
         }
 
         public VariableType GetVariableType(string variableType)
         {
-            return _variables[variableType.ToLower()];
+            return VariablesDictionary[variableType.ToLower()];
         }
     }
 }

@@ -84,7 +84,10 @@ namespace EzDSC
             Parent = parent;
             Nodes = new List<DscServerNode>();
             Node = DscServer.Load(FilePath);
+
             string folder = Path.GetDirectoryName(FilePath);
+            if (folder == null) return;
+
             switch (type)
             {
                 case ServerType.Root:
@@ -102,7 +105,8 @@ namespace EzDSC
                     }
                     break;
                 case ServerType.Server:
-                    Name = Path.GetFileName(path).Replace(".json", "");
+                    string fileName = Path.GetFileName(path);
+                    if (fileName != null) Name = fileName.Replace(".json", "");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

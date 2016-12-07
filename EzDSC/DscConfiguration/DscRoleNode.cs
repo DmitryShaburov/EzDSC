@@ -14,7 +14,8 @@ namespace EzDSC
         {
             Parent = parent;
             FilePath = path;
-            Name = Path.GetFileName(path).Replace(".json", "");
+            string fileName = Path.GetFileName(path);
+            if (fileName != null) Name = fileName.Replace(".json", "");
             Role = DscRole.Load(path);
         }
 
