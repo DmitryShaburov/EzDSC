@@ -536,8 +536,7 @@ namespace EzDSC
                 MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
-            serverNode.Parent.Nodes.Remove(serverNode);
-            File.Delete(serverNode.FilePath);
+            _repositoryWorker.RemoveItem(serverNode);
 
             tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
         }
@@ -557,9 +556,7 @@ namespace EzDSC
                 MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
-            serverNode.Parent.Nodes.Remove(serverNode);
-            string folder = Path.GetDirectoryName(serverNode.FilePath);
-            if (folder != null) Directory.Delete(folder, true);
+            _repositoryWorker.RemoveItem(serverNode);
 
             tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
         }
@@ -589,8 +586,7 @@ namespace EzDSC
                 MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
-            roleGroup.Parent.Groups.Remove(roleGroup);
-            Directory.Delete(roleGroup.DirectoryPath, true);
+            _repositoryWorker.RemoveItem(roleGroup);
 
             tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
         }
@@ -620,8 +616,7 @@ namespace EzDSC
                 MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
-            roleNode.Parent.Nodes.Remove(roleNode);
-            File.Delete(roleNode.FilePath);
+            _repositoryWorker.RemoveItem(roleNode);
 
             tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
         }
@@ -651,8 +646,7 @@ namespace EzDSC
                 MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
-            configurationItemNode.Parent.Nodes.Remove(configurationItemNode);
-            File.Delete(configurationItemNode.FilePath);
+            _repositoryWorker.RemoveItem(configurationItemNode);
 
             tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
         }

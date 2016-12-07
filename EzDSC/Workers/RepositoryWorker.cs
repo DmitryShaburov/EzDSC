@@ -103,5 +103,41 @@ namespace EzDSC
         {
             return parent != null && parent.Nodes.Any(x => x.Name == name);
         }
+
+        // Remove configuration item
+        public void RemoveItem(DscConfigurationItemNode item)
+        {
+            item.Parent.Nodes.Remove(item);
+            File.Delete(item.FilePath);
+        }
+
+        // Remove role
+        public void RemoveItem(DscRoleNode item)
+        {
+            item.Parent.Nodes.Remove(item);
+            File.Delete(item.FilePath);
+        }
+
+        // Remove role group
+        public void RemoveItem(DscRoleGroup item)
+        {
+            item.Parent.Groups.Remove(item);
+            Directory.Delete(item.DirectoryPath, true);
+        }
+
+        // Remove server or servers groups
+        public void RemoveItem(DscServerNode item)
+        {
+            item.Parent.Nodes.Remove(item);
+            if (item.Type != DscServerNode.ServerType.Server)
+            {
+                string folder = Path.GetDirectoryName(item.FilePath);
+                if (folder != null) Directory.Delete(folder, true);
+            }
+            else
+            {
+                File.Delete(item.FilePath);
+            }
+        }
     }
 }
