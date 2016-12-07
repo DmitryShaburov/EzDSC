@@ -123,6 +123,7 @@
     <Compile Include="PsCodeBuilder\PsConfiguration.cs" />
     <Compile Include="PsCodeBuilder\PsRunner.cs" />
     <Compile Include="Workers\ModuleWorker.cs" />
+    <Compile Include="Workers\RepositoryWorker.cs" />
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>

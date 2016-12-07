@@ -12,33 +12,170 @@ namespace EzDSC
     public partial class fMain : Form
     {
         private DscRepository _repository;
+        private RepositoryWorker _repositoryWorker;
         private EzSettings _settings;
+        private static readonly Dictionary<Type, int> TypeMap = new Dictionary<Type, int>
+            {
+                {typeof(DscConfigurationItemNode), 0},
+                {typeof(DscRoleGroup), 1},
+                {typeof(DscRoleNode), 2},
+                {typeof(DscServerNode), 3}
+            };
 
         public fMain()
         {
             InitializeComponent();
         }
 
-        // Create new Role
-        private void createRoleToolStripMenuItem_Click(object sender, EventArgs e)
+        private TreeNode TreeNodeAdd(string text, object tag, TreeNode parent)
         {
-            DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
-            if (roleGroup == null) return;
+            TreeNode node = parent.Nodes.Add(text);
+
+            switch (TypeMap[tag.GetType()])
+            {
+                // DscConfigurationItemNode
+                // DscRoleGroup
+                case 0:
+                case 2:
+                    node.ImageIndex = 1;
+                    node.SelectedImageIndex = 1;
+                    break;
+                // DscRoleNode
+                case 1:
+                    node.ImageIndex = 0;
+                    node.SelectedImageIndex = 0;
+                    node.ContextMenuStrip = cmRoles;
+                    break;
+                // DscServerNode
+                case 3:
+                    DscServerNode dscServerNode = tag as DscServerNode;
+                    if (dscServerNode != null && dscServerNode.Type == DscServerNode.ServerType.Server)
+                    {
+                        node.ImageIndex = 2;
+                        node.SelectedImageIndex = 2;
+                        node.ContextMenuStrip = cmServerItem;
+                    }
+                    else
+                    {
+                        node.ImageIndex = 0;
+                        node.SelectedImageIndex = 0;
+                        node.ContextMenuStrip = cmServers;
+                    }
+                    break;
+                // Default behavior
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            node.Tag = tag;
+            return node;
+        }
+
+        // Create new configuration item
+        private void miResourceTypeNewConfigurationItem_Click(object sender, EventArgs e)
+        {
+            DscResource parent = (tvLibrary.SelectedNode.Tag as DscResource);
 
             fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(nameDialog.InputResult)) return;
-            
-            DscRole role = new DscRole();
-            string fileName = roleGroup.DirectoryPath + "\\" + nameDialog.InputResult + ".json";
-            role.Save(fileName);
-            DscRoleNode newRoleNode = new DscRoleNode(fileName, roleGroup);
-            roleGroup.Nodes.Add(newRoleNode);
+            if (nameDialog.ShowDialog() != DialogResult.OK) return;
 
-            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(newRoleNode.BuildName(), newRoleNode.Name);
-            newTreeNode.ImageIndex = 1;
-            newTreeNode.SelectedImageIndex = 1;
-            newTreeNode.Tag = newRoleNode;
-            tvLibrary.SelectedNode = newTreeNode;
+            if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
+            {
+                MessageBox.Show(this, "Configuration item with same name already exists!", "Error!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            DscConfigurationItemNode configurationItemNode =
+                _repositoryWorker.NewConfigurationItemNode(nameDialog.InputResult, parent);
+            if (configurationItemNode == null) return;
+
+            tvLibrary.SelectedNode = TreeNodeAdd(configurationItemNode.Name, configurationItemNode, tvLibrary.SelectedNode);
+        }
+
+        // Create new role
+        private void createRoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DscRoleGroup parent = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
+
+            fModalName nameDialog = new fModalName();
+            if (nameDialog.ShowDialog() != DialogResult.OK) return;
+
+            if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
+            {
+                MessageBox.Show(this, "Role or roles group with same name already exists!", "Error!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            DscRoleNode roleNode = _repositoryWorker.NewRoleNode(nameDialog.InputResult, parent);
+            if (roleNode == null) return;
+
+            tvLibrary.SelectedNode = TreeNodeAdd(roleNode.Name, roleNode, tvLibrary.SelectedNode);
+        }
+
+        // Create new roles group
+        private void miRolesNewGroup_Click(object sender, EventArgs e)
+        {
+            DscRoleGroup parent = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
+
+            fModalName nameDialog = new fModalName();
+            if (nameDialog.ShowDialog() != DialogResult.OK) return;
+
+            if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
+            {
+                MessageBox.Show(this, "Role or roles group with same name already exists!", "Error!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            DscRoleGroup roleGroup = _repositoryWorker.NewRoleGroup(nameDialog.InputResult, parent);
+            if (roleGroup == null) return;
+
+            tvLibrary.SelectedNode = TreeNodeAdd(roleGroup.Name, roleGroup, tvLibrary.SelectedNode);
+        }
+
+        // Create new server
+        private void miServersNewServer_Click(object sender, EventArgs e)
+        {
+            DscServerNode parent = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            if (parent == null) return;
+
+            fModalName nameDialog = new fModalName();
+            if (nameDialog.ShowDialog() != DialogResult.OK) return;
+
+            if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
+            {
+                MessageBox.Show(this, "Server or group with same name already exists!", "Error!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            DscServerNode serverNode = _repositoryWorker.NewServerNode(nameDialog.InputResult,
+                DscServerNode.ServerType.Server, parent);
+
+            tvLibrary.SelectedNode = TreeNodeAdd(serverNode.Name, serverNode, tvLibrary.SelectedNode);
+        }
+
+        // Create new Servers Group
+        private void miServersNewGroup_Click(object sender, EventArgs e)
+        {
+            DscServerNode parent = (tvLibrary.SelectedNode.Tag as DscServerNode);
+
+            fModalName nameDialog = new fModalName();
+            if (nameDialog.ShowDialog() != DialogResult.OK) return;
+
+            if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
+            {
+                MessageBox.Show(this, "Server or group with same name already exists!", "Error!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            DscServerNode serverNode = _repositoryWorker.NewServerNode(nameDialog.InputResult,
+                DscServerNode.ServerType.Group, parent);
+
+            tvLibrary.SelectedNode = TreeNodeAdd(serverNode.Name, serverNode, tvLibrary.SelectedNode);
         }
 
         // Fills TreeView with modules, resources and configuration items from current repository
@@ -138,6 +275,7 @@ namespace EzDSC
         private void LoadRepository(string path)
         {
             _repository = new DscRepository(path);
+            _repositoryWorker = new RepositoryWorker(_repository);
 
             tvLibrary.Nodes["tviResources"].Nodes.Clear();
             tvLibrary.Nodes["tviRoles"].Nodes.Clear();
@@ -241,71 +379,6 @@ namespace EzDSC
             configurationItemNode.ConfigurationItem.Save(configurationItemNode.FilePath);
         }
 
-        // Create new Server
-        private void miServersNewServer_Click(object sender, EventArgs e)
-        {
-            DscServerNode parentNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
-            if (parentNode == null) return;
-
-            fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(nameDialog.InputResult)) return;
-
-            if (parentNode.Nodes.Any(x => x.Name == nameDialog.InputResult))
-            {
-                MessageBox.Show(this, "Server or group with same name already exists!", "Error!", MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
-
-            string fileName = Path.GetDirectoryName(parentNode.FilePath) + "\\" + nameDialog.InputResult + ".json";
-
-            DscServer server = new DscServer();
-            server.Save(fileName);
-            DscServerNode serverNode =
-                new DscServerNode(DscServerNode.ServerType.Server, fileName, parentNode);
-            parentNode.Nodes.Add(serverNode);
-
-            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(serverNode.FilePath, serverNode.Name);
-            newTreeNode.ImageIndex = 2;
-            newTreeNode.SelectedImageIndex = 2;
-            newTreeNode.Tag = serverNode;
-            newTreeNode.ContextMenuStrip = cmServerItem;
-            tvLibrary.SelectedNode = newTreeNode;
-        }
-
-        // Create new Servers Group
-        private void miServersNewGroup_Click(object sender, EventArgs e)
-        {
-            DscServerNode parentNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
-            if (parentNode == null) return;
-
-            fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(nameDialog.InputResult)) return;
-
-            if (parentNode.Nodes.Any(x => x.Name == nameDialog.InputResult))
-            {
-                MessageBox.Show(this, "Server or group with same name already exists!", "Error!", MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
-
-            string fileName = Path.GetDirectoryName(parentNode.FilePath) + "\\" + nameDialog.InputResult + "\\.group";
-            FileSystem.DirectoryCreateIfNotExists(Path.GetDirectoryName(fileName));
-
-            DscServer server = new DscServer();
-            server.Save(fileName);
-            DscServerNode serverNode =
-                new DscServerNode(DscServerNode.ServerType.Group, fileName, parentNode);
-            parentNode.Nodes.Add(serverNode);
-
-            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(serverNode.FilePath, serverNode.Name);
-            newTreeNode.ImageIndex = 0;
-            newTreeNode.SelectedImageIndex = 0;
-            newTreeNode.Tag = serverNode;
-            newTreeNode.ContextMenuStrip = cmServers;
-            tvLibrary.SelectedNode = newTreeNode;
-        }
-
         // Exit application
         private void miFileExit_Click(object sender, EventArgs e)
         {
@@ -319,31 +392,6 @@ namespace EzDSC
             if ((fbd.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(fbd.SelectedPath)) return;
             
             LoadRepository(fbd.SelectedPath);
-        }
-
-        // Create Configuration Item
-        private void miResourceTypeNewConfigurationItem_Click(object sender, EventArgs e)
-        {
-            DscResource resource = (tvLibrary.SelectedNode.Tag as DscResource);
-            if (resource == null) return;
-
-            fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(nameDialog.InputResult)) return;
-
-            string fileName = _repository.Dir.Resources + resource.Parent.Name + @"\" + resource.FriendlyName + @"\" +
-                              nameDialog.InputResult + @".json";
-
-            DscConfigurationItem configurationItem = new DscConfigurationItem(resource);
-            configurationItem.Save(fileName);
-            DscConfigurationItemNode configurationItemNode = new DscConfigurationItemNode(fileName, resource);
-            configurationItemNode.Validate();
-            resource.Nodes.Add(configurationItemNode);
-
-            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(configurationItemNode.GetFullName(), configurationItemNode.Name);
-            newTreeNode.ImageIndex = 1;
-            newTreeNode.SelectedImageIndex = 1;
-            newTreeNode.Tag = configurationItemNode;
-            tvLibrary.SelectedNode = newTreeNode;
         }
 
         // Add Configuration Item to Role
@@ -504,29 +552,6 @@ namespace EzDSC
         private void tvLibrary_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             tvLibrary.SelectedNode = e.Node;
-        }
-
-        // Create roles group
-        private void miRolesNewGroup_Click(object sender, EventArgs e)
-        {
-            DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
-            if (roleGroup == null) return;
-
-            fModalName nameDialog = new fModalName();
-            if ((nameDialog.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(nameDialog.InputResult)) return;
-
-            string path = roleGroup.DirectoryPath + nameDialog.InputResult + @"\"; 
-
-            FileSystem.DirectoryCreateIfNotExists(path);
-            DscRoleGroup newRoleGroup = new DscRoleGroup(path, roleGroup);
-            roleGroup.Groups.Add(newRoleGroup);
-
-            TreeNode newTreeNode = tvLibrary.SelectedNode.Nodes.Add(newRoleGroup.BuildName(), newRoleGroup.Name);
-            newTreeNode.Tag = newRoleGroup;
-            newTreeNode.ImageIndex = 0;
-            newTreeNode.SelectedImageIndex = 0;
-            newTreeNode.ContextMenuStrip = cmRoles;
-            tvLibrary.SelectedNode = newTreeNode;
         }
 
         // Remove variable from server or servers group
