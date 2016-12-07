@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Resources");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Roles");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Servers");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Resources");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Roles");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Servers");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.cmRoles = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
@@ -148,7 +148,7 @@
             this.toolStripMenuItem4,
             this.deleteToolStripMenuItem1});
             this.cmServers.Name = "cmServers";
-            this.cmServers.Size = new System.Drawing.Size(192, 154);
+            this.cmServers.Size = new System.Drawing.Size(192, 176);
             // 
             // tssServers
             // 
@@ -172,19 +172,19 @@
             this.tvLibrary.ImageList = this.ilMain;
             this.tvLibrary.Location = new System.Drawing.Point(0, 0);
             this.tvLibrary.Name = "tvLibrary";
-            treeNode4.Name = "tviResources";
-            treeNode4.Text = "Resources";
-            treeNode5.ContextMenuStrip = this.cmRoles;
-            treeNode5.Name = "tviRoles";
-            treeNode5.Text = "Roles";
-            treeNode6.ContextMenuStrip = this.cmServers;
-            treeNode6.ImageIndex = 0;
-            treeNode6.Name = "tviServers";
-            treeNode6.Text = "Servers";
+            treeNode1.Name = "tviResources";
+            treeNode1.Text = "Resources";
+            treeNode2.ContextMenuStrip = this.cmRoles;
+            treeNode2.Name = "tviRoles";
+            treeNode2.Text = "Roles";
+            treeNode3.ContextMenuStrip = this.cmServers;
+            treeNode3.ImageIndex = 0;
+            treeNode3.Name = "tviServers";
+            treeNode3.Text = "Servers";
             this.tvLibrary.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5,
-            treeNode6});
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.tvLibrary.SelectedImageIndex = 0;
             this.tvLibrary.Size = new System.Drawing.Size(240, 514);
             this.tvLibrary.TabIndex = 0;
@@ -449,7 +449,7 @@
             this.cmRoleItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem6});
             this.cmRoleItem.Name = "cmRoleItem";
-            this.cmRoleItem.Size = new System.Drawing.Size(153, 48);
+            this.cmRoleItem.Size = new System.Drawing.Size(108, 26);
             // 
             // tsbCIAddDepends
             // 
@@ -609,7 +609,7 @@
             this.installModulesToolStripMenuItem1.Name = "installModulesToolStripMenuItem1";
             this.installModulesToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
             this.installModulesToolStripMenuItem1.Text = "Install modules";
-            this.installModulesToolStripMenuItem1.Click += new System.EventHandler(this.installModulesToolStripMenuItem1_Click);
+            this.installModulesToolStripMenuItem1.Click += new System.EventHandler(this.installModulesToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem1
             // 
@@ -625,7 +625,7 @@
             this.miServerItemBuildConfiguration.Name = "miServerItemBuildConfiguration";
             this.miServerItemBuildConfiguration.Size = new System.Drawing.Size(182, 22);
             this.miServerItemBuildConfiguration.Text = "Export configuration";
-            this.miServerItemBuildConfiguration.Click += new System.EventHandler(this.miServerItemBuildConfiguration_Click);
+            this.miServerItemBuildConfiguration.Click += new System.EventHandler(this.miBuildConfiguration_Click);
             // 
             // runConfigurationToolStripMenuItem
             // 
@@ -633,7 +633,7 @@
             this.runConfigurationToolStripMenuItem.Name = "runConfigurationToolStripMenuItem";
             this.runConfigurationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.runConfigurationToolStripMenuItem.Text = "Run configuration";
-            this.runConfigurationToolStripMenuItem.Click += new System.EventHandler(this.runConfigurationToolStripMenuItem_Click);
+            this.runConfigurationToolStripMenuItem.Click += new System.EventHandler(this.miRunConfiguration_Click);
             // 
             // installModulesToolStripMenuItem
             // 
@@ -678,7 +678,7 @@
             // 
             this.toolStripMenuItem7.Image = global::EzDSC.Images.edit_delete;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem7.Text = "Delete";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 

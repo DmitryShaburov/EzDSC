@@ -91,6 +91,7 @@
     <Compile Include="DscConfiguration\DscServer.cs" />
     <Compile Include="DscConfiguration\DscServerNode.cs" />
     <Compile Include="FileFormats\SchemaMofFile.cs" />
+    <Compile Include="fMainCode\ItemsCreation.cs" />
     <Compile Include="Helpers\DictionaryPropertyGridAdapter.cs" />
     <Compile Include="fMain.cs">
       <SubType>Form</SubType>
@@ -124,6 +125,7 @@
     <Compile Include="PsCodeBuilder\PsRunner.cs" />
     <Compile Include="Workers\ModuleWorker.cs" />
     <Compile Include="Workers\RepositoryWorker.cs" />
+    <Compile Include="Workers\TreeViewWorker.cs" />
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>
