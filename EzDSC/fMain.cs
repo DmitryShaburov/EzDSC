@@ -30,7 +30,9 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this, "Configuration item with same name already exists!", "Error!",
+                MessageBox.Show(this,
+                    string.Concat(Strings.UI_Text_ConfigurationItemC, Strings.UI_Text_SameAlreadyExists),
+                    Strings.UI_Caption_Error,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
@@ -54,7 +56,9 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this, "Role or roles group with same name already exists!", "Error!",
+                MessageBox.Show(this,
+                    string.Concat(Strings.UI_Text_RoleOrGroupC, Strings.UI_Text_SameAlreadyExists),
+                    Strings.UI_Caption_Error,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
@@ -77,7 +81,9 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this, "Role or roles group with same name already exists!", "Error!",
+                MessageBox.Show(this,
+                    string.Concat(Strings.UI_Text_RoleOrGroupC, Strings.UI_Text_SameAlreadyExists),
+                    Strings.UI_Caption_Error,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
@@ -101,7 +107,9 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this, "Server or group with same name already exists!", "Error!", 
+                MessageBox.Show(this,
+                    string.Concat(Strings.UI_Text_ServerOrGroupC, Strings.UI_Text_SameAlreadyExists),
+                    Strings.UI_Caption_Error,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
@@ -124,7 +132,9 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this, "Server or group with same name already exists!", "Error!", 
+                MessageBox.Show(this,
+                    string.Concat(Strings.UI_Text_ServerOrGroupC, Strings.UI_Text_SameAlreadyExists),
+                    Strings.UI_Caption_Error,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
@@ -507,7 +517,10 @@ namespace EzDSC
                 ModuleWorker.InstallModules(_repository, configuration.Servers, configuration.GetUsedModules(_repository));
             }
 
-            MessageBox.Show(this, "Module installation completed!", "Done!", MessageBoxButtons.OK,
+            MessageBox.Show(this,
+                Strings.UI_Text_ModuleInstallComplete,
+                Strings.UI_Caption_Done,
+                MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
 
@@ -516,9 +529,11 @@ namespace EzDSC
         {
             DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
-
-            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected server?",
-                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show(this,
+                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_ServerL, "?"),
+                Strings.UI_Caption_ConfirmDelete, 
+                MessageBoxButtons.YesNo, 
+                MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
             serverNode.Parent.Nodes.Remove(serverNode);
@@ -535,8 +550,11 @@ namespace EzDSC
 
             if (serverNode.Type == DscServerNode.ServerType.Root) return;
 
-            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected group?",
-                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show(this,
+                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_GroupL, "?"),
+                Strings.UI_Caption_ConfirmDelete,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
             serverNode.Parent.Nodes.Remove(serverNode);
@@ -557,13 +575,18 @@ namespace EzDSC
             {
                 string usages = string.Join(Environment.NewLine, roleUsages);
                 MessageBox.Show(this,
-                    "You cannot delete selected group because following servers/groups using it:" + Environment.NewLine +
-                    usages, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string.Concat(Strings.UI_Text_CannotDeleteServersGroups, Environment.NewLine, usages),
+                    Strings.UI_Caption_Error, 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Exclamation);
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected group?",
-                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show(this,
+                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_GroupL, "?"),
+                Strings.UI_Caption_ConfirmDelete,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
             roleGroup.Parent.Groups.Remove(roleGroup);
@@ -583,13 +606,18 @@ namespace EzDSC
             {
                 string usages = string.Join(Environment.NewLine, roleUsages);
                 MessageBox.Show(this,
-                    "You cannot delete selected role because following servers/groups using it:" + Environment.NewLine +
-                    usages, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string.Concat(Strings.UI_Text_CannotDeleteServersGroups, Environment.NewLine, usages),
+                    Strings.UI_Caption_Error,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected role?",
-                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show(this,
+                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_RoleL, "?"),
+                Strings.UI_Caption_ConfirmDelete,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
             roleNode.Parent.Nodes.Remove(roleNode);
@@ -609,13 +637,18 @@ namespace EzDSC
             {
                 string usages = string.Join(Environment.NewLine, configurationItemUsages);
                 MessageBox.Show(this,
-                    "You cannot delete selected configuration item because following roles using it:" + Environment.NewLine +
-                    usages, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    string.Concat(Strings.UI_Text_CannotDeleteRoles, Environment.NewLine, usages),
+                    Strings.UI_Caption_Error,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show(this, "Do you want to delete selected configuration item?",
-                "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show(this,
+                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_ConfigurationItemL, "?"),
+                Strings.UI_Caption_ConfirmDelete,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes) return;
 
             configurationItemNode.Parent.Nodes.Remove(configurationItemNode);

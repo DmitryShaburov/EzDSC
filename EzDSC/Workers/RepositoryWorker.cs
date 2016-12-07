@@ -1,12 +1,11 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace EzDSC
 {
     internal class RepositoryWorker
     {
-        private DscRepository _repository;
+        private readonly DscRepository _repository;
 
         public RepositoryWorker(DscRepository repository)
         {
