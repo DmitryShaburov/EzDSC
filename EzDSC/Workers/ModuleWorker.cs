@@ -23,6 +23,16 @@ namespace EzDSC
             }
         }
 
+        public static void InstallModules(DscRepository repository, DscServerNode serverNode)
+        {
+            if (serverNode == null) return;
+            List<PsConfiguration> configurations = serverNode.GetConfigurations();
+            foreach (PsConfiguration configuration in configurations)
+            {
+                InstallModules(repository, configuration.Servers, configuration.GetUsedModules(repository));
+            }
+        }
+
         public static void InstallLocalModules(DscRepository repository)
         {
             string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

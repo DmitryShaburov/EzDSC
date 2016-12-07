@@ -30,11 +30,7 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this,
-                    string.Concat(Strings.UI_Text_ConfigurationItemC, Strings.UI_Text_SameAlreadyExists),
-                    Strings.UI_Caption_Error,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBoxWorker.SameItemExists(this, Strings.UI_Text_ConfigurationItemC);
                 return;
             }
 
@@ -56,11 +52,7 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this,
-                    string.Concat(Strings.UI_Text_RoleOrGroupC, Strings.UI_Text_SameAlreadyExists),
-                    Strings.UI_Caption_Error,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBoxWorker.SameItemExists(this, Strings.UI_Text_RoleOrGroupC);
                 return;
             }
 
@@ -81,11 +73,7 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this,
-                    string.Concat(Strings.UI_Text_RoleOrGroupC, Strings.UI_Text_SameAlreadyExists),
-                    Strings.UI_Caption_Error,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBoxWorker.SameItemExists(this, Strings.UI_Text_RoleOrGroupC);
                 return;
             }
 
@@ -107,11 +95,7 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this,
-                    string.Concat(Strings.UI_Text_ServerOrGroupC, Strings.UI_Text_SameAlreadyExists),
-                    Strings.UI_Caption_Error,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBoxWorker.SameItemExists(this, Strings.UI_Text_ServerOrGroupC);
                 return;
             }
 
@@ -132,11 +116,7 @@ namespace EzDSC
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
             {
-                MessageBox.Show(this,
-                    string.Concat(Strings.UI_Text_ServerOrGroupC, Strings.UI_Text_SameAlreadyExists),
-                    Strings.UI_Caption_Error,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
+                MessageBoxWorker.SameItemExists(this, Strings.UI_Text_ServerOrGroupC);
                 return;
             }
 
@@ -509,19 +489,10 @@ namespace EzDSC
         private void installModulesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
-            if (serverNode == null) return;
 
-            List<PsConfiguration> configurations = serverNode.GetConfigurations();
-            foreach (PsConfiguration configuration in configurations)
-            {
-                ModuleWorker.InstallModules(_repository, configuration.Servers, configuration.GetUsedModules(_repository));
-            }
+            ModuleWorker.InstallModules(_repository, serverNode);
 
-            MessageBox.Show(this,
-                Strings.UI_Text_ModuleInstallComplete,
-                Strings.UI_Caption_Done,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MessageBoxWorker.Done(this, Strings.UI_Text_ModuleInstallComplete);
         }
 
         // Delete selected server
@@ -529,12 +500,8 @@ namespace EzDSC
         {
             DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
-            DialogResult dialogResult = MessageBox.Show(this,
-                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_ServerL, "?"),
-                Strings.UI_Caption_ConfirmDelete, 
-                MessageBoxButtons.YesNo, 
-                MessageBoxIcon.Question);
-            if (dialogResult != DialogResult.Yes) return;
+
+            if (MessageBoxWorker.ConfirmDelete(this, Strings.UI_Text_ServerL) != DialogResult.Yes) return;
 
             _repositoryWorker.RemoveItem(serverNode);
 
@@ -549,12 +516,7 @@ namespace EzDSC
 
             if (serverNode.Type == DscServerNode.ServerType.Root) return;
 
-            DialogResult dialogResult = MessageBox.Show(this,
-                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_GroupL, "?"),
-                Strings.UI_Caption_ConfirmDelete,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-            if (dialogResult != DialogResult.Yes) return;
+            if (MessageBoxWorker.ConfirmDelete(this, Strings.UI_Text_GroupL) != DialogResult.Yes) return;
 
             _repositoryWorker.RemoveItem(serverNode);
 
@@ -570,21 +532,11 @@ namespace EzDSC
             HashSet<string> roleUsages = roleGroup.FindUsages(_repository.Servers);
             if (roleUsages.Count > 0)
             {
-                string usages = string.Join(Environment.NewLine, roleUsages);
-                MessageBox.Show(this,
-                    string.Concat(Strings.UI_Text_CannotDeleteServersGroups, Environment.NewLine, usages),
-                    Strings.UI_Caption_Error, 
-                    MessageBoxButtons.OK, 
-                    MessageBoxIcon.Exclamation);
+                MessageBoxWorker.CannotDeleteAreUsed(this, Strings.UI_Text_CannotDeleteServersGroups, roleUsages);
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show(this,
-                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_GroupL, "?"),
-                Strings.UI_Caption_ConfirmDelete,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-            if (dialogResult != DialogResult.Yes) return;
+            if (MessageBoxWorker.ConfirmDelete(this, Strings.UI_Text_GroupL) != DialogResult.Yes) return;
 
             _repositoryWorker.RemoveItem(roleGroup);
 
@@ -600,21 +552,11 @@ namespace EzDSC
             HashSet<string> roleUsages = roleNode.FindUsages(_repository.Servers);
             if (roleUsages.Count > 0)
             {
-                string usages = string.Join(Environment.NewLine, roleUsages);
-                MessageBox.Show(this,
-                    string.Concat(Strings.UI_Text_CannotDeleteServersGroups, Environment.NewLine, usages),
-                    Strings.UI_Caption_Error,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                MessageBoxWorker.CannotDeleteAreUsed(this, Strings.UI_Text_CannotDeleteServersGroups, roleUsages);
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show(this,
-                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_RoleL, "?"),
-                Strings.UI_Caption_ConfirmDelete,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-            if (dialogResult != DialogResult.Yes) return;
+            if (MessageBoxWorker.ConfirmDelete(this, Strings.UI_Text_RoleL) != DialogResult.Yes) return;
 
             _repositoryWorker.RemoveItem(roleNode);
 
@@ -630,21 +572,11 @@ namespace EzDSC
             HashSet<string> configurationItemUsages = configurationItemNode.FindUsages(_repository.Roles);
             if (configurationItemUsages.Count > 0)
             {
-                string usages = string.Join(Environment.NewLine, configurationItemUsages);
-                MessageBox.Show(this,
-                    string.Concat(Strings.UI_Text_CannotDeleteRoles, Environment.NewLine, usages),
-                    Strings.UI_Caption_Error,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                MessageBoxWorker.CannotDeleteAreUsed(this, Strings.UI_Text_CannotDeleteRoles, configurationItemUsages);
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show(this,
-                string.Concat(Strings.UI_Text_DoYouWantToDelete, Strings.UI_Text_ConfigurationItemL, "?"),
-                Strings.UI_Caption_ConfirmDelete,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-            if (dialogResult != DialogResult.Yes) return;
+            if (MessageBoxWorker.ConfirmDelete(this, Strings.UI_Text_ConfigurationItemL) != DialogResult.Yes) return;
 
             _repositoryWorker.RemoveItem(configurationItemNode);
 

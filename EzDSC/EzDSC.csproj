@@ -122,6 +122,12 @@
     <Compile Include="PsCodeBuilder\PsCodeBuilder.cs" />
     <Compile Include="PsCodeBuilder\PsConfiguration.cs" />
     <Compile Include="PsCodeBuilder\PsRunner.cs" />
+    <Compile Include="Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Workers\MessageBoxWorker.cs" />
     <Compile Include="Workers\ModuleWorker.cs" />
     <Compile Include="Workers\RepositoryWorker.cs" />
     <Compile Include="Workers\TreeViewWorker.cs" />
@@ -147,6 +153,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
