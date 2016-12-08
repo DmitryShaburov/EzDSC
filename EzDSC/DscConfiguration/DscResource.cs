@@ -109,6 +109,12 @@ namespace EzDSC
             return parameter.Values;
         }
 
+        public bool GetRequiredOf(string name)
+        {
+            Parameter parameter = Parameters.Find(x => x.Name == name);
+            return (parameter.Qualifier == QualifierType.Key) || (parameter.Qualifier == QualifierType.Required);
+        }
+
         public VariableType GetVariableTypeOf(string name)
         {
             Parameter parameter = Parameters.Find(x => x.Name == name);

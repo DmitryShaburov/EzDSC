@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 
 namespace EzDSC
 {
@@ -156,10 +155,6 @@ namespace EzDSC
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            // you need to get the list of values from somewhere
-            // in this sample, I get it from the MyClass itself
-            //var myClass = context.Instance as MyClass;
-            //if (myClass != null)
             return _values != null ? new StandardValuesCollection(_values) : base.GetStandardValues(context);
         }
     }

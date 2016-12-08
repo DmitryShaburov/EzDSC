@@ -42,11 +42,11 @@ namespace EzDSC
 
             foreach (DictionaryEntry entry in node.ConfigurationItem.Properties)
             {
-                if ((entry.Value == null) || (entry.Value.ToString() == "")) continue;
+                if (((entry.Value == null) || (entry.Value.ToString() == "")) && !node.Parent.GetRequiredOf(entry.Key.ToString())) continue;
                 switch (node.Parent.GetVariableTypeOf(entry.Key.ToString()))
                 {
                     case DscResource.VariableType.String:
-                        if (entry.Value.ToString().StartsWith("$") || entry.Value.ToString().StartsWith("\""))
+                        if ((entry.Value != null) && (entry.Value.ToString().StartsWith("$") || entry.Value.ToString().StartsWith("\"")))
                         {
                             itemText.Add(entry.Key + " = " + entry.Value);
                         }
