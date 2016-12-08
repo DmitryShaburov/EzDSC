@@ -3,17 +3,16 @@ using System.Windows.Forms;
 
 namespace EzDSC
 {
-    // ReSharper disable once InconsistentNaming
-    public partial class fModalTree : Form
+    public partial class DialogTree : Form
     {
         public enum TreeType { TtResources, TtRoles }
         public object SelectedTag;
 
-        public fModalTree(TreeNode node, ImageList list)
+        public DialogTree(TreeNode node, ImageList list)
         {
             InitializeComponent();
-            tvSelect.ImageList = list;
-            tvSelect.Nodes.Add((TreeNode)node.Clone());
+            treeSelect.ImageList = list;
+            treeSelect.Nodes.Add((TreeNode)node.Clone());
         }
 
         private void fModalTree_Load(object sender, EventArgs e)
@@ -23,7 +22,7 @@ namespace EzDSC
 
         private void bOK_Click(object sender, EventArgs e)
         {
-            SelectedTag = tvSelect.SelectedNode.Tag;
+            SelectedTag = treeSelect.SelectedNode.Tag;
         }
     }
 }

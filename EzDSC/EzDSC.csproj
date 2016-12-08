@@ -92,23 +92,23 @@
     <Compile Include="DscConfiguration\DscServerNode.cs" />
     <Compile Include="FileFormats\SchemaMofFile.cs" />
     <Compile Include="Helpers\DictionaryPropertyGridAdapter.cs" />
-    <Compile Include="fMain.cs">
+    <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fMain.Designer.cs">
-      <DependentUpon>fMain.cs</DependentUpon>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="fModalName.cs">
+    <Compile Include="DialogText.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fModalName.Designer.cs">
-      <DependentUpon>fModalName.cs</DependentUpon>
+    <Compile Include="DialogText.Designer.cs">
+      <DependentUpon>DialogText.cs</DependentUpon>
     </Compile>
-    <Compile Include="fModalTree.cs">
+    <Compile Include="DialogTree.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fModalTree.Designer.cs">
-      <DependentUpon>fModalTree.cs</DependentUpon>
+    <Compile Include="DialogTree.Designer.cs">
+      <DependentUpon>DialogTree.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EzSettings.cs" />
     <Compile Include="Helpers\FileSystem.cs" />
@@ -131,14 +131,14 @@
     <Compile Include="Workers\ModuleWorker.cs" />
     <Compile Include="Workers\RepositoryWorker.cs" />
     <Compile Include="Workers\TreeViewWorker.cs" />
-    <EmbeddedResource Include="fMain.resx">
-      <DependentUpon>fMain.cs</DependentUpon>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fModalName.resx">
-      <DependentUpon>fModalName.cs</DependentUpon>
+    <EmbeddedResource Include="DialogText.resx">
+      <DependentUpon>DialogText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fModalTree.resx">
-      <DependentUpon>fModalTree.cs</DependentUpon>
+    <EmbeddedResource Include="DialogTree.resx">
+      <DependentUpon>DialogTree.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Images.resx">
       <Generator>ResXFileCodeGenerator</Generator>

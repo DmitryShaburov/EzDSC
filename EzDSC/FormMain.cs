@@ -8,14 +8,13 @@ using System.Security.Policy;
 
 namespace EzDSC
 {
-    // ReSharper disable once InconsistentNaming
-    public partial class fMain : Form
+    public partial class FormMain : Form
     {
         private DscRepository _repository;
         private RepositoryWorker _repositoryWorker;
         private EzSettings _settings;
 
-        public fMain()
+        public FormMain()
         {
             InitializeComponent();
         }
@@ -23,9 +22,9 @@ namespace EzDSC
         // Create new configuration item
         private void miResourceTypeNewConfigurationItem_Click(object sender, EventArgs e)
         {
-            DscResource parent = (tvLibrary.SelectedNode.Tag as DscResource);
+            DscResource parent = (treeLibrary.SelectedNode.Tag as DscResource);
 
-            fModalName nameDialog = new fModalName();
+            DialogText nameDialog = new DialogText();
             if (nameDialog.ShowDialog() != DialogResult.OK) return;
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
@@ -38,16 +37,16 @@ namespace EzDSC
                 _repositoryWorker.NewConfigurationItemNode(nameDialog.InputResult, parent);
             if (configurationItemNode == null) return;
 
-            tvLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(configurationItemNode.Name, configurationItemNode, 1,
-                cmConfigurationItem, tvLibrary.SelectedNode);
+            treeLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(configurationItemNode.Name, configurationItemNode, 1,
+                menuConfigurationItem, treeLibrary.SelectedNode);
         }
 
         // Create new role
         private void createRoleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DscRoleGroup parent = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
+            DscRoleGroup parent = (treeLibrary.SelectedNode.Tag as DscRoleGroup);
 
-            fModalName nameDialog = new fModalName();
+            DialogText nameDialog = new DialogText();
             if (nameDialog.ShowDialog() != DialogResult.OK) return;
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
@@ -59,16 +58,16 @@ namespace EzDSC
             DscRoleNode roleNode = _repositoryWorker.NewRoleNode(nameDialog.InputResult, parent);
             if (roleNode == null) return;
 
-            tvLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(roleNode.Name, roleNode, 1, cmRoleItem,
-                tvLibrary.SelectedNode);
+            treeLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(roleNode.Name, roleNode, 1, menuRole,
+                treeLibrary.SelectedNode);
         }
 
         // Create new roles group
         private void miRolesNewGroup_Click(object sender, EventArgs e)
         {
-            DscRoleGroup parent = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
+            DscRoleGroup parent = (treeLibrary.SelectedNode.Tag as DscRoleGroup);
 
-            fModalName nameDialog = new fModalName();
+            DialogText nameDialog = new DialogText();
             if (nameDialog.ShowDialog() != DialogResult.OK) return;
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
@@ -80,17 +79,17 @@ namespace EzDSC
             DscRoleGroup roleGroup = _repositoryWorker.NewRoleGroup(nameDialog.InputResult, parent);
             if (roleGroup == null) return;
 
-            tvLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(roleGroup.Name, roleGroup, 0, cmRoles,
-                tvLibrary.SelectedNode);
+            treeLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(roleGroup.Name, roleGroup, 0, menuRoleGroup,
+                treeLibrary.SelectedNode);
         }
 
         // Create new server
         private void miServersNewServer_Click(object sender, EventArgs e)
         {
-            DscServerNode parent = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode parent = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (parent == null) return;
 
-            fModalName nameDialog = new fModalName();
+            DialogText nameDialog = new DialogText();
             if (nameDialog.ShowDialog() != DialogResult.OK) return;
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
@@ -102,16 +101,16 @@ namespace EzDSC
             DscServerNode serverNode = _repositoryWorker.NewServerNode(nameDialog.InputResult,
                 DscServerNode.ServerType.Server, parent);
 
-            tvLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(serverNode.Name, serverNode, 2, cmServerItem,
-                tvLibrary.SelectedNode);
+            treeLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(serverNode.Name, serverNode, 2, menuServer,
+                treeLibrary.SelectedNode);
         }
 
         // Create new Servers Group
         private void miServersNewGroup_Click(object sender, EventArgs e)
         {
-            DscServerNode parent = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode parent = (treeLibrary.SelectedNode.Tag as DscServerNode);
 
-            fModalName nameDialog = new fModalName();
+            DialogText nameDialog = new DialogText();
             if (nameDialog.ShowDialog() != DialogResult.OK) return;
 
             if (_repositoryWorker.Contains(nameDialog.InputResult, parent))
@@ -123,8 +122,8 @@ namespace EzDSC
             DscServerNode serverNode = _repositoryWorker.NewServerNode(nameDialog.InputResult,
                 DscServerNode.ServerType.Group, parent);
 
-            tvLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(serverNode.Name, serverNode, 0, cmServers,
-                tvLibrary.SelectedNode);
+            treeLibrary.SelectedNode = TreeViewWorker.TreeNodeAdd(serverNode.Name, serverNode, 0, menuServerGroup,
+                treeLibrary.SelectedNode);
         }
 
         // Fills TreeView with modules, resources and configuration items from current repository
@@ -133,16 +132,16 @@ namespace EzDSC
             foreach (DscModule module in _repository.Modules)
             {
                 TreeNode moduleNode = TreeViewWorker.TreeNodeAdd(module.Name, module, 0, null,
-                    tvLibrary.Nodes["tviResources"]);
+                    treeLibrary.Nodes["tviResources"]);
 
                 foreach (DscResource resource in module.Resources)
                 {
                     TreeNode resourceNode = TreeViewWorker.TreeNodeAdd(resource.FriendlyName, resource, 0,
-                        cmResourceType, moduleNode);
+                        menuResource, moduleNode);
 
                     foreach (DscConfigurationItemNode configurationItem in resource.Nodes)
                     {
-                        TreeViewWorker.TreeNodeAdd(configurationItem.Name, configurationItem, 1, cmConfigurationItem,
+                        TreeViewWorker.TreeNodeAdd(configurationItem.Name, configurationItem, 1, menuConfigurationItem,
                             resourceNode);
                     }
                 }
@@ -156,11 +155,11 @@ namespace EzDSC
             treeNode.Tag = group;
             foreach (DscRoleNode childRole in group.Nodes)
             {
-                TreeViewWorker.TreeNodeAdd(childRole.Name, childRole, 1, cmRoleItem, treeNode);
+                TreeViewWorker.TreeNodeAdd(childRole.Name, childRole, 1, menuRole, treeNode);
             }
             foreach (DscRoleGroup childGroup in group.Groups)
             {
-                TreeNode groupNode = TreeViewWorker.TreeNodeAdd(childGroup.Name, childGroup, 0, cmRoles, treeNode);
+                TreeNode groupNode = TreeViewWorker.TreeNodeAdd(childGroup.Name, childGroup, 0, menuRoleGroup, treeNode);
                 FillRoleTree(childGroup, groupNode);
             }
         }
@@ -173,11 +172,11 @@ namespace EzDSC
             {
                 if (child.Type != DscServerNode.ServerType.Group)
                 {
-                    TreeViewWorker.TreeNodeAdd(child.Name, child, 2, cmServerItem, treeNode);
+                    TreeViewWorker.TreeNodeAdd(child.Name, child, 2, menuServer, treeNode);
                 }
                 else
                 {
-                    TreeNode childNode = TreeViewWorker.TreeNodeAdd(child.Name, child, 2, cmServers, treeNode);
+                    TreeNode childNode = TreeViewWorker.TreeNodeAdd(child.Name, child, 2, menuServerGroup, treeNode);
                     FillServerTree(child, childNode);
                 }
             }
@@ -206,13 +205,13 @@ namespace EzDSC
             _repository = new DscRepository(path);
             _repositoryWorker = new RepositoryWorker(_repository);
 
-            tvLibrary.Nodes["tviResources"].Nodes.Clear();
-            tvLibrary.Nodes["tviRoles"].Nodes.Clear();
-            tvLibrary.Nodes["tviServers"].Nodes.Clear();
+            treeLibrary.Nodes["tviResources"].Nodes.Clear();
+            treeLibrary.Nodes["tviRoles"].Nodes.Clear();
+            treeLibrary.Nodes["tviServers"].Nodes.Clear();
 
             FillResourceTree();
-            FillRoleTree(_repository.Roles, tvLibrary.Nodes["tviRoles"]);
-            FillServerTree(_repository.Servers, tvLibrary.Nodes["tviServers"]);
+            FillRoleTree(_repository.Roles, treeLibrary.Nodes["tviRoles"]);
+            FillServerTree(_repository.Servers, treeLibrary.Nodes["tviServers"]);
 
             UnblockModules();
             ModuleWorker.InstallLocalModules(_repository);
@@ -221,18 +220,18 @@ namespace EzDSC
         // Hide all selected item specific controls
         private void HideControls()
         {
-            pRolePanel.Hide();
-            scServer.Hide();
-            scConfigurationItem.Hide();
+            panelRole.Hide();
+            panelServer.Hide();
+            panelConfigurationItem.Hide();
         }
 
         // Main application init code
         private void fMain_Load(object sender, EventArgs e)
         {
             // Setting default controls state
-            pRolePanel.Dock = DockStyle.Fill;
-            scServer.Dock = DockStyle.Fill;
-            scConfigurationItem.Dock = DockStyle.Fill;
+            panelRole.Dock = DockStyle.Fill;
+            panelServer.Dock = DockStyle.Fill;
+            panelConfigurationItem.Dock = DockStyle.Fill;
             HideControls();
 
             // Loading application settings
@@ -251,57 +250,57 @@ namespace EzDSC
         // Show selected item specific controls
         private void tvLibrary_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (tvLibrary.SelectedNode.Tag == null) return;
-            Type selectedType = tvLibrary.SelectedNode.Tag.GetType();
+            if (treeLibrary.SelectedNode.Tag == null) return;
+            Type selectedType = treeLibrary.SelectedNode.Tag.GetType();
 
             HideControls();
 
             if (selectedType == typeof(DscConfigurationItemNode))
             {
-                DscConfigurationItemNode configurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
+                DscConfigurationItemNode configurationItemNode = (treeLibrary.SelectedNode.Tag as DscConfigurationItemNode);
                 if (configurationItemNode == null) return;
 
-                scConfigurationItem.Show();
-                pgEditor.SelectedObject = new DictionaryPropertyGridAdapter(configurationItemNode.ConfigurationItem.Properties, configurationItemNode.Parent);
-                lbCIDependency.DataSource = configurationItemNode.ConfigurationItem.DependsOn;
+                panelConfigurationItem.Show();
+                gridConfigurationItem.SelectedObject = new DictionaryPropertyGridAdapter(configurationItemNode.ConfigurationItem.Properties, configurationItemNode.Parent);
+                listDependsOn.DataSource = configurationItemNode.ConfigurationItem.DependsOn;
             }
 
             if (selectedType == typeof(DscRoleNode))
             {
-                DscRoleNode roleNode = (tvLibrary.SelectedNode.Tag as DscRoleNode);
+                DscRoleNode roleNode = (treeLibrary.SelectedNode.Tag as DscRoleNode);
                 if (roleNode == null) return;
 
-                pRolePanel.Show();
-                lbRole.DataSource = roleNode.Role.Resources;
+                panelRole.Show();
+                listRoleItems.DataSource = roleNode.Role.Resources;
             }
 
             if (selectedType == typeof(DscServerNode))
             {
-                DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+                DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
                 if (serverNode == null) return;
 
-                scServer.Show();
-                lbServerRoles.DataSource = serverNode.Node.Roles;
-                pgServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
+                panelServer.Show();
+                listServerRoles.DataSource = serverNode.Node.Roles;
+                gridServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
             }
         }
 
         // Export DSC configuration for server node
         private void miBuildConfiguration_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
 
-            if ((sfdExportScript.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(sfdExportScript.FileName)) return;
+            if ((dialogSaveFile.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(dialogSaveFile.FileName)) return;
 
             List<PsConfiguration> configurations = serverNode.GetConfigurations();
-            File.WriteAllLines(sfdExportScript.FileName, PsCodeBuilder.BuildScript(configurations, _repository));
+            File.WriteAllLines(dialogSaveFile.FileName, PsCodeBuilder.BuildScript(configurations, _repository));
         }
 
         // Run DSC configuration on server node
         private void miRunConfiguration_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
 
             string filename = FileSystem.GetTempFile();
@@ -313,7 +312,7 @@ namespace EzDSC
         // Save changes in selected configuration item properties
         private void pgEditor_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            DscConfigurationItemNode configurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
+            DscConfigurationItemNode configurationItemNode = (treeLibrary.SelectedNode.Tag as DscConfigurationItemNode);
             if (configurationItemNode == null) return;
 
             configurationItemNode.Validate();
@@ -323,7 +322,7 @@ namespace EzDSC
         // Save changes in selected server node variables
         private void pgServerVariables_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             serverNode?.Node.Save(serverNode.FilePath);
         }
 
@@ -345,10 +344,10 @@ namespace EzDSC
         // Add Configuration Item to Role
         private void tsbRoleAdd_Click(object sender, EventArgs e)
         {
-            DscRoleNode roleNode = (tvLibrary.SelectedNode.Tag as DscRoleNode);
+            DscRoleNode roleNode = (treeLibrary.SelectedNode.Tag as DscRoleNode);
             if (roleNode == null) return;
 
-            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviResources"], ilMain);
+            DialogTree treeDialog = new DialogTree(treeLibrary.Nodes["tviResources"], imagesMain);
             if ((treeDialog.ShowDialog() != DialogResult.OK) || (treeDialog.SelectedTag == null)) return;
             if (treeDialog.SelectedTag.GetType() != typeof(DscConfigurationItemNode)) return;
 
@@ -358,32 +357,32 @@ namespace EzDSC
             roleNode.Role.Resources.Add(configurationItemNode.GetFullName());
             roleNode.Role.Save(roleNode.FilePath);
 
-            lbRole.DataSource = null;
-            lbRole.DataSource = roleNode.Role.Resources;
+            listRoleItems.DataSource = null;
+            listRoleItems.DataSource = roleNode.Role.Resources;
         }
 
         // Remove Configuration Item from Role
         private void tsbRoleRemove_Click(object sender, EventArgs e)
         {
-            DscRoleNode roleNode = (tvLibrary.SelectedNode.Tag as DscRoleNode);
+            DscRoleNode roleNode = (treeLibrary.SelectedNode.Tag as DscRoleNode);
             if (roleNode == null) return;
 
-            if (lbRole.SelectedItem == null) return;
+            if (listRoleItems.SelectedItem == null) return;
 
-            roleNode.Role.Resources.Remove(lbRole.SelectedItem.ToString());
+            roleNode.Role.Resources.Remove(listRoleItems.SelectedItem.ToString());
             roleNode.Role.Save(roleNode.FilePath);
 
-            lbRole.DataSource = null;
-            lbRole.DataSource = roleNode.Role.Resources;
+            listRoleItems.DataSource = null;
+            listRoleItems.DataSource = roleNode.Role.Resources;
         }
         
         // Add Role to Server Node
         private void tsbServerRoleAdd_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
 
-            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviRoles"], ilMain);
+            DialogTree treeDialog = new DialogTree(treeLibrary.Nodes["tviRoles"], imagesMain);
             if ((treeDialog.ShowDialog() != DialogResult.OK) || (treeDialog.SelectedTag == null)) return;
             if (treeDialog.SelectedTag.GetType() != typeof(DscRoleNode)) return;
 
@@ -393,32 +392,32 @@ namespace EzDSC
             serverNode.Node.Roles.Add(roleNode.BuildName());
             serverNode.Node.Save(serverNode.FilePath);
 
-            lbServerRoles.DataSource = null;
-            lbServerRoles.DataSource = serverNode.Node.Roles;
+            listServerRoles.DataSource = null;
+            listServerRoles.DataSource = serverNode.Node.Roles;
         }
 
         // Remove Role from Server Node
         private void tsbServerRoleRemove_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
 
-            if (lbServerRoles.SelectedItem == null) return;
+            if (listServerRoles.SelectedItem == null) return;
             
-            serverNode.Node.Roles.Remove(lbServerRoles.SelectedItem.ToString());
+            serverNode.Node.Roles.Remove(listServerRoles.SelectedItem.ToString());
             serverNode.Node.Save(serverNode.FilePath);
 
-            lbServerRoles.DataSource = null;
-            lbServerRoles.DataSource = serverNode.Node.Roles;
+            listServerRoles.DataSource = null;
+            listServerRoles.DataSource = serverNode.Node.Roles;
         }
 
         // Add variable to Server or Servers Groups
         private void tsbVariableAdd_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
 
-            fModalName nameDialog = new fModalName();
+            DialogText nameDialog = new DialogText();
             if ((nameDialog.ShowDialog() != DialogResult.OK) || string.IsNullOrWhiteSpace(nameDialog.InputResult)) return;
             
             string variableName = nameDialog.InputResult.Replace("$", "");
@@ -427,30 +426,30 @@ namespace EzDSC
             serverNode.Node.Variables.Add(variableName, "");
             serverNode.Node.Save(serverNode.FilePath);
 
-            pgServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
+            gridServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
         }
 
         // Remove variable from server or servers group
         private void tsbVariableRemove_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
 
-            if (pgServerVariables.SelectedGridItem.Label == null) return;
+            if (gridServerVariables.SelectedGridItem.Label == null) return;
 
-            serverNode.Node.Variables.Remove(pgServerVariables.SelectedGridItem.Label);
+            serverNode.Node.Variables.Remove(gridServerVariables.SelectedGridItem.Label);
             serverNode.Node.Save(serverNode.FilePath);
 
-            pgServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
+            gridServerVariables.SelectedObject = new DictionaryPropertyGridAdapter(serverNode.Node.Variables);
         }
 
         // Add dependency to configuration item
         private void tsbCIAddDepends_Click(object sender, EventArgs e)
         {
-            DscConfigurationItemNode currentConfigurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
+            DscConfigurationItemNode currentConfigurationItemNode = (treeLibrary.SelectedNode.Tag as DscConfigurationItemNode);
             if (currentConfigurationItemNode == null) return;
 
-            fModalTree treeDialog = new fModalTree(tvLibrary.Nodes["tviResources"], ilMain);
+            DialogTree treeDialog = new DialogTree(treeLibrary.Nodes["tviResources"], imagesMain);
             if ((treeDialog.ShowDialog() != DialogResult.OK) || (treeDialog.SelectedTag == null)) return;
             if (treeDialog.SelectedTag.GetType() != typeof(DscConfigurationItemNode)) return;
 
@@ -460,35 +459,35 @@ namespace EzDSC
             currentConfigurationItemNode.ConfigurationItem.DependsOn.Add(selectedConfigurationItemNode.GetFullName());
             currentConfigurationItemNode.ConfigurationItem.Save(currentConfigurationItemNode.FilePath);
 
-            lbCIDependency.DataSource = null;
-            lbCIDependency.DataSource = currentConfigurationItemNode.ConfigurationItem.DependsOn;
+            listDependsOn.DataSource = null;
+            listDependsOn.DataSource = currentConfigurationItemNode.ConfigurationItem.DependsOn;
         }
 
         // Remove dependency from configuration item
         private void tsbCIRemoveDepends_Click(object sender, EventArgs e)
         {
-            DscConfigurationItemNode configurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
+            DscConfigurationItemNode configurationItemNode = (treeLibrary.SelectedNode.Tag as DscConfigurationItemNode);
             if (configurationItemNode == null) return;
 
-            if (lbCIDependency.SelectedItem == null) return;
+            if (listDependsOn.SelectedItem == null) return;
 
-            configurationItemNode.ConfigurationItem.DependsOn.Remove(lbCIDependency.SelectedItem.ToString());
+            configurationItemNode.ConfigurationItem.DependsOn.Remove(listDependsOn.SelectedItem.ToString());
             configurationItemNode.ConfigurationItem.Save(configurationItemNode.FilePath);
 
-            lbCIDependency.DataSource = null;
-            lbCIDependency.DataSource = configurationItemNode.ConfigurationItem.DependsOn;
+            listDependsOn.DataSource = null;
+            listDependsOn.DataSource = configurationItemNode.ConfigurationItem.DependsOn;
         }
 
         // Select TreeViewNode on right click
         private void tvLibrary_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            tvLibrary.SelectedNode = e.Node;
+            treeLibrary.SelectedNode = e.Node;
         }
 
         // Install DSC modules on selected server
         private void installModulesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
 
             ModuleWorker.InstallModules(_repository, serverNode);
 
@@ -498,20 +497,20 @@ namespace EzDSC
         // Delete selected server
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
 
             if (MessageBoxWorker.ConfirmDelete(this, Strings.UI_Text_ServerL) != DialogResult.Yes) return;
 
             _repositoryWorker.RemoveItem(serverNode);
 
-            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+            treeLibrary.Nodes.Remove(treeLibrary.SelectedNode);
         }
 
         // Delete selected servers group
         private void deleteToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            DscServerNode serverNode = (tvLibrary.SelectedNode.Tag as DscServerNode);
+            DscServerNode serverNode = (treeLibrary.SelectedNode.Tag as DscServerNode);
             if (serverNode == null) return;
 
             if (serverNode.Type == DscServerNode.ServerType.Root) return;
@@ -520,13 +519,13 @@ namespace EzDSC
 
             _repositoryWorker.RemoveItem(serverNode);
 
-            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+            treeLibrary.Nodes.Remove(treeLibrary.SelectedNode);
         }
 
         // Delete selected roles group
         private void deleteToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            DscRoleGroup roleGroup = (tvLibrary.SelectedNode.Tag as DscRoleGroup);
+            DscRoleGroup roleGroup = (treeLibrary.SelectedNode.Tag as DscRoleGroup);
             if (roleGroup?.Parent == null) return;
 
             HashSet<string> roleUsages = roleGroup.FindUsages(_repository.Servers);
@@ -540,13 +539,13 @@ namespace EzDSC
 
             _repositoryWorker.RemoveItem(roleGroup);
 
-            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+            treeLibrary.Nodes.Remove(treeLibrary.SelectedNode);
         }
 
         // Delete selected role
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-            DscRoleNode roleNode = (tvLibrary.SelectedNode.Tag as DscRoleNode);
+            DscRoleNode roleNode = (treeLibrary.SelectedNode.Tag as DscRoleNode);
             if (roleNode == null) return;
 
             HashSet<string> roleUsages = roleNode.FindUsages(_repository.Servers);
@@ -560,13 +559,13 @@ namespace EzDSC
 
             _repositoryWorker.RemoveItem(roleNode);
 
-            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+            treeLibrary.Nodes.Remove(treeLibrary.SelectedNode);
         }
 
         // Delete selected configuration item
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
-            DscConfigurationItemNode configurationItemNode = (tvLibrary.SelectedNode.Tag as DscConfigurationItemNode);
+            DscConfigurationItemNode configurationItemNode = (treeLibrary.SelectedNode.Tag as DscConfigurationItemNode);
             if (configurationItemNode == null) return;
 
             HashSet<string> configurationItemUsages = configurationItemNode.FindUsages(_repository.Roles);
@@ -580,7 +579,7 @@ namespace EzDSC
 
             _repositoryWorker.RemoveItem(configurationItemNode);
 
-            tvLibrary.Nodes.Remove(tvLibrary.SelectedNode);
+            treeLibrary.Nodes.Remove(treeLibrary.SelectedNode);
         }
 
         // Save application settings
