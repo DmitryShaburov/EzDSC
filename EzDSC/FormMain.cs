@@ -176,7 +176,7 @@ namespace EzDSC
                 }
                 else
                 {
-                    TreeNode childNode = TreeViewWorker.TreeNodeAdd(child.Name, child, 2, menuServerGroup, treeNode);
+                    TreeNode childNode = TreeViewWorker.TreeNodeAdd(child.Name, child, 0, menuServerGroup, treeNode);
                     FillServerTree(child, childNode);
                 }
             }
@@ -261,7 +261,8 @@ namespace EzDSC
                 if (configurationItemNode == null) return;
 
                 panelConfigurationItem.Show();
-                gridConfigurationItem.SelectedObject = new DictionaryPropertyGridAdapter(configurationItemNode.ConfigurationItem.Properties, configurationItemNode.Parent);
+                //gridConfigurationItem.SelectedObject = new DictionaryPropertyGridAdapter(configurationItemNode.ConfigurationItem.Properties, configurationItemNode.Parent);
+                gridConfigurationItem.SelectedObject = new DscResourcePropertyGridAdapter(configurationItemNode);
                 listDependsOn.DataSource = configurationItemNode.ConfigurationItem.DependsOn;
             }
 

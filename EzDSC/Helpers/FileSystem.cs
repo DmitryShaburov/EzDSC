@@ -3,7 +3,7 @@ using System.IO;
 
 namespace EzDSC
 {
-    class FileSystem
+    internal class FileSystem
     {
         public static void DirectoryCopy(string source, string destination)
         {

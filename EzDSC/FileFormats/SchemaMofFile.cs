@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace EzDSC
 {
-    public class SchemaMofFile
+    internal class SchemaMofFile
     {
         public string ClassVersion;
         public string FriendlyName;
@@ -17,8 +17,9 @@ namespace EzDSC
         {
             public string Qualifier;
             public string Name;
+            public string Description;
             public string Type;
-            public string[] Values;
+            public List<string> Values;
         }
 
 
@@ -71,9 +72,11 @@ namespace EzDSC
                 switch (s[i])
                 {
                     case '{':
+                    case '(':
                         bracesDepth++;
                         break;
                     case '}':
+                    case ')':
                         bracesDepth--;
                         break;
                     default:
@@ -139,7 +142,12 @@ namespace EzDSC
                 {
                     if (q.ToLower().StartsWith("values"))
                     {
-                        parameter.Values = GetStringInsideOf(q, '{', '}').Split(',').Select(p => p.Trim().Replace("\"", "")).ToArray();
+                        parameter.Values = GetStringInsideOf(q, '{', '}').Split(',').Select(p => p.Trim().Replace("\"", "")).ToList();
+                        parameter.Values.Add("");
+                    }
+                    if (q.ToLower().StartsWith("description"))
+                    {
+                        parameter.Description = GetStringInsideOf(q, '(', ')').Replace("\"", "").Replace(@"\n", Environment.NewLine);
                     }
                 }
                 int varStart = parameterString.IndexOf(']') + 1;

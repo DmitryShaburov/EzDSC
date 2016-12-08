@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace EzDSC
 {
-    public class EzSettings
+    internal class EzSettings
     {
         public string LastRepositoryPath;
         public FormWindowState WindowState = FormWindowState.Normal;

@@ -39,9 +39,9 @@ namespace EzDSC
             public VariableType Type;
             public string Name;
             public string Description;
-            public string[] Values;
+            public List<string> Values;
 
-            public Parameter(QualifierType qualifier, VariableType type, string name, string description, string[] values)
+            public Parameter(QualifierType qualifier, VariableType type, string name, string description, List<string> values)
             {
                 Qualifier = qualifier;
                 Type = type;
@@ -97,6 +97,18 @@ namespace EzDSC
             }
         }
 
+        public string GetDescriptionOf(string name)
+        {
+            Parameter parameter = Parameters.Find(x => x.Name == name);
+            return parameter.Description;
+        }
+
+        public List<string> GetValuesOf(string name)
+        {
+            Parameter parameter = Parameters.Find(x => x.Name == name);
+            return parameter.Values;
+        }
+
         public VariableType GetVariableTypeOf(string name)
         {
             Parameter parameter = Parameters.Find(x => x.Name == name);
@@ -113,7 +125,7 @@ namespace EzDSC
             foreach (SchemaMofFile.MofParameter parameter in mofFile.Parameters)
             {
                 Parameters.Add(new Parameter(GetQualifierType(parameter.Qualifier), GetVariableType(parameter.Type),
-                    parameter.Name, null, parameter.Values));
+                    parameter.Name, parameter.Description, parameter.Values));
             }
         }
 

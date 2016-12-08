@@ -110,6 +110,7 @@
     <Compile Include="DialogTree.Designer.cs">
       <DependentUpon>DialogTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DscResourcePropertyGridAdapter.cs" />
     <Compile Include="Helpers\EzSettings.cs" />
     <Compile Include="Helpers\FileSystem.cs" />
     <Compile Include="Images.Designer.cs">
